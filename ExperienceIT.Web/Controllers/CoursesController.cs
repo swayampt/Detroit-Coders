@@ -14,6 +14,8 @@ namespace ExperienceIT.Web.Controllers
     {
         private readonly ApplicationDbContext _context;
 
+
+        // Updating the first commit of feature branch - CoursesBranch
         public CoursesController(ApplicationDbContext context)
         {
             _context = context;
@@ -148,6 +150,12 @@ namespace ExperienceIT.Web.Controllers
         private bool CourseExists(int id)
         {
             return _context.Courses.Any(e => e.Id == id);
+        }
+
+
+        private void GetCourses()
+        {
+            //Drop Down logic for Courses
         }
     }
 }
