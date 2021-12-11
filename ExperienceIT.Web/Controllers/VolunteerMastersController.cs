@@ -10,23 +10,23 @@ using ExperienceIT.Web.Models;
 
 namespace ExperienceIT.Web.Controllers
 {
-    public class VolunteersController : Controller
+    public class VolunteerMastersController : Controller
     {
         private readonly ApplicationDbContext _context;
-        //Update
-        public VolunteersController(ApplicationDbContext context)
+
+        public VolunteerMastersController(ApplicationDbContext context)
         {
             _context = context;
         }
 
-        // GET: Volunteers
+        // GET: VolunteerMasters
         public async Task<IActionResult> Index()
         {
-            var applicationDbContext = _context.Volunteers.Include(v => v.Course).Include(v => v.User);
+            var applicationDbContext = _context.VolunteerMaster.Include(v => v.User);
             return View(await applicationDbContext.ToListAsync());
         }
 
-        // GET: Volunteers/Details/5
+        // GET: VolunteerMasters/Details/5
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
@@ -34,45 +34,42 @@ namespace ExperienceIT.Web.Controllers
                 return NotFound();
             }
 
-            var volunteer = await _context.Volunteers
-                .Include(v => v.Course)
+            var volunteerMaster = await _context.VolunteerMaster
                 .Include(v => v.User)
                 .FirstOrDefaultAsync(m => m.Id == id);
-            if (volunteer == null)
+            if (volunteerMaster == null)
             {
                 return NotFound();
             }
 
-            return View(volunteer);
+            return View(volunteerMaster);
         }
 
-        // GET: Volunteers/Create
+        // GET: VolunteerMasters/Create
         public IActionResult Create()
         {
-            ViewData["CourseId"] = new SelectList(_context.Courses, "Id", "Description");
             ViewData["UserId"] = new SelectList(_context.Users, "Id", "Id");
             return View();
         }
 
-        // POST: Volunteers/Create
+        // POST: VolunteerMasters/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to, for 
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,FirstName,LastName,Phone,LinkedIn,Skills,YearsOfExperience,CurrentOrganization,Address,City,State,Zipcode,Country,AgeStatus,Aboutme,CourseId,UserId")] Volunteer volunteer)
+        public async Task<IActionResult> Create([Bind("Id,FirstName,LastName,Phone,LinkedIn,Skills,YearsOfExperience,CurrentOrganization,Address,City,State,Zipcode,Country,AgeStatus,Aboutme,Availability,UserId")] VolunteerMaster volunteerMaster)
         {
             if (ModelState.IsValid)
             {
-                _context.Add(volunteer);
+                _context.Add(volunteerMaster);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["CourseId"] = new SelectList(_context.Courses, "Id", "Description", volunteer.CourseId);
-            ViewData["UserId"] = new SelectList(_context.Users, "Id", "Id", volunteer.UserId);
-            return View(volunteer);
+            ViewData["UserId"] = new SelectList(_context.Users, "Id", "Id", volunteerMaster.UserId);
+            return View(volunteerMaster);
         }
 
-        // GET: Volunteers/Edit/5
+        // GET: VolunteerMasters/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -80,24 +77,23 @@ namespace ExperienceIT.Web.Controllers
                 return NotFound();
             }
 
-            var volunteer = await _context.Volunteers.FindAsync(id);
-            if (volunteer == null)
+            var volunteerMaster = await _context.VolunteerMaster.FindAsync(id);
+            if (volunteerMaster == null)
             {
                 return NotFound();
             }
-            ViewData["CourseId"] = new SelectList(_context.Courses, "Id", "Description", volunteer.CourseId);
-            ViewData["UserId"] = new SelectList(_context.Users, "Id", "Id", volunteer.UserId);
-            return View(volunteer);
+            ViewData["UserId"] = new SelectList(_context.Users, "Id", "Id", volunteerMaster.UserId);
+            return View(volunteerMaster);
         }
 
-        // POST: Volunteers/Edit/5
+        // POST: VolunteerMasters/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to, for 
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,FirstName,LastName,Phone,LinkedIn,Skills,YearsOfExperience,CurrentOrganization,Address,City,State,Zipcode,Country,AgeStatus,Aboutme,CourseId,UserId")] Volunteer volunteer)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,FirstName,LastName,Phone,LinkedIn,Skills,YearsOfExperience,CurrentOrganization,Address,City,State,Zipcode,Country,AgeStatus,Aboutme,Availability,UserId")] VolunteerMaster volunteerMaster)
         {
-            if (id != volunteer.Id)
+            if (id != volunteerMaster.Id)
             {
                 return NotFound();
             }
@@ -106,12 +102,12 @@ namespace ExperienceIT.Web.Controllers
             {
                 try
                 {
-                    _context.Update(volunteer);
+                    _context.Update(volunteerMaster);
                     await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!VolunteerExists(volunteer.Id))
+                    if (!VolunteerMasterExists(volunteerMaster.Id))
                     {
                         return NotFound();
                     }
@@ -122,12 +118,11 @@ namespace ExperienceIT.Web.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["CourseId"] = new SelectList(_context.Courses, "Id", "Description", volunteer.CourseId);
-            ViewData["UserId"] = new SelectList(_context.Users, "Id", "Id", volunteer.UserId);
-            return View(volunteer);
+            ViewData["UserId"] = new SelectList(_context.Users, "Id", "Id", volunteerMaster.UserId);
+            return View(volunteerMaster);
         }
 
-        // GET: Volunteers/Delete/5
+        // GET: VolunteerMasters/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -135,32 +130,31 @@ namespace ExperienceIT.Web.Controllers
                 return NotFound();
             }
 
-            var volunteer = await _context.Volunteers
-                .Include(v => v.Course)
+            var volunteerMaster = await _context.VolunteerMaster
                 .Include(v => v.User)
                 .FirstOrDefaultAsync(m => m.Id == id);
-            if (volunteer == null)
+            if (volunteerMaster == null)
             {
                 return NotFound();
             }
 
-            return View(volunteer);
+            return View(volunteerMaster);
         }
 
-        // POST: Volunteers/Delete/5
+        // POST: VolunteerMasters/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var volunteer = await _context.Volunteers.FindAsync(id);
-            _context.Volunteers.Remove(volunteer);
+            var volunteerMaster = await _context.VolunteerMaster.FindAsync(id);
+            _context.VolunteerMaster.Remove(volunteerMaster);
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
-        private bool VolunteerExists(int id)
+        private bool VolunteerMasterExists(int id)
         {
-            return _context.Volunteers.Any(e => e.Id == id);
+            return _context.VolunteerMaster.Any(e => e.Id == id);
         }
     }
 }

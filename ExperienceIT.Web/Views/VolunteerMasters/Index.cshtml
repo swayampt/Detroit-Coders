@@ -1,4 +1,4 @@
-﻿@model IEnumerable<ExperienceIT.Web.Models.Volunteer>
+﻿@model IEnumerable<ExperienceIT.Web.Models.VolunteerMaster>
 
 @{
     ViewData["Title"] = "Index";
@@ -56,7 +56,7 @@
                 @Html.DisplayNameFor(model => model.Aboutme)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Course)
+                @Html.DisplayNameFor(model => model.Availability)
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.User)
@@ -110,7 +110,7 @@
                 @Html.DisplayFor(modelItem => item.Aboutme)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Course.Description)
+                @Html.DisplayFor(modelItem => item.Availability)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.User.Id)

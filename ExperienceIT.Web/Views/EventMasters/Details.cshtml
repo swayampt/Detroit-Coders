@@ -1,4 +1,4 @@
-﻿@model ExperienceIT.Web.Models.Course
+﻿@model ExperienceIT.Web.Models.EventMaster
 
 @{
     ViewData["Title"] = "Details";
@@ -8,7 +8,7 @@
 <h1>Details</h1>
 
 <div>
-    <h4>Course</h4>
+    <h4>EventMaster</h4>
     <hr />
     <dl class="row">
         <dt class = "col-sm-2">
@@ -24,28 +24,34 @@
             @Html.DisplayFor(model => model.Description)
         </dd>
         <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.TutorName)
+            @Html.DisplayNameFor(model => model.StartingDate)
         </dt>
         <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.TutorName)
+            @Html.DisplayFor(model => model.StartingDate)
         </dd>
         <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.CourseRating)
+            @Html.DisplayNameFor(model => model.EndingDate)
         </dt>
         <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.CourseRating)
+            @Html.DisplayFor(model => model.EndingDate)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.EnrollmentDate)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.EnrollmentDate)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Venue)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Venue)
         </dd>
         <dt class = "col-sm-2">
             @Html.DisplayNameFor(model => model.Duration)
         </dt>
         <dd class = "col-sm-10">
             @Html.DisplayFor(model => model.Duration)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Resources)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Resources)
         </dd>
     </dl>
 </div>

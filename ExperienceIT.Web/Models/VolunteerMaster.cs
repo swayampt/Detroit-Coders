@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace ExperienceIT.Web.Models
 {
-    public class Volunteer
+    public class VolunteerMaster
     {
         [Key]
         public int Id { get; set; }
@@ -59,16 +59,13 @@ namespace ExperienceIT.Web.Models
         [Display(Name = "About Me")]
         public string Aboutme { get; set; }
 
-        [Required]
-        [Display(Name = "Course Name")]
-        public int CourseId { get; set; }
-
-        [ForeignKey("CourseId")]
-        public virtual Course Course { get; set; }
+        [Required]        
+        public bool Availability { get; set; } = true;
 
         public string UserId { get; set; }
         
         [ForeignKey("UserId")]
         public virtual IdentityUser User { get; set; }
     }
+
 }
