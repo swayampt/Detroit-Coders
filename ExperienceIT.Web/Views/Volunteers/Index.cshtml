@@ -1,126 +1,31 @@
-﻿@model IEnumerable<ExperienceIT.Web.Models.Volunteer>
+﻿@*to retrieve list of category*@
 
+@model IEnumerable<ExperienceIT.Web.Models.Volunteer>
 @{
     ViewData["Title"] = "Index";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
+<div class="border backgroundwhite search-background">
+    @*adding border,background and image*@
 
-<h1>Index</h1>
-
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.FirstName)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.LastName)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Phone)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.LinkedIn)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Skills)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.YearsOfExperience)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.CurrentOrganization)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Address)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.City)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.State)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Zipcode)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Country)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.AgeStatus)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Aboutme)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Course)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.User)
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.FirstName)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.LastName)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Phone)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.LinkedIn)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Skills)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.YearsOfExperience)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.CurrentOrganization)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Address)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.City)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.State)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Zipcode)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Country)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.AgeStatus)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Aboutme)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Course.Description)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.User.Id)
-            </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
-            </td>
-        </tr>
-}
-    </tbody>
-</table>
+    <div class="row">
+        @* the "row" class is used mainly to hold columns in it.*@
+        <div class="col-6">
+            @*element take half of the horizontal screen space devices.*@
+            <h2 class="text-info">Volunteer Role</h2>@*Add meaning through text-colors*@
+        </div>
+        <div class="col-6 text-right">
+            @* move the columns to the right*@
+            <a><partial name="_CreateButtonPartial" /></a>
+        </div>
+    </div>
+    <p></p>
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+    
+</div>

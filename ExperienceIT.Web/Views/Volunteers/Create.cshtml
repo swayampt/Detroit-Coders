@@ -1,107 +1,139 @@
-﻿@model ExperienceIT.Web.Models.Volunteer
-
+﻿@*define model for one volunteer not list*@
+@model ExperienceIT.Web.Models.Volunteer
 @{
     ViewData["Title"] = "Create";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-
-<h1>Create</h1>
-
-<h4>Volunteer</h4>
-<hr />
-<div class="row">
-    <div class="col-md-4">
-        <form asp-action="Create">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <div class="form-group">
-                <label asp-for="FirstName" class="control-label"></label>
-                <input asp-for="FirstName" class="form-control" />
-                <span asp-validation-for="FirstName" class="text-danger"></span>
+<style>
+    body {
+        background-color: azure;
+    }
+</style>
+<h4 class="text-info">Apply Now</h4>
+<div class="border backgroundwhite">
+    <form enctype="multipart/form-data" asp-action="Create">
+        @* allows entire files to be included in the data(server)*@
+        <div class="row">
+            <div class="col-md-6">
+                @*if req prop not filled this will display error*@
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <div class="form-group">
+                    <label asp-for="FirstName" class="control-label"></label>
+                    <input asp-for="FirstName" class="form-control" />
+                    <span asp-validation-for="FirstName" class="text-danger"></span>
+                </div>
             </div>
-            <div class="form-group">
-                <label asp-for="LastName" class="control-label"></label>
-                <input asp-for="LastName" class="form-control" />
-                <span asp-validation-for="LastName" class="text-danger"></span>
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label asp-for="LastName" class="control-label"></label>
+                    <input asp-for="LastName" class="form-control" />
+                    <span asp-validation-for="LastName" class="text-danger"></span>
+                </div>
             </div>
-            <div class="form-group">
-                <label asp-for="Phone" class="control-label"></label>
-                <input asp-for="Phone" class="form-control" />
-                <span asp-validation-for="Phone" class="text-danger"></span>
+        </div>
+        <div class="row">
+            <div class="col-md-6">
+                @*if req prop not filled this will display error*@
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <div class="form-group">
+                    <label asp-for="Phone" class="control-label"></label>
+                    <input asp-for="Phone" class="form-control" />
+                    <span asp-validation-for="Phone" class="text-danger"></span>
+                </div>
             </div>
-            <div class="form-group">
-                <label asp-for="LinkedIn" class="control-label"></label>
-                <input asp-for="LinkedIn" class="form-control" />
-                <span asp-validation-for="LinkedIn" class="text-danger"></span>
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label asp-for="LinkedIn" class="control-label"></label>
+                    <input asp-for="LinkedIn" class="form-control" />
+                    <span asp-validation-for="LinkedIn" class="text-danger"></span>
+                </div>
             </div>
-            <div class="form-group">
-                <label asp-for="Skills" class="control-label"></label>
-                <input asp-for="Skills" class="form-control" />
-                <span asp-validation-for="Skills" class="text-danger"></span>
+        </div>
+        <div class="row">
+            <div class="col-md-6">
+                @*if req prop not filled this will display error*@
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <div class="form-group">
+                    <label asp-for="Address" class="control-label"></label>
+                    <input asp-for="Address" class="form-control" />
+                    <span asp-validation-for="Address" class="text-danger"></span>
+                </div>
             </div>
-            <div class="form-group">
-                <label asp-for="YearsOfExperience" class="control-label"></label>
-                <input asp-for="YearsOfExperience" class="form-control" />
-                <span asp-validation-for="YearsOfExperience" class="text-danger"></span>
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label asp-for="City" class="control-label"></label>
+                    <input asp-for="City" class="form-control" />
+                    <span asp-validation-for="City" class="text-danger"></span>
+                </div>
             </div>
-            <div class="form-group">
-                <label asp-for="CurrentOrganization" class="control-label"></label>
-                <input asp-for="CurrentOrganization" class="form-control" />
-                <span asp-validation-for="CurrentOrganization" class="text-danger"></span>
+        </div>
+        <div class="row">
+            <div class="col-md-6">
+                @*if req prop not filled this will display error*@
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <div class="form-group">
+                    <label asp-for="State" class="control-label"></label>
+                    <input asp-for="State" class="form-control" />
+                    <span asp-validation-for="State" class="text-danger"></span>
+                </div>
             </div>
-            <div class="form-group">
-                <label asp-for="Address" class="control-label"></label>
-                <input asp-for="Address" class="form-control" />
-                <span asp-validation-for="Address" class="text-danger"></span>
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label asp-for="Zipcode" class="control-label"></label>
+                    <input asp-for="Zipcode" class="form-control" />
+                    <span asp-validation-for="Zipcode" class="text-danger"></span>
+                </div>
             </div>
-            <div class="form-group">
-                <label asp-for="City" class="control-label"></label>
-                <input asp-for="City" class="form-control" />
-                <span asp-validation-for="City" class="text-danger"></span>
+        </div>
+        <div class="row">
+            <div class="col-md-6">
+                @*if req prop not filled this will display error*@
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <div class="form-group">
+                    <label asp-for="Country" class="control-label"></label>
+                    <input asp-for="Country" class="form-control" />
+                    <span asp-validation-for="Country" class="text-danger"></span>
+                </div>
             </div>
-            <div class="form-group">
-                <label asp-for="State" class="control-label"></label>
-                <input asp-for="State" class="form-control" />
-                <span asp-validation-for="State" class="text-danger"></span>
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label asp-for="CurrentOrganization" class="control-label"></label>
+                    <input asp-for="CurrentOrganization" class="form-control" />
+                    <span asp-validation-for="CurrentOrganization" class="text-danger"></span>
+                </div>
             </div>
-            <div class="form-group">
-                <label asp-for="Zipcode" class="control-label"></label>
-                <input asp-for="Zipcode" class="form-control" />
-                <span asp-validation-for="Zipcode" class="text-danger"></span>
+        </div>
+        <div class="row">
+            <div class="col-md-6">
+                @*if req prop not filled this will display error*@
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <div class="form-group">
+                    <label asp-for="Skills" class="control-label"></label>
+                    <input asp-for="Skills" class="form-control" />
+                    <span asp-validation-for="Skills" class="text-danger"></span>
+                </div>
             </div>
-            <div class="form-group">
-                <label asp-for="Country" class="control-label"></label>
-                <input asp-for="Country" class="form-control" />
-                <span asp-validation-for="Country" class="text-danger"></span>
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label asp-for="YearsOfExperience" class="control-label"></label>
+                    <input asp-for="YearsOfExperience" class="form-control" />
+                    <span asp-validation-for="YearsOfExperience" class="text-danger"></span>
+                </div>
             </div>
-            <div class="form-group">
-                <label asp-for="AgeStatus" class="control-label"></label>
-                <input asp-for="AgeStatus" class="form-control" />
-                <span asp-validation-for="AgeStatus" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Aboutme" class="control-label"></label>
-                <input asp-for="Aboutme" class="form-control" />
-                <span asp-validation-for="Aboutme" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="CourseId" class="control-label"></label>
-                <select asp-for="CourseId" class ="form-control" asp-items="ViewBag.CourseId"></select>
-            </div>
-            <div class="form-group">
-                <label asp-for="UserId" class="control-label"></label>
-                <select asp-for="UserId" class ="form-control" asp-items="ViewBag.UserId"></select>
-            </div>
-            <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-primary" />
-            </div>
-        </form>
-    </div>
+        </div>
+        <partial name="_CreateAndBackToListButton" />
+    </form>
 </div>
+@*@section scripts {
+        <script type="text/javascript">
 
-<div>
-    <a asp-action="Index">Back to List</a>
-</div>
-
-@section Scripts {
+            // Add the following code if you want the name of the file appear on select
+            $(".custom-file-input").on("change", function () {
+                var fileName = $(this).val().split("\\").pop();
+                $(this).siblings(".custom-file-label").addClass("selected").html(fileName);
+            });
+        </script>
+    }*@
+@*@section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
-}
+        }*@

@@ -31,9 +31,10 @@ namespace ExperienceIT.Web.Models
         [Required]
         [StringLength(100)]
         public string Skills { get; set; }
-
+        [Display(Name = "Work Experience")]
         [Required]
         public int YearsOfExperience { get; set; }
+        [Display(Name = "WorK Place")]
 
         [StringLength(100)]
         public string CurrentOrganization { get; set; }
