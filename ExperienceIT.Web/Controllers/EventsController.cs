@@ -10,11 +10,11 @@ using ExperienceIT.Web.Models;
 
 namespace ExperienceIT.Web.Controllers
 {
-    public class EventMastersController : Controller
+    public class EventsController : Controller
     {
         private readonly ApplicationDbContext _context;
 
-        public EventMastersController(ApplicationDbContext context)
+        public EventsController(ApplicationDbContext context)
         {
             _context = context;
         }

@@ -10,11 +10,11 @@ using ExperienceIT.Web.Models;
 
 namespace ExperienceIT.Web.Controllers
 {
-    public class VolunteerMastersController : Controller
+    public class VolunteersController : Controller
     {
         private readonly ApplicationDbContext _context;
 
-        public VolunteerMastersController(ApplicationDbContext context)
+        public VolunteersController(ApplicationDbContext context)
         {
             _context = context;
         }
