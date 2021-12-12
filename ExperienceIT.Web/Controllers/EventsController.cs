@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using ExperienceIT.Web.Data;
 using ExperienceIT.Web.Models;
+using ExperienceIT.Web.ViewModels;
 
 namespace ExperienceIT.Web.Controllers
 {
@@ -22,7 +23,30 @@ namespace ExperienceIT.Web.Controllers
         // GET: EventMasters
         public async Task<IActionResult> Index()
         {
-            return View(await _context.EventMaster.ToListAsync());
+            var events = await _context.EventMaster.ToListAsync();
+            
+            var programEventMapper = await _context.ProgramEventMapper
+                .Include(x => x.ProgramMaster)
+                .Include(x => x.EventMaster).ToListAsync();
+
+            var model = programEventMapper.Select(x => new ProgramEventViewModel()
+            {
+                Event = new EventMaster()
+                { 
+                    Id = x.EventMaster.Id,
+                    Name = x.EventMaster.Name,
+                    Description = x.EventMaster.Description,
+                    StartingDate = x.EventMaster.StartingDate,
+                    EndingDate = x.EventMaster.EndingDate,
+                    EnrollmentDate = x.EventMaster.EnrollmentDate,
+                    Venue = x.EventMaster.Venue,
+                    Duration = x.EventMaster.Duration
+                },
+                ProgramName = x.ProgramMaster.Name,
+                ProgramId = x.ProgramMaster.Id
+            }).ToList();
+
+            return View(model);
         }
 
         // GET: EventMasters/Details/5
@@ -46,7 +70,13 @@ namespace ExperienceIT.Web.Controllers
         // GET: EventMasters/Create
         public IActionResult Create()
         {
-            return View();
+            ProgramEventViewModel model = new ProgramEventViewModel()
+            {
+                Event = new EventMaster(),
+                ProgramList = _context.ProgramMaster.ToList()
+            };
+
+            return View(model);
         }
 
         // POST: EventMasters/Create
@@ -54,15 +84,27 @@ namespace ExperienceIT.Web.Controllers
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Name,Description,StartingDate,EndingDate,EnrollmentDate,Venue,Duration")] EventMaster eventMaster)
+        public async Task<IActionResult> Create(ProgramEventViewModel model)
         {
             if (ModelState.IsValid)
             {
-                _context.Add(eventMaster);
+                _context.Add(model.Event);
                 await _context.SaveChangesAsync();
+
+                // Update the ProgramEventMapper
+
+                var mapper = new ProgramEventMapper()
+                {
+                    EventId = model.Event.Id,
+                    ProgramId = model.ProgramId
+                };
+
+                _context.Add(mapper);
+                await _context.SaveChangesAsync();
+
                 return RedirectToAction(nameof(Index));
             }
-            return View(eventMaster);
+            return View(model);
         }
 
         // GET: EventMasters/Edit/5

@@ -1,4 +1,4 @@
-﻿@model ExperienceIT.Web.Models.EventMaster
+﻿@model ProgramEventViewModel
 
 @{
     ViewData["Title"] = "Create";
@@ -6,7 +6,6 @@
 }
 
 <h1>Create</h1>
-
 <h4>EventMaster</h4>
 <hr />
 <div class="row">
@@ -14,39 +13,46 @@
         <form asp-action="Create">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
-                <label asp-for="Name" class="control-label"></label>
-                <input asp-for="Name" class="form-control" />
-                <span asp-validation-for="Name" class="text-danger"></span>
+                <label asp-for="ProgramName" class="control-label"></label>
+                @Html.DropDownListFor(s => s.ProgramId,
+                    new SelectList(Model.ProgramList, "Id", "Name"), "--Select Program--", new { @class = "form-control" })
+                <span asp-validation-for="ProgramName" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="Event.Name" class="control-label"></label>
+                <input asp-for="Event.Name" class="form-control" />
+                <span asp-validation-for="Event.Name" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Description" class="control-label"></label>
-                <input asp-for="Description" class="form-control" />
-                <span asp-validation-for="Description" class="text-danger"></span>
+                <label asp-for="Event.Description" class="control-label"></label>
+                <input asp-for="Event.Description" class="form-control" />
+                <span asp-validation-for="Event.Description" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="StartingDate" class="control-label"></label>
-                <input asp-for="StartingDate" class="form-control" />
-                <span asp-validation-for="StartingDate" class="text-danger"></span>
+                <label asp-for="Event.StartingDate" class="control-label"></label>
+                <input asp-for="Event.StartingDate" class="form-control" />
+                <span asp-validation-for="Event.StartingDate" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="EndingDate" class="control-label"></label>
-                <input asp-for="EndingDate" class="form-control" />
-                <span asp-validation-for="EndingDate" class="text-danger"></span>
+                <label asp-for="Event.EndingDate" class="control-label"></label>
+                <input asp-for="Event.EndingDate" class="form-control" />
+                <span asp-validation-for="Event.EndingDate" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="EnrollmentDate" class="control-label"></label>
-                <input asp-for="EnrollmentDate" class="form-control" />
-                <span asp-validation-for="EnrollmentDate" class="text-danger"></span>
+                <label asp-for="Event.EnrollmentDate" class="control-label"></label>
+                <input asp-for="Event.EnrollmentDate" class="form-control" />
+                <span asp-validation-for="Event.EnrollmentDate" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Venue" class="control-label"></label>
-                <input asp-for="Venue" class="form-control" />
-                <span asp-validation-for="Venue" class="text-danger"></span>
+                <label asp-for="Event.Venue" class="control-label"></label>
+                <input asp-for="Event.Venue" class="form-control" />
+                <span asp-validation-for="Event.Venue" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Duration" class="control-label"></label>
-                <input asp-for="Duration" class="form-control" />
-                <span asp-validation-for="Duration" class="text-danger"></span>
+                <label asp-for="Event.Duration" class="control-label"></label>
+                <input asp-for="Event.Duration" class="form-control" />
+                <span asp-validation-for="Event.Duration" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <input type="submit" value="Create" class="btn btn-primary" />
