@@ -1,4 +1,4 @@
-﻿@model IEnumerable<ExperienceIT.Web.Models.EventMaster>
+﻿@model IEnumerable<ProgramEventViewModel>
 
 @{
     ViewData["Title"] = "Index";
@@ -14,57 +14,64 @@
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.Name)
+                @Html.DisplayNameFor(model => model.Event.Name)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Description)
+                @Html.DisplayNameFor(model => model.Event.Description)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.StartingDate)
+                @Html.DisplayNameFor(model => model.Event.StartingDate)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.EndingDate)
+                @Html.DisplayNameFor(model => model.Event.EndingDate)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.EnrollmentDate)
+                @Html.DisplayNameFor(model => model.Event.EnrollmentDate)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Venue)
+                @Html.DisplayNameFor(model => model.ProgramName)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Duration)
+                @Html.DisplayNameFor(model => model.Event.Venue)
+            </th>
+
+            <th>
+                @Html.DisplayNameFor(model => model.Event.Duration)
             </th>
             <th></th>
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model) {
+    @foreach (var item in Model) {
         <tr>
             <td>
-                @Html.DisplayFor(modelItem => item.Name)
+                @Html.DisplayFor(modelItem => item.Event.Name)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Description)
+                @Html.DisplayFor(modelItem => item.Event.Description)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.StartingDate)
+                @Html.DisplayFor(modelItem => item.Event.StartingDate)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.EndingDate)
+                @Html.DisplayFor(modelItem => item.Event.EndingDate)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.EnrollmentDate)
+                @Html.DisplayFor(modelItem => item.Event.EnrollmentDate)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Venue)
+                @Html.DisplayFor(modelItem => item.ProgramName)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Duration)
+                @Html.DisplayFor(modelItem => item.Event.Venue)
             </td>
             <td>
-                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                @Html.DisplayFor(modelItem => item.Event.Duration)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.Event.Id">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.Event.Id">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.Event.Id">Delete</a>
             </td>
         </tr>
 }
