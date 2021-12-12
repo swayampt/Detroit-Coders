@@ -1,4 +1,4 @@
-﻿@model IEnumerable<ExperienceIT.Web.Models.Course>
+﻿@model IEnumerable<ExperienceIT.Web.Models.EventMaster>
 
 @{
     ViewData["Title"] = "Index";
@@ -20,16 +20,19 @@
                 @Html.DisplayNameFor(model => model.Description)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.TutorName)
+                @Html.DisplayNameFor(model => model.StartingDate)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.CourseRating)
+                @Html.DisplayNameFor(model => model.EndingDate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.EnrollmentDate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Venue)
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.Duration)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Resources)
             </th>
             <th></th>
         </tr>
@@ -44,16 +47,19 @@
                 @Html.DisplayFor(modelItem => item.Description)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.TutorName)
+                @Html.DisplayFor(modelItem => item.StartingDate)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.CourseRating)
+                @Html.DisplayFor(modelItem => item.EndingDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.EnrollmentDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Venue)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Duration)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Resources)
             </td>
             <td>
                 <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |

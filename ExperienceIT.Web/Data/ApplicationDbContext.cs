@@ -14,7 +14,18 @@ namespace ExperienceIT.Web.Data
         {
         }
 
-        public DbSet<Course> Courses { get; set; }
-        public DbSet<Volunteer> Volunteers { get; set; }
+
+        public DbSet<VolunteerMaster> VolunteerMaster { get; set; }
+        public DbSet<StudentMaster> StudentMaster { get; set; }
+        public DbSet<OrganizerMaster> OrganizerMaster { get; set; }
+        public DbSet<EventMaster> EventMaster { get; set; }
+        public DbSet<ProgramMaster> ProgramMaster { get; set; }
+        public DbSet<ProgramEventMapper> ProgramEventMapper { get; set; }
+        public DbSet<ProgramEventStudentMapper> ProgramEventStudentMapper { get; set; }
+        public DbSet<ProgramEventVolunteerMapper> ProgramEventVolunteerMapper { get; set; }
+        public DbSet<ProgramOrganizerMapper> ProgramOrganaizerMapper { get; set; }
+        public DbSet<VolunteerEventMapper> VolunteerEventMapper { get; set; }
+
+
     }
 }

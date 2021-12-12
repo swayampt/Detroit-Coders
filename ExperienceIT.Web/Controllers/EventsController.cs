@@ -10,24 +10,22 @@ using ExperienceIT.Web.Models;
 
 namespace ExperienceIT.Web.Controllers
 {
-    public class CoursesController : Controller
+    public class EventsController : Controller
     {
         private readonly ApplicationDbContext _context;
 
-
-        // Updating the first commit of feature branch - CoursesBranch
-        public CoursesController(ApplicationDbContext context)
+        public EventsController(ApplicationDbContext context)
         {
             _context = context;
         }
 
-        // GET: Courses
+        // GET: EventMasters
         public async Task<IActionResult> Index()
         {
-            return View(await _context.Courses.ToListAsync());
+            return View(await _context.EventMaster.ToListAsync());
         }
 
-        // GET: Courses/Details/5
+        // GET: EventMasters/Details/5
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
@@ -35,39 +33,39 @@ namespace ExperienceIT.Web.Controllers
                 return NotFound();
             }
 
-            var course = await _context.Courses
+            var eventMaster = await _context.EventMaster
                 .FirstOrDefaultAsync(m => m.Id == id);
-            if (course == null)
+            if (eventMaster == null)
             {
                 return NotFound();
             }
 
-            return View(course);
+            return View(eventMaster);
         }
 
-        // GET: Courses/Create
+        // GET: EventMasters/Create
         public IActionResult Create()
         {
             return View();
         }
 
-        // POST: Courses/Create
+        // POST: EventMasters/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to, for 
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Name,Description,TutorName,CourseRating,Duration,Resources")] Course course)
+        public async Task<IActionResult> Create([Bind("Id,Name,Description,StartingDate,EndingDate,EnrollmentDate,Venue,Duration")] EventMaster eventMaster)
         {
             if (ModelState.IsValid)
             {
-                _context.Add(course);
+                _context.Add(eventMaster);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            return View(course);
+            return View(eventMaster);
         }
 
-        // GET: Courses/Edit/5
+        // GET: EventMasters/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -75,22 +73,22 @@ namespace ExperienceIT.Web.Controllers
                 return NotFound();
             }
 
-            var course = await _context.Courses.FindAsync(id);
-            if (course == null)
+            var eventMaster = await _context.EventMaster.FindAsync(id);
+            if (eventMaster == null)
             {
                 return NotFound();
             }
-            return View(course);
+            return View(eventMaster);
         }
 
-        // POST: Courses/Edit/5
+        // POST: EventMasters/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to, for 
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Name,Description,TutorName,CourseRating,Duration,Resources")] Course course)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,Name,Description,StartingDate,EndingDate,EnrollmentDate,Venue,Duration")] EventMaster eventMaster)
         {
-            if (id != course.Id)
+            if (id != eventMaster.Id)
             {
                 return NotFound();
             }
@@ -99,12 +97,12 @@ namespace ExperienceIT.Web.Controllers
             {
                 try
                 {
-                    _context.Update(course);
+                    _context.Update(eventMaster);
                     await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!CourseExists(course.Id))
+                    if (!EventMasterExists(eventMaster.Id))
                     {
                         return NotFound();
                     }
@@ -115,10 +113,10 @@ namespace ExperienceIT.Web.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            return View(course);
+            return View(eventMaster);
         }
 
-        // GET: Courses/Delete/5
+        // GET: EventMasters/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -126,36 +124,30 @@ namespace ExperienceIT.Web.Controllers
                 return NotFound();
             }
 
-            var course = await _context.Courses
+            var eventMaster = await _context.EventMaster
                 .FirstOrDefaultAsync(m => m.Id == id);
-            if (course == null)
+            if (eventMaster == null)
             {
                 return NotFound();
             }
 
-            return View(course);
+            return View(eventMaster);
         }
 
-        // POST: Courses/Delete/5
+        // POST: EventMasters/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var course = await _context.Courses.FindAsync(id);
-            _context.Courses.Remove(course);
+            var eventMaster = await _context.EventMaster.FindAsync(id);
+            _context.EventMaster.Remove(eventMaster);
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
-        private bool CourseExists(int id)
+        private bool EventMasterExists(int id)
         {
-            return _context.Courses.Any(e => e.Id == id);
-        }
-
-
-        private void GetCourses()
-        {
-            //Drop Down logic for Courses
+            return _context.EventMaster.Any(e => e.Id == id);
         }
     }
 }

@@ -1,4 +1,4 @@
-﻿@model ExperienceIT.Web.Models.Volunteer
+﻿@model ExperienceIT.Web.Models.VolunteerMaster
 
 @{
     ViewData["Title"] = "Details";
@@ -8,7 +8,7 @@
 <h1>Details</h1>
 
 <div>
-    <h4>Volunteer</h4>
+    <h4>VolunteerMaster</h4>
     <hr />
     <dl class="row">
         <dt class = "col-sm-2">
@@ -96,10 +96,10 @@
             @Html.DisplayFor(model => model.Aboutme)
         </dd>
         <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Course)
+            @Html.DisplayNameFor(model => model.Availability)
         </dt>
         <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Course.Description)
+            @Html.DisplayFor(model => model.Availability)
         </dd>
         <dt class = "col-sm-2">
             @Html.DisplayNameFor(model => model.User)

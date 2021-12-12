@@ -10,23 +10,22 @@ using ExperienceIT.Web.Models;
 
 namespace ExperienceIT.Web.Controllers
 {
-    public class VolunteersController : Controller
+    public class OrganizersController : Controller
     {
         private readonly ApplicationDbContext _context;
 
-        public VolunteersController(ApplicationDbContext context)
+        public OrganizersController(ApplicationDbContext context)
         {
             _context = context;
         }
 
-        // GET: VolunteerMasters
+        // GET: Organizers
         public async Task<IActionResult> Index()
         {
-            var applicationDbContext = _context.VolunteerMaster.Include(v => v.User);
-            return View(await applicationDbContext.ToListAsync());
+            return View(await _context.OrganizerMaster.ToListAsync());
         }
 
-        // GET: VolunteerMasters/Details/5
+        // GET: Organizers/Details/5
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
@@ -34,42 +33,39 @@ namespace ExperienceIT.Web.Controllers
                 return NotFound();
             }
 
-            var volunteerMaster = await _context.VolunteerMaster
-                .Include(v => v.User)
+            var organizerMaster = await _context.OrganizerMaster
                 .FirstOrDefaultAsync(m => m.Id == id);
-            if (volunteerMaster == null)
+            if (organizerMaster == null)
             {
                 return NotFound();
             }
 
-            return View(volunteerMaster);
+            return View(organizerMaster);
         }
 
-        // GET: VolunteerMasters/Create
+        // GET: Organizers/Create
         public IActionResult Create()
         {
-            ViewData["UserId"] = new SelectList(_context.Users, "Id", "Id");
             return View();
         }
 
-        // POST: VolunteerMasters/Create
+        // POST: Organizers/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to, for 
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,FirstName,LastName,Phone,LinkedIn,Skills,YearsOfExperience,CurrentOrganization,Address,City,State,Zipcode,Country,AgeStatus,Aboutme,Availability,UserId")] VolunteerMaster volunteerMaster)
+        public async Task<IActionResult> Create([Bind("Id,Name,Address,City,State,Zipcode,Country")] OrganizerMaster organizerMaster)
         {
             if (ModelState.IsValid)
             {
-                _context.Add(volunteerMaster);
+                _context.Add(organizerMaster);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["UserId"] = new SelectList(_context.Users, "Id", "Id", volunteerMaster.UserId);
-            return View(volunteerMaster);
+            return View(organizerMaster);
         }
 
-        // GET: VolunteerMasters/Edit/5
+        // GET: Organizers/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -77,23 +73,22 @@ namespace ExperienceIT.Web.Controllers
                 return NotFound();
             }
 
-            var volunteerMaster = await _context.VolunteerMaster.FindAsync(id);
-            if (volunteerMaster == null)
+            var organizerMaster = await _context.OrganizerMaster.FindAsync(id);
+            if (organizerMaster == null)
             {
                 return NotFound();
             }
-            ViewData["UserId"] = new SelectList(_context.Users, "Id", "Id", volunteerMaster.UserId);
-            return View(volunteerMaster);
+            return View(organizerMaster);
         }
 
-        // POST: VolunteerMasters/Edit/5
+        // POST: Organizers/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to, for 
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,FirstName,LastName,Phone,LinkedIn,Skills,YearsOfExperience,CurrentOrganization,Address,City,State,Zipcode,Country,AgeStatus,Aboutme,Availability,UserId")] VolunteerMaster volunteerMaster)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,Name,Address,City,State,Zipcode,Country")] OrganizerMaster organizerMaster)
         {
-            if (id != volunteerMaster.Id)
+            if (id != organizerMaster.Id)
             {
                 return NotFound();
             }
@@ -102,12 +97,12 @@ namespace ExperienceIT.Web.Controllers
             {
                 try
                 {
-                    _context.Update(volunteerMaster);
+                    _context.Update(organizerMaster);
                     await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!VolunteerMasterExists(volunteerMaster.Id))
+                    if (!OrganizerMasterExists(organizerMaster.Id))
                     {
                         return NotFound();
                     }
@@ -118,11 +113,10 @@ namespace ExperienceIT.Web.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["UserId"] = new SelectList(_context.Users, "Id", "Id", volunteerMaster.UserId);
-            return View(volunteerMaster);
+            return View(organizerMaster);
         }
 
-        // GET: VolunteerMasters/Delete/5
+        // GET: Organizers/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -130,31 +124,30 @@ namespace ExperienceIT.Web.Controllers
                 return NotFound();
             }
 
-            var volunteerMaster = await _context.VolunteerMaster
-                .Include(v => v.User)
+            var organizerMaster = await _context.OrganizerMaster
                 .FirstOrDefaultAsync(m => m.Id == id);
-            if (volunteerMaster == null)
+            if (organizerMaster == null)
             {
                 return NotFound();
             }
 
-            return View(volunteerMaster);
+            return View(organizerMaster);
         }
 
-        // POST: VolunteerMasters/Delete/5
+        // POST: Organizers/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var volunteerMaster = await _context.VolunteerMaster.FindAsync(id);
-            _context.VolunteerMaster.Remove(volunteerMaster);
+            var organizerMaster = await _context.OrganizerMaster.FindAsync(id);
+            _context.OrganizerMaster.Remove(organizerMaster);
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
-        private bool VolunteerMasterExists(int id)
+        private bool OrganizerMasterExists(int id)
         {
-            return _context.VolunteerMaster.Any(e => e.Id == id);
+            return _context.OrganizerMaster.Any(e => e.Id == id);
         }
     }
 }
