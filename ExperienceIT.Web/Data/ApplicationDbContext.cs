@@ -25,7 +25,7 @@ namespace ExperienceIT.Web.Data
         public DbSet<ProgramEventVolunteerMapper> ProgramEventVolunteerMapper { get; set; }
         public DbSet<ProgramOrganizerMapper> ProgramOrganaizerMapper { get; set; }
         public DbSet<VolunteerEventMapper> VolunteerEventMapper { get; set; }
-
+        public DbSet<ApplicationUser> ApplicationUser { get; set; }
 
     }
 }
