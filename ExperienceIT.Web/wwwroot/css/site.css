@@ -72,11 +72,11 @@ body {
 
 .bg-image {
     background-position: center;
-    background-size: cover;
+    background-image: url(../images/home3.jpg);
     background-repeat: no-repeat;
     background-attachment: inherit;
     height: 100%;
     min-height: 100%;
-    /* filter: blur(4px);
-    -webkit-filter: blur(4px);/*/
+    /*filter: blur(1px);
+    -webkit-filter: blur(2px);*/
 }
