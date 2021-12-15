@@ -29,10 +29,37 @@ namespace ExperienceIT.Web.Controllers
                 .Include(x => x.ProgramMaster)
                 .Include(x => x.EventMaster).ToListAsync();
 
+            //For every record in the programeventmapper you will have to create an
+            //instance of the programeventviewmodel and provide the values for all the
+            //properties - Event, ProgramId, ProgramName and ProgramList.
+
+            //List<ProgramEventViewModel> result = new List<ProgramEventViewModel>();
+
+            //foreach(var x in programEventMapper)
+            //{
+            //    var viewModel = new ProgramEventViewModel()
+            //    {
+            //        Event = new EventMaster()
+            //        {
+            //            Id = x.EventMaster.Id,
+            //            Name = x.EventMaster.Name,
+            //            Description = x.EventMaster.Description,
+            //            StartingDate = x.EventMaster.StartingDate,
+            //            EndingDate = x.EventMaster.EndingDate,
+            //            EnrollmentDate = x.EventMaster.EnrollmentDate,
+            //            Venue = x.EventMaster.Venue,
+            //            Duration = x.EventMaster.Duration
+            //        },
+            //        ProgramName = x.ProgramMaster.Name,
+            //        ProgramId = x.ProgramMaster.Id
+            //    };
+            //    result.Add(viewModel);
+            //}
+
             var model = programEventMapper.Select(x => new ProgramEventViewModel()
             {
                 Event = new EventMaster()
-                { 
+                {
                     Id = x.EventMaster.Id,
                     Name = x.EventMaster.Name,
                     Description = x.EventMaster.Description,
@@ -44,7 +71,7 @@ namespace ExperienceIT.Web.Controllers
                 },
                 ProgramName = x.ProgramMaster.Name,
                 ProgramId = x.ProgramMaster.Id
-            }).ToList();
+            }).OrderBy(x => x.ProgramName).ToList();
 
             return View(model);
         }
@@ -191,5 +218,22 @@ namespace ExperienceIT.Web.Controllers
         {
             return _context.EventMaster.Any(e => e.Id == id);
         }
+
+        //public async Task<IActionResult> Register()
+        //{
+        //    string userName = User.Identity.Name;
+           
+        //    if(User.IsInRole("Volunteer"))
+        //    {
+        //        //Put entry into ProgramEventVolunteerMapper
+        //    }
+        //    else if (User.IsInRole("Student"))
+        //    {
+        //        //Put entry into ProgramEventStudentMapper
+        //    }
+
+        //    return RedirectToAction(nameof(Index));
+        //}
+
     }
 }

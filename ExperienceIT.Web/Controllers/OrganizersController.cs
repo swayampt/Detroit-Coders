@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using ExperienceIT.Web.Data;
 using ExperienceIT.Web.Models;
+using ExperienceIT.Web.ViewModels;
 
 namespace ExperienceIT.Web.Controllers
 {
@@ -19,10 +20,12 @@ namespace ExperienceIT.Web.Controllers
             _context = context;
         }
 
-        // GET: Organizers
+        //GET: Organizers
         public async Task<IActionResult> Index()
         {
-            return View(await _context.OrganizerMaster.ToListAsync());
+
+            var organizers = await _context.OrganizerMaster.ToListAsync();
+            return View(organizers);
         }
 
         // GET: Organizers/Details/5
@@ -46,7 +49,14 @@ namespace ExperienceIT.Web.Controllers
         // GET: Organizers/Create
         public IActionResult Create()
         {
-            return View();
+            ProgramOrganizerViewModel model = new ProgramOrganizerViewModel()
+            {
+                Organizer = new OrganizerMaster(),
+                Organizations = _context.OrganizerMaster.ToList()
+            };
+
+            return View(model);
+            
         }
 
         // POST: Organizers/Create
@@ -54,15 +64,15 @@ namespace ExperienceIT.Web.Controllers
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Name,Address,City,State,Zipcode,Country")] OrganizerMaster organizerMaster)
+        public async Task<IActionResult> Create(ProgramOrganizerViewModel model)
         {
             if (ModelState.IsValid)
             {
-                _context.Add(organizerMaster);
+                _context.Add(model.Organizer);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            return View(organizerMaster);
+            return View(model);
         }
 
         // GET: Organizers/Edit/5

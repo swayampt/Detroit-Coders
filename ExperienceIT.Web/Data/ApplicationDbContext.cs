@@ -23,7 +23,7 @@ namespace ExperienceIT.Web.Data
         public DbSet<ProgramEventMapper> ProgramEventMapper { get; set; }
         public DbSet<ProgramEventStudentMapper> ProgramEventStudentMapper { get; set; }
         public DbSet<ProgramEventVolunteerMapper> ProgramEventVolunteerMapper { get; set; }
-        public DbSet<ProgramOrganizerMapper> ProgramOrganaizerMapper { get; set; }
+        public DbSet<ProgramOrganizerMapper> ProgramOrganizerMapper { get; set; }
         public DbSet<VolunteerEventMapper> VolunteerEventMapper { get; set; }
         public DbSet<ApplicationUser> ApplicationUser { get; set; }
 

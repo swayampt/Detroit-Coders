@@ -188,15 +188,15 @@ namespace ExperienceIT.Web.Migrations
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     ProgramId = table.Column<int>(nullable: false),
-                    OrganaizerId = table.Column<int>(nullable: false),
+                    OrganizerId = table.Column<int>(nullable: false),
                     StudentId = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_ProgramOrganaizerMapper", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_ProgramOrganaizerMapper_OrganizerMaster_OrganaizerId",
-                        column: x => x.OrganaizerId,
+                        name: "FK_ProgramOrganaizerMapper_OrganizerMaster_OrganizerId",
+                        column: x => x.OrganizerId,
                         principalTable: "OrganizerMaster",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
@@ -288,18 +288,18 @@ namespace ExperienceIT.Web.Migrations
                 column: "VolunteerId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_ProgramOrganaizerMapper_OrganaizerId",
-                table: "ProgramOrganaizerMapper",
-                column: "OrganaizerId");
+                name: "IX_ProgramOrganaizerMapper_OrganizerId",
+                table: "ProgramOrganizerMapper",
+                column: "OrganizerId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_ProgramOrganaizerMapper_ProgramId",
-                table: "ProgramOrganaizerMapper",
+                name: "IX_ProgramOrganizerMapper_ProgramId",
+                table: "ProgramOrganizerMapper",
                 column: "ProgramId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_ProgramOrganaizerMapper_StudentId",
-                table: "ProgramOrganaizerMapper",
+                name: "IX_ProgramOrganizerMapper_StudentId",
+                table: "ProgramOrganizerMapper",
                 column: "StudentId");
 
             migrationBuilder.CreateIndex(
@@ -325,7 +325,7 @@ namespace ExperienceIT.Web.Migrations
                 name: "ProgramEventVolunteerMapper");
 
             migrationBuilder.DropTable(
-                name: "ProgramOrganaizerMapper");
+                name: "ProgramOrganizerMapper");
 
             migrationBuilder.DropTable(
                 name: "EventMaster");

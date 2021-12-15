@@ -7,12 +7,15 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using ExperienceIT.Web.Data;
 using ExperienceIT.Web.Models;
+using ExperienceIT.Web.ViewModels;
 
 namespace ExperienceIT.Web.Controllers
 {
     public class ProgramsController : Controller
     {
         private readonly ApplicationDbContext _context;
+
+        public OrganizerMaster Organizer { get; private set; }
 
         public ProgramsController(ApplicationDbContext context)
         {
@@ -22,7 +25,22 @@ namespace ExperienceIT.Web.Controllers
         // GET: Programs
         public async Task<IActionResult> Index()
         {
-            return View(await _context.ProgramMaster.ToListAsync());
+            var programMaster = await _context.ProgramMaster.ToListAsync();
+            var organizations = await _context.OrganizerMaster.ToListAsync();
+            var events = await _context.EventMaster.ToListAsync();
+            var orgMapper = await _context.ProgramOrganizerMapper.ToListAsync();
+            var eventMapper = await _context.ProgramEventMapper.ToListAsync();
+
+            var model = new ProgramOrganizerViewModel()
+            {
+                ProgramList = programMaster,
+                Organizations = organizations,
+                Events = events,
+                EventMappers = eventMapper,
+                ProgramOrganizerMappers = orgMapper
+            };
+
+            return View(model);
         }
 
         // GET: Programs/Details/5
@@ -33,20 +51,56 @@ namespace ExperienceIT.Web.Controllers
                 return NotFound();
             }
 
+            var model = new ProgramOrganizerViewModel();
+
+            //Get the program details from the program master based on the id
             var programMaster = await _context.ProgramMaster
                 .FirstOrDefaultAsync(m => m.Id == id);
+
+            //Going to the ProgramOrganizerMapper and getting all the organizers (id)
+            //for that program and storing it in an integer array
+            var orgArray = await _context.ProgramOrganizerMapper
+                .Where(x => x.ProgramId == programMaster.Id)
+                .Select(x => x.OrganizerId).ToArrayAsync();
+
+            //Going to the EventMaster and getting all the Events (id)
+            //for that program and storing it in an integer array
+            var eventArray = await _context.ProgramEventMapper
+                .Where(x => x.ProgramId == programMaster.Id)
+                .Select(x => x.EventId).ToArrayAsync();
+
+            model.Program = programMaster;
+
+            //Look for the organization from the integer array and only
+            //select those organizations
+            model.Organizations = await _context.OrganizerMaster
+                .Where(x => orgArray.Contains(x.Id)).ToListAsync();
+
+            //Look for the events from the integer array and only
+            //select those events
+            model.Events = await _context.EventMaster
+                .Where(x => eventArray.Contains(x.Id)).ToListAsync();
+
             if (programMaster == null)
             {
                 return NotFound();
             }
 
-            return View(programMaster);
+            return View(model);
         }
 
         // GET: Programs/Create
-        public IActionResult Create()
+        public async Task<IActionResult> Create()
         {
-            return View();
+            var model = new ProgramOrganizerViewModel()
+            {
+                Organizer = new OrganizerMaster(),
+                Organizations = await _context.OrganizerMaster.ToListAsync(),
+                Event=new EventMaster(),
+                Events=await _context.EventMaster.ToListAsync()
+            };
+
+            return View(model);
         }
 
         // POST: Programs/Create
@@ -54,31 +108,73 @@ namespace ExperienceIT.Web.Controllers
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Name,Description")] ProgramMaster programMaster)
+        public async Task<IActionResult> Create(ProgramOrganizerViewModel model)
         {
-            if (ModelState.IsValid)
+            var orgIds = Request.Form["orgIds"].ToString().Split(',');
+            var program = model.Program;
+            _context.Add(program);
+            await _context.SaveChangesAsync();
+
+            var programId = program.Id;
+
+            foreach (var orgId in orgIds)
             {
-                _context.Add(programMaster);
-                await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
+                if (!string.IsNullOrEmpty(orgId))
+                {
+                    var organizationId = Convert.ToInt32(orgId);
+                    var organizationMapper = new ProgramOrganizerMapper()
+                    {
+                        OrganizerId = organizationId,
+                        ProgramId = programId
+                    };
+                    _context.Add(organizationMapper);
+                    await _context.SaveChangesAsync();
+                }
+
             }
-            return View(programMaster);
+
+            return RedirectToAction(nameof(Index));
+
         }
 
         // GET: Programs/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
+            var model = new ProgramOrganizerViewModel();
             if (id == null)
             {
                 return NotFound();
             }
 
-            var programMaster = await _context.ProgramMaster.FindAsync(id);
+            var programMaster = await _context.ProgramMaster.FirstOrDefaultAsync(m => m.Id == id);
+            var orgMaster = await _context.OrganizerMaster.ToListAsync();
+            var eventMaster = await _context.EventMaster.ToListAsync();
+
             if (programMaster == null)
             {
                 return NotFound();
             }
-            return View(programMaster);
+
+            var prgOrgMapper = await _context.ProgramOrganizerMapper
+                .Where(x => x.ProgramId == programMaster.Id)
+                .Select(x => x.OrganizerId).ToArrayAsync();
+
+            var eventMapper = await _context.ProgramEventMapper
+                .Where(x => x.ProgramId == programMaster.Id)
+                .Select(x => x.EventId).ToArrayAsync();
+
+            model.Program = programMaster;
+            model.Organizations = orgMaster.ToList();
+            model.Events = eventMaster.ToList();
+            model.ProgramOrganizations = orgMaster
+                                  .Where(x => prgOrgMapper.Contains(x.Id))
+                                  .ToList();
+
+            model.ProgramEvents = eventMaster
+                            .Where(x => eventMapper.Contains(x.Id))
+                            .ToList();
+
+            return View(model);
         }
 
         // POST: Programs/Edit/5
@@ -86,34 +182,50 @@ namespace ExperienceIT.Web.Controllers
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Name,Description")] ProgramMaster programMaster)
+        public async Task<IActionResult> Edit(ProgramOrganizerViewModel model)
         {
-            if (id != programMaster.Id)
-            {
-                return NotFound();
-            }
+            var orgIds = Request.Form["orgIds"].ToString().Split(',');
+            var eventIds = Request.Form["eventIds"].ToString().Split(',');
 
-            if (ModelState.IsValid)
+            var program = model.Program;
+            _context.Update(program);
+            await _context.SaveChangesAsync();
+
+            var programId = program.Id;
+
+            foreach (var orgId in orgIds)
             {
-                try
+                if (!string.IsNullOrEmpty(orgId))
                 {
-                    _context.Update(programMaster);
+                    var organizationId = Convert.ToInt32(orgId);
+                    var organizationMapper = new ProgramOrganizerMapper()
+                    {
+                        OrganizerId = organizationId,
+                        ProgramId = programId
+                    };
+                    _context.Add(organizationMapper);
                     await _context.SaveChangesAsync();
                 }
-                catch (DbUpdateConcurrencyException)
-                {
-                    if (!ProgramMasterExists(programMaster.Id))
-                    {
-                        return NotFound();
-                    }
-                    else
-                    {
-                        throw;
-                    }
-                }
-                return RedirectToAction(nameof(Index));
+
             }
-            return View(programMaster);
+
+            foreach (var evtId in eventIds)
+            {
+                if (!string.IsNullOrEmpty(evtId))
+                {
+                    var eventId = Convert.ToInt32(evtId);
+                    var eventMapper = new ProgramEventMapper()
+                    {
+                        EventId = eventId,
+                        ProgramId = programId
+                    };
+                    _context.Add(eventMapper);
+                    await _context.SaveChangesAsync();
+                }
+
+            }
+
+            return RedirectToAction(nameof(Index));
         }
 
         // GET: Programs/Delete/5
