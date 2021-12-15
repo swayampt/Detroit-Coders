@@ -1,18 +1,29 @@
 ﻿@model IEnumerable<ProgramEventViewModel>
-
 @{
     ViewData["Title"] = "Index";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-
-<h1>Index</h1>
-
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
-<table class="table">
-    <thead>
-        <tr>
+<style>
+    body {
+        background-color: azure;
+    }
+</style>
+<div class="border backgroundwhite">
+    @*adding border,background and image*@
+    <div class="row">
+        @* the "row" class is used mainly to hold columns in it.*@
+        <div class="col-6">
+            @*element take half of the horizontal screen space devices.*@
+            <h2 class="text-info">Events List</h2>@*Add meaning through text-colors*@
+        </div>
+        <div class="col-6 text-right">
+            @* move the columns to the right*@
+            <a><partial name="_CreateButtonPartial" /></a>
+        </div>
+    </div>
+   
+    <table class="table table-striped border">
+        <tr class="table-secondary">
             <th>
                 @Html.DisplayNameFor(model => model.Event.Name)
             </th>
@@ -25,55 +36,52 @@
             <th>
                 @Html.DisplayNameFor(model => model.Event.EndingDate)
             </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Event.EnrollmentDate)
-            </th>
+            @*<th>
+                    @Html.DisplayNameFor(model => model.Event.EnrollmentDate)
+                </th>*@
             <th>
                 @Html.DisplayNameFor(model => model.ProgramName)
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.Event.Venue)
             </th>
-
-            <th>
+            <th colspan="2">
                 @Html.DisplayNameFor(model => model.Event.Duration)
             </th>
-            <th></th>
         </tr>
-    </thead>
-    <tbody>
-    @foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Event.Name)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Event.Description)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Event.StartingDate)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Event.EndingDate)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Event.EnrollmentDate)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.ProgramName)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Event.Venue)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Event.Duration)
-            </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.Event.Id">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.Event.Id">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.Event.Id">Delete</a>
-            </td>
-        </tr>
-}
-    </tbody>
-</table>
+
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Event.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Event.Description)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Event.StartingDate)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Event.EndingDate)
+                </td>
+                @*<td>
+                        @Html.DisplayFor(modelItem => item.Event.EnrollmentDate)
+                    </td>*@
+                <td>
+                    @Html.DisplayFor(modelItem => item.ProgramName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Event.Venue)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Event.Duration)
+                </td>
+
+                <partial name="_TableButtonPartial" model="item.Event.Id" />
+            </tr>
+        }
+
+    </table>
+</div>
