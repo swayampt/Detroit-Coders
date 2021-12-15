@@ -125,11 +125,11 @@
         <partial name="_CreateAndBackToListButton" />
     </form>
 </div>
-@*@section Scripts {
+@section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
-        }*@
-@section scripts {
-    <script type="text/javascript">
+}
+@*@section scripts {
+        <script type="text/javascript">
 
             // Add the following code if you want the name of the file appear on select
             $(".custom-file-input").on("change", function () {
@@ -137,7 +137,7 @@
                 $(this).siblings(".custom-file-label").addClass("selected").html(fileName);
             });
         </script>
-    }
+    }*@
 
 
 
