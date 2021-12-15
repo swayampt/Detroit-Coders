@@ -1,11 +1,11 @@
-﻿@model IEnumerable<ExperienceIT.Web.Models.ProgramMaster>
+﻿@model ProgramOrganizerViewModel
 
 @{
     ViewData["Title"] = "Index";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h1>Index</h1>
+<h1>Programs</h1>
 
 <p>
     <a asp-action="Create">Create New</a>
@@ -14,16 +14,22 @@
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.Name)
+                <label>Name</label>
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Description)
+                <label>Description</label>
+            </th>
+            <th>
+                <label>&emsp;&nbsp;Organizers</label>
+            </th>
+            <th>
+                <label>&emsp;&nbsp;Events</label>
             </th>
             <th></th>
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model) {
+    @foreach (var item in Model.ProgramList) {
         <tr>
             <td>
                 @Html.DisplayFor(modelItem => item.Name)
@@ -32,7 +38,38 @@
                 @Html.DisplayFor(modelItem => item.Description)
             </td>
             <td>
-                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
+                @{
+                    var orgIds = Model.ProgramOrganizerMappers.Where(x => x.ProgramId == item.Id)
+                        .Select(x => x.OrganizerId).ToArray();
+                    var orgs = Model.Organizations.Where(x => orgIds.Contains(x.Id)).ToList();
+                }
+                <ul>
+                    @foreach (var org in orgs)
+                    {
+                        <li>@org.Name</li>
+                    }
+                </ul>
+            </td>
+            <td>
+                @{
+                    var evtIds = Model.EventMappers.Where(x => x.ProgramId == item.Id)
+                        .Select(x => x.EventId).ToArray();
+                    var evts = Model.Events.Where(x => evtIds.Contains(x.Id)).ToList();
+                }
+                <ul>
+                    @foreach (var evt in evts)
+                    {
+                        <li>@evt.Name</li>
+                    }
+                </ul>
+            </td>
+            <td>
+                @*This is for Admin authentication roll. We will make it later once all the functionalities
+                and views will be done  
+                @if (User.IsInRole("Admin"))
+                {*@
+                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a>
+                @* } *@|
                 <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
                 <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
             </td>

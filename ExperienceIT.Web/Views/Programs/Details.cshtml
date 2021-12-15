@@ -1,4 +1,4 @@
-﻿@model ExperienceIT.Web.Models.ProgramMaster
+﻿@model ProgramOrganizerViewModel
 
 @{
     ViewData["Title"] = "Details";
@@ -11,21 +11,38 @@
     <h4>ProgramMaster</h4>
     <hr />
     <dl class="row">
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Name)
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Program.Name)
         </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Name)
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Program.Name)
         </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Description)
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Program.Description)
         </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Description)
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Program.Description)
         </dd>
     </dl>
+    <hr />
+    <h4>List of Organizers</h4>
+    <ul>
+        @foreach (var org in Model.Organizations)
+        {
+            <li>@org.Name</li>
+        }
+    </ul>
+    <hr />
+    <h4>List of events for this program</h4>
+    <ul>
+        @foreach (var evt in Model.Events)
+        {
+            <li>@evt.Name</li>
+        }
+    </ul>
 </div>
+<br />
 <div>
-    <a asp-action="Edit" asp-route-id="@Model.Id">Edit</a> |
-    <a asp-action="Index">Back to List</a>
+    <a asp-action="Edit" class="btn btn-primary" asp-route-id="@Model.Program.Id">Edit</a>
+    <a asp-action="Index" class="btn btn-primary">Back to List</a>
 </div>

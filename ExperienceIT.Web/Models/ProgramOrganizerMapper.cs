@@ -16,13 +16,10 @@ namespace ExperienceIT.Web.Models
         [ForeignKey("ProgramId")]
         public virtual ProgramMaster ProgramMaster { get; set; }
 
-        public int OrganaizerId { get; set; }
-        [ForeignKey("OrganaizerId")]
-        public virtual OrganizerMaster OrganaizerMaster { get; set; }
+        public int OrganizerId { get; set; }
+        [ForeignKey("OrganizerId")]
+        public virtual OrganizerMaster OrganizerMaster { get; set; }
 
-        public int StudentId { get; set; }
-
-        [ForeignKey("StudentId")]
-        public virtual StudentMaster StudentMaster { get; set; }
+        
     }
 }

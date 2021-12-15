@@ -22,14 +22,17 @@ namespace ExperienceIT.Web.Models
 
         [Required]
         [Display(Name = "Starting Date")]
+        [DataType(DataType.Date)]
         public DateTime StartingDate { get; set; }
 
         [Required]
         [Display(Name = "Ending Date")]
+        [DataType(DataType.Date)]
         public DateTime EndingDate { get; set; }
 
         [Required]
         [Display(Name = "Enrollment Date")]
+        [DataType(DataType.Date)]
         public DateTime EnrollmentDate { get; set; }
 
         [Required]
