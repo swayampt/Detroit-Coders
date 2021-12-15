@@ -3,6 +3,7 @@
 @model RegisterModel
 @{
     ViewData["Title"] = "Register";
+    Layout = "~/Areas/Identity/Pages/_AuthLayout.cshtml";  /*Add this extra line code to connect authlayout*/
 }
 <style>
     body {
@@ -10,132 +11,136 @@
     }
 </style>
 
-<h2 class="text-info">Create New Account</h2>
-<br />
+<br/><br />
 
 <form method="post" asp-route-returnUrl="@Model.ReturnUrl">    
-    <div class="border backgroundwhite">        
-        <h6><span style="color:#ff0000">*</span> <i>is a required field.</i></h6>
-        <br />
-        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-
-        <div class="form-group row">
-            <div class="col-2">
+    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+    <div class="row">
+        <div class="col-sm-1"></div>
+        <div class="col-md-5">
+            <div class="form-group">
                 <label asp-for="Input.FirstName" class="col-form-label">First Name <span style="color:#ff0000">*</span></label>
-            </div>
-            <div class="col-5">
-                <input asp-for="Input.FirstName" class="form-control" />
-            </div>
-            <span asp-validation-for="Input.FirstName" class="text-danger"></span>
-        </div>
-
-        <div class="form-group row">
-            <div class="col-2">
-                <label asp-for="Input.LastName" class="col-form-label">Last Name <span style="color:#ff0000">*</span></label>
-            </div>
-            <div class="col-5">
-                <input asp-for="Input.LastName" class="form-control" />
-            </div>
-            <span asp-validation-for="Input.LastName" class="text-danger"></span>
-        </div>
-
-        <div class="form-group row">
-            <div class="col-2">
-                <label asp-for="Input.Email" class="col-form-label">Email <span style="color:#ff0000">*</span></label>
-            </div>
-            <div class="col-5">
-                <input asp-for="Input.Email" class="form-control" />
-            </div>
-            <span asp-validation-for="Input.Email" class="text-danger"></span>
-        </div>
-
-        <div class="form-group row">
-            <div class="col-2">
-                <label asp-for="Input.PhoneNumber" class="col-form-label"></label>
-            </div>
-            <div class="col-5">
-                <input asp-for="Input.PhoneNumber" class="form-control" />
-            </div>
-            <span asp-validation-for="Input.PhoneNumber" class="text-danger"></span>
-        </div>
-
-        <div class="form-group row">
-            <div class="col-2">
-                <label asp-for="Input.StreetAddress" class="col-form-label"></label>
-            </div>
-            <div class="col-5">
-                <input asp-for="Input.StreetAddress" class="form-control" />
-            </div>
-            <span asp-validation-for="Input.StreetAddress" class="text-danger"></span>
-        </div>
-
-        <div class="form-group row">
-            <div class="col-2">
-                <label asp-for="Input.City" class="col-form-label"></label>
-            </div>
-            <div class="col-5">
-                <input asp-for="Input.City" class="form-control" />
-            </div>
-            <span asp-validation-for="Input.City" class="text-danger"></span>
-        </div>
-
-        <div class="form-group row">
-            <div class="col-2">
-                <label asp-for="Input.State" class="col-form-label"></label>
-            </div>
-            <div class="col-5">
-                <input asp-for="Input.State" class="form-control" />
-            </div>
-            <span asp-validation-for="Input.State" class="text-danger"></span>
-        </div>
-
-        <div class="form-group row">
-            <div class="col-2">
-                <label asp-for="Input.Zipcode" class="col-form-label"></label>
-            </div>
-            <div class="col-5">
-                <input asp-for="Input.Zipcode" class="form-control" />
-            </div>
-            <span asp-validation-for="Input.Zipcode" class="text-danger"></span>
-        </div>
-
-        <div class="form-group row">
-            <div class="col-2">
-                <label asp-for="Input.Password" class="col-form-label">Password <span style="color:#ff0000">*</span></label>
-            </div>
-            <div class="col-5">
-                <input asp-for="Input.Password" class="form-control" />
-            </div>
-            <span asp-validation-for="Input.Password" class="text-danger"></span>
-        </div>
-
-        <div class="form-group row">
-            <div class="col-2">
-                <label asp-for="Input.ConfirmPassword" class="col-form-label"></label>
-            </div>
-            <div class="col-5">
-                <input asp-for="Input.ConfirmPassword" class="form-control" />
-            </div>
-            <span asp-validation-for="Input.ConfirmPassword" class="text-danger"></span>
-        </div>
-
-        <div class="form-group row">
-            <div class="col-2"></div>
-            <div class="col-5">
-                <input type="radio" name="rdUserRole" value="@SD.VolunteerUser" checked /> @SD.VolunteerUser                 
-                <input type="radio" name="rdUserRole" value="@SD.StudentUser" checked /> @SD.StudentUser                
+                <input asp-for="Input.FirstName" class="form-control"/>
+                <span asp-validation-for="Input.FirstName" class="text-danger"></span>
             </div>            
         </div>
+        <div class="col-md-5">
+            <div class="form-group">
+                <label asp-for="Input.LastName" class="col-form-label">Last Name <span style="color:#ff0000">*</span></label>
+                <input asp-for="Input.LastName" class="form-control" />
+                <span asp-validation-for="Input.LastName" class="text-danger"></span>
+            </div> 
+        </div>
+        <div class="col-sm-1"></div>
+    </div>
 
-        <div class="form-group row">
-            <div class="col-5 offset-2">
-                <button type="submit" class="btn btn-primary form-control">Register</button>
+    <div class="row">
+        <div class="col-sm-1"></div>
+        <div class="col-md-5">
+            <div class="form-group">
+                <label asp-for="Input.Email" class="col-form-label">Email <span style="color:#ff0000">*</span></label>
+                <input asp-for="Input.Email" class="form-control" placeholder="example@yourmail.com"/>
+                <span asp-validation-for="Input.Email" class="text-danger"></span>
+            </div> 
+        </div>
+        <div class="col-md-5">
+            <div class="form-group">
+                <label asp-for="Input.PhoneNumber" class="col-form-label">Phone Number</label>
+                <input asp-for="Input.PhoneNumber" class="form-control" placeholder="+1 (000)-000-0000"/>
+                <span asp-validation-for="Input.PhoneNumber" class="text-danger"></span>
+            </div> 
+        </div>
+        <div class="col-sm-1"></div>
+    </div>
+
+    <div class="row">
+        <div class="col-sm-1"></div>
+        <div class="col-md-5">
+            <div class="form-group">
+                <label asp-for="Input.Password" class="col-form-label">Password <span style="color:#ff0000">*</span></label>
+                <input asp-for="Input.Password" class="form-control"/>
+                <span asp-validation-for="Input.Password" class="text-danger"></span>
+            </div> 
+        </div>
+        <div class="col-md-5">
+            <div class="form-group">
+                <label asp-for="Input.ConfirmPassword" class="col-form-label">Confirm Password <span style="color:#ff0000">*</span></label>
+                <input asp-for="Input.ConfirmPassword" class="form-control"/>
+                <span asp-validation-for="Input.ConfirmPassword" class="text-danger"></span>
+            </div> 
+        </div>
+        <div class="col-sm-1"></div>
+    </div>
+
+    <div class="row">
+        <div class="col-sm-1"></div>
+        <div class="col-md-5">
+            <div class="form-group">
+                <label asp-for="Input.StreetAddress" class="col-form-label">Street Address</label>
+                <input asp-for="Input.StreetAddress" class="form-control"/>
+                <span asp-validation-for="Input.StreetAddress" class="text-danger"></span>
+            </div> 
+        </div>
+        <div class="col-md-5">
+            <div class="form-group">
+                <label asp-for="Input.City" class="col-form-label"></label>
+                <input asp-for="Input.City" class="form-control"/>
+                <span asp-validation-for="Input.City" class="text-danger"></span>
+            </div> 
+        </div>
+        <div class="col-sm-1"></div>
+    </div>
+
+    <div class="row">
+        <div class="col-sm-1"></div>
+        <div class="col-md-5">
+            <div class="form-group">
+                <label asp-for="Input.State" class="col-form-label"></label>
+                <input asp-for="Input.State" class="form-control" placeholder="MI"/>
+                <span asp-validation-for="Input.State" class="text-danger"></span>
+            </div> 
+        </div>
+        <div class="col-md-5">
+            <div class="form-group">
+                <label asp-for="Input.Zipcode" class="col-form-label">Zip Code</label>
+                <input asp-for="Input.Zipcode" class="form-control"/>
+                <span asp-validation-for="Input.Zipcode" class="text-danger"></span>
+            </div> 
+        </div>
+        <div class="col-sm-1"></div>
+    </div>    
+
+    <div class="row">
+        <div class="col-md-5 offset-sm-1 form-group">
+             <label class="col-form-label align-content-end">
+                 <span>Choose Registration Type <span style="color:#ff0000">*</span></span>
+             </label>
+        </div>
+        <div class="col-md-3">
+        <div class="form-group">
+            <label class="col-form-label">                  
+                <input type="radio" name="rdUserRole" value="@SD.VolunteerUser" checked /> @SD.VolunteerUser
+            </label>
+            </div>
+        </div>
+        <div class="col-md-3">
+        <div class="form-group">
+            <label class="col-form-label">
+                <input type="radio" name="rdUserRole" value="@SD.StudentUser" checked /> @SD.StudentUser
+            </label>
             </div>
         </div>
     </div>
+
+    <br/>
+
+    <div class="row">
+        <div class="col-md-6 form-group offset-md-3">
+             <button type="submit" class="btn btn-primary form-control">Register</button>
+        </div>
+    </div> 
 </form>
 
-        @*Swayam - removed the Comment. @section Script needed for validation as per Spice project.*@
-        @section Scripts {
-            <partial name="_ValidationScriptsPartial" />
-        }
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}
