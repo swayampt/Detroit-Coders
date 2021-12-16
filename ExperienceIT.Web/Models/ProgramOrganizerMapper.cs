@@ -18,8 +18,6 @@ namespace ExperienceIT.Web.Models
 
         public int OrganizerId { get; set; }
         [ForeignKey("OrganizerId")]
-        public virtual OrganizerMaster OrganizerMaster { get; set; }
-
-        
+        public virtual OrganizerMaster OrganizerMaster { get; set; }        
     }
 }

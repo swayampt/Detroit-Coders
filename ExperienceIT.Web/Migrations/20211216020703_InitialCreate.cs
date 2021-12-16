@@ -3,11 +3,10 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace ExperienceIT.Web.Migrations
 {
-    public partial class UpdateLatestModelsToDB : Migration
+    public partial class InitialCreate : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
-            Down(migrationBuilder);
             migrationBuilder.CreateTable(
                 name: "AspNetRoles",
                 columns: table => new
@@ -151,8 +150,8 @@ namespace ExperienceIT.Web.Migrations
                 name: "AspNetUserLogins",
                 columns: table => new
                 {
-                    LoginProvider = table.Column<string>(maxLength: 128, nullable: false),
-                    ProviderKey = table.Column<string>(maxLength: 128, nullable: false),
+                    LoginProvider = table.Column<string>(nullable: false),
+                    ProviderKey = table.Column<string>(nullable: false),
                     ProviderDisplayName = table.Column<string>(nullable: true),
                     UserId = table.Column<string>(nullable: false)
                 },
@@ -196,8 +195,8 @@ namespace ExperienceIT.Web.Migrations
                 columns: table => new
                 {
                     UserId = table.Column<string>(nullable: false),
-                    LoginProvider = table.Column<string>(maxLength: 128, nullable: false),
-                    Name = table.Column<string>(maxLength: 128, nullable: false),
+                    LoginProvider = table.Column<string>(nullable: false),
+                    Name = table.Column<string>(nullable: false),
                     Value = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
@@ -302,6 +301,32 @@ namespace ExperienceIT.Web.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "ProgramOrganizerMapper",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    ProgramId = table.Column<int>(nullable: false),
+                    OrganizerId = table.Column<int>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_ProgramOrganizerMapper", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_ProgramOrganizerMapper_OrganizerMaster_OrganizerId",
+                        column: x => x.OrganizerId,
+                        principalTable: "OrganizerMaster",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_ProgramOrganizerMapper_ProgramMaster_ProgramId",
+                        column: x => x.ProgramId,
+                        principalTable: "ProgramMaster",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "ProgramEventStudentMapper",
                 columns: table => new
                 {
@@ -328,39 +353,6 @@ namespace ExperienceIT.Web.Migrations
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_ProgramEventStudentMapper_StudentMaster_StudentId",
-                        column: x => x.StudentId,
-                        principalTable: "StudentMaster",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "ProgramOrganaizerMapper",
-                columns: table => new
-                {
-                    Id = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    ProgramId = table.Column<int>(nullable: false),
-                    OrganizerId = table.Column<int>(nullable: false),
-                    StudentId = table.Column<int>(nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_ProgramOrganaizerMapper", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_ProgramOrganaizerMapper_OrganizerMaster_OrganizerId",
-                        column: x => x.OrganizerId,
-                        principalTable: "OrganizerMaster",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_ProgramOrganaizerMapper_ProgramMaster_ProgramId",
-                        column: x => x.ProgramId,
-                        principalTable: "ProgramMaster",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_ProgramOrganaizerMapper_StudentMaster_StudentId",
                         column: x => x.StudentId,
                         principalTable: "StudentMaster",
                         principalColumn: "Id",
@@ -506,7 +498,7 @@ namespace ExperienceIT.Web.Migrations
                 column: "VolunteerId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_ProgramOrganaizerMapper_OrganizerId",
+                name: "IX_ProgramOrganizerMapper_OrganizerId",
                 table: "ProgramOrganizerMapper",
                 column: "OrganizerId");
 
@@ -514,11 +506,6 @@ namespace ExperienceIT.Web.Migrations
                 name: "IX_ProgramOrganizerMapper_ProgramId",
                 table: "ProgramOrganizerMapper",
                 column: "ProgramId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_ProgramOrganizerMapper_StudentId",
-                table: "ProgramOrganizerMapper",
-                column: "StudentId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_StudentMaster_UserId",
@@ -577,13 +564,13 @@ namespace ExperienceIT.Web.Migrations
                 name: "AspNetRoles");
 
             migrationBuilder.DropTable(
+                name: "StudentMaster");
+
+            migrationBuilder.DropTable(
                 name: "OrganizerMaster");
 
             migrationBuilder.DropTable(
                 name: "ProgramMaster");
-
-            migrationBuilder.DropTable(
-                name: "StudentMaster");
 
             migrationBuilder.DropTable(
                 name: "EventMaster");
