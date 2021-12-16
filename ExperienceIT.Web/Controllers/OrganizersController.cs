@@ -66,13 +66,9 @@ namespace ExperienceIT.Web.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create(ProgramOrganizerViewModel model)
         {
-            if (ModelState.IsValid)
-            {
-                _context.Add(model.Organizer);
-                await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
-            }
-            return View(model);
+            _context.Add(model.Organizer);
+            await _context.SaveChangesAsync();
+            return RedirectToAction(nameof(Index));
         }
 
         // GET: Organizers/Edit/5
