@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Text.Encodings.Web;
 using System.Threading.Tasks;
+using ExperienceIT.Web.Data;
 using ExperienceIT.Web.Models;
 using ExperienceIT.Web.Utility;
 using Microsoft.AspNetCore.Authentication;
@@ -26,20 +27,22 @@ namespace ExperienceIT.Web.Areas.Identity.Pages.Account
         private readonly ILogger<RegisterModel> _logger;
         private readonly IEmailSender _emailSender;
         private readonly RoleManager<IdentityRole> _roleManager;
-
+        private readonly ApplicationDbContext _context;
 
         public RegisterModel(
             UserManager<IdentityUser> userManager,
             SignInManager<IdentityUser> signInManager,
             ILogger<RegisterModel> logger,
             IEmailSender emailSender,
-            RoleManager<IdentityRole> roleManager)
+            RoleManager<IdentityRole> roleManager,
+            ApplicationDbContext context)
         {
             _userManager = userManager;
             _signInManager = signInManager;
             _logger = logger;
             _emailSender = emailSender;
             _roleManager = roleManager;
+            _context = context;
         }
 
         [BindProperty]
@@ -110,6 +113,25 @@ namespace ExperienceIT.Web.Areas.Identity.Pages.Account
                     if (role == SD.VolunteerUser)
                     {
                         await _userManager.AddToRoleAsync(user, SD.VolunteerUser);
+
+                        //Create an entry into the VolunteerMaster
+
+
+                        var volunteer = new VolunteerMaster()
+                        {
+                            LastName = user.LastName,
+                            FirstName = user.FirstName,
+                            UserId = user.Id,
+                            Skills = "-",
+                            YearsOfExperience = 0,
+                            AgeStatus = 0,
+                            Availability = true
+                        };
+
+                        _context.Add(volunteer);
+                        await _context.SaveChangesAsync();
+
+                        
                     }
                     else
                     {

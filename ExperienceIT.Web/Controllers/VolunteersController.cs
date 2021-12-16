@@ -70,14 +70,16 @@ namespace ExperienceIT.Web.Controllers
         }
 
         // GET: VolunteerMasters/Edit/5
-        public async Task<IActionResult> Edit(int? id)
+        public async Task<IActionResult> Edit(string userId)
         {
-            if (id == null)
+            if (string.IsNullOrEmpty(userId))
             {
                 return NotFound();
             }
 
-            var volunteerMaster = await _context.VolunteerMaster.FindAsync(id);
+            var volunteerMaster = await _context.VolunteerMaster.Where(x => x.UserId == userId)
+                .FirstOrDefaultAsync();
+
             if (volunteerMaster == null)
             {
                 return NotFound();
