@@ -64,12 +64,12 @@
                 </ul>
             </td>
             <td>
-                This is for Admin authentication roll. We will make it later once all the functionalities
-                and views will be done  
+                @*This is for Admin authentication roll. We will make it later once all the functionalities
+                and views will be done*@  
                 @*@if (User.IsInRole("Admin"))
-                {
+                {*@
                 <a asp-action="Edit" asp-route-id="@item.Id">Edit</a>
-                 } |*@
+                @*}*@ |
                 <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
                 <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
             </td>
