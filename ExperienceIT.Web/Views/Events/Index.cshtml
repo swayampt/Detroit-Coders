@@ -25,6 +25,9 @@
     <table class="table table-striped border">
         <tr class="table-secondary">
             <th>
+                Select
+            </th>
+            <th>
                 @Html.DisplayNameFor(model => model.Event.Name)
             </th>
             <th>
@@ -55,6 +58,9 @@
         {
             <tr>
                 <td>
+                    @Html.CheckBox("Test",false)
+                </td>
+                <td>
                     @Html.DisplayFor(modelItem => item.Event.Name)
                 </td>
                 <td>
@@ -82,6 +88,9 @@
                 <partial name="_TableButtonPartial" model="item.Event.Id" />
             </tr>
         }
-
+        <tr><td colspan="9" class="text-right"><a asp-action="Register" class="btn btn-info">
+    <i class="fas fa-plus"></i> &nbsp;
+    Register
+</a></td></tr>
     </table>
 </div>
