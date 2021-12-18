@@ -18,15 +18,16 @@
         </div>
         <div class="col-6 text-right">
             @* move the columns to the right*@
-            <a><partial name="_CreateButtonPartial" /></a>
+
+            @if (User.IsInRole("Admin"))
+            {
+                <a><partial name="_CreateButtonPartial" /></a>
+            }
         </div>
     </div>
-   
+
     <table class="table table-striped border">
         <tr class="table-secondary">
-            <th>
-                Select
-            </th>
             <th>
                 @Html.DisplayNameFor(model => model.Event.Name)
             </th>
@@ -58,9 +59,6 @@
         {
             <tr>
                 <td>
-                    @Html.CheckBox("Test",false)
-                </td>
-                <td>
                     @Html.DisplayFor(modelItem => item.Event.Name)
                 </td>
                 <td>
@@ -84,13 +82,44 @@
                 <td>
                     @Html.DisplayFor(modelItem => item.Event.Duration)
                 </td>
-
-                <partial name="_TableButtonPartial" model="item.Event.Id" />
+                @if (User.IsInRole("Admin"))
+                {
+                    <partial name="_TableButtonPartial" model="item.Event.Id" />
+                }
+                else
+                {
+                    <td>
+                        <button class="btn btn-primary" id="Register"  onclick="this.disabled = true;">Register</button>
+                    </td>
+                }
             </tr>
         }
-        <tr><td colspan="9" class="text-right"><a asp-action="Register" class="btn btn-info">
-    <i class="fas fa-plus"></i> &nbsp;
-    Register
-</a></td></tr>
     </table>
 </div>
+
+
+
+
+
+
+@section Scripts {
+
+    <script type="text/javascript">
+
+        $("#Register").on('click',function (e) {
+            e.preventDefault();
+                    console.log(this.id);
+        });
+        //$(document).ready(function () {
+        //    $("#Register").click(function () {
+        //        var elmId = $("#test").attr("id");
+        //        alert(elmId);
+        //        console.log(this.id);
+        //    });
+        //});
+
+       
+    
+
+    </script>
+}

@@ -20,7 +20,126 @@
                 <input asp-for="Input.PhoneNumber" class="form-control" />
                 <span asp-validation-for="Input.PhoneNumber" class="text-danger"></span>
             </div>
-            <button id="update-profile-button" type="submit" class="btn btn-primary">Save</button>
+
+            
+            <div style="text-align:center;font-size:x-large">Details</div>
+            <hr />
+            <div id="Details">
+                <div class="row">
+                    <div class="col-sm-1"></div>
+                    <div class="col-md-5">
+                        <div class="form-group">
+                            <label asp-for="Input.FirstName" class="col-form-label">First Name <span style="color:#ff0000">*</span></label>
+                            <input asp-for="Input.FirstName" class="form-control" />
+                            <span asp-validation-for="Input.FirstName" class="text-danger"></span>
+                        </div>
+                    </div>
+                    <div class="col-md-5">
+                        <div class="form-group">
+                            <label asp-for="Input.LastName" class="col-form-label">Last Name <span style="color:#ff0000">*</span></label>
+                            <input asp-for="Input.LastName" class="form-control" />
+                            <span asp-validation-for="Input.LastName" class="text-danger"></span>
+                        </div>
+                    </div>
+                    <div class="col-sm-1"></div>
+                </div>
+
+                <div class="row">
+                    <div class="col-sm-1"></div>
+                    <div class="col-md-5">
+                        <div class="form-group">
+                            <label asp-for="Input.Email" class="col-form-label">Email <span style="color:#ff0000">*</span></label>
+                            <input asp-for="Input.Email" disabled class="form-control" placeholder="example@yourmail.com" />
+                            <span asp-validation-for="Input.Email" class="text-danger"></span>
+                        </div>
+                    </div>
+                    <div class="col-md-5">
+                        <div class="form-group">
+                            <label asp-for="Input.PhoneNumber" class="col-form-label">Phone Number</label>
+                            <input asp-for="Input.PhoneNumber" class="form-control" placeholder="+1 (000)-000-0000" />
+                            <span asp-validation-for="Input.PhoneNumber" class="text-danger"></span>
+                        </div>
+                    </div>
+                    <div class="col-sm-1"></div>
+                </div>
+
+                <div class="row">
+                    <div class="col-sm-1"></div>
+                    <div class="col-md-5">
+                        <div class="form-group">
+                            <label asp-for="Input.StreetAddress" class="col-form-label">Street Address</label>
+                            <input asp-for="Input.StreetAddress" class="form-control" />
+                            <span asp-validation-for="Input.StreetAddress" class="text-danger"></span>
+                        </div>
+                    </div>
+                    <div class="col-md-5">
+                        <div class="form-group">
+                            <label asp-for="Input.City" class="col-form-label"></label>
+                            <input asp-for="Input.City" class="form-control" />
+                            <span asp-validation-for="Input.City" class="text-danger"></span>
+                        </div>
+                    </div>
+                    <div class="col-sm-1"></div>
+                </div>
+
+                <div class="row">
+                    <div class="col-sm-1"></div>
+                    <div class="col-md-5">
+                        <div class="form-group">
+                            <label asp-for="Input.State" class="col-form-label"></label>
+                            <input asp-for="Input.State" class="form-control" placeholder="MI" />
+                            <span asp-validation-for="Input.State" class="text-danger"></span>
+                        </div>
+                    </div>
+                    <div class="col-md-5">
+                        <div class="form-group">
+                            <label asp-for="Input.Zipcode" class="col-form-label">Zip Code</label>
+                            <input asp-for="Input.Zipcode" class="form-control" />
+                            <span asp-validation-for="Input.Zipcode" class="text-danger"></span>
+                        </div>
+                    </div>
+                    <div class="col-sm-1"></div>
+                </div>
+
+                <br />
+
+                <div class="volunteer">
+                    <div class="row">
+                        <div class="col-sm-1"></div>
+                        <div class="col-md-5">
+                            <div class="form-group">
+                                <label asp-for="Input.Skills" class="col-form-label">Skills<span style="color:#ff0000">*</span></label>
+                                <input asp-for="Input.Skills" class="form-control" placeholder="MI" />
+                                <span asp-validation-for="Input.Skills" class="text-danger"></span>
+                            </div>
+                        </div>
+                        <div class="col-md-5">
+                            <div class="form-group">
+                                <label asp-for="Input.YearsOfExperience" class="col-form-label">Years Of Experience<span style="color:#ff0000">*</span></label>
+                                <input asp-for="Input.YearsOfExperience" class="form-control" />
+                                <span asp-validation-for="Input.YearsOfExperience" class="text-danger"></span>
+                            </div>
+                        </div>
+                        <div class="col-sm-1"></div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-1"></div>
+                        <div class="col-md-5">
+                            <div class="form-group">
+                                <label asp-for="Input.WorkPlace" class="col-form-label">WorkPlace<span style="color:#ff0000">*</span></label>
+                                <input asp-for="Input.WorkPlace" class="form-control" placeholder="MI" />
+                                <span asp-validation-for="Input.WorkPlace" class="text-danger"></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div style="float:right">
+                <a class="btn btn-primary" asp-area="" asp-controller="Events" asp-action="Index">Register for Events</a>
+                <button id="update-profile-button" type="submit" class="btn btn-primary">Save</button>
+            </div>
+        
         </form>
     </div>
 </div>

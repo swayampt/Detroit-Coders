@@ -23,6 +23,11 @@ namespace ExperienceIT.Web.Controllers
             return View();
         }
 
+        public IActionResult IndexHome()
+        {
+            return View();
+        }
+
         public IActionResult Privacy()
         {
             return View();
