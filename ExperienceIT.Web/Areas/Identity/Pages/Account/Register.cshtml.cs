@@ -96,16 +96,15 @@ namespace ExperienceIT.Web.Areas.Identity.Pages.Account
             if (ModelState.IsValid)
             {
                 var user = new ApplicationUser
-                { 
-                  UserName = Input.Email, 
-                  Email = Input.Email, 
-                  FirstName = Input.FirstName,
-                  LastName = Input.LastName,
-                  PhoneNumber = Input.PhoneNumber,
-                  City = Input.City,
-                  State = Input.State,
-                  Zipcode = Input.Zipcode,
-
+                {                   
+                    UserName = Input.Email,
+                    Email = Input.Email, 
+                    FirstName = Input.FirstName,
+                    LastName = Input.LastName,
+                    PhoneNumber = Input.PhoneNumber,
+                    City = Input.City,
+                    State = Input.State,
+                    Zipcode = Input.Zipcode,
                 };
                 var result = await _userManager.CreateAsync(user, Input.Password);
                 if (result.Succeeded)
@@ -130,7 +129,6 @@ namespace ExperienceIT.Web.Areas.Identity.Pages.Account
 
                         _context.Add(volunteer);
                         await _context.SaveChangesAsync();
-
                         
                     }
                     else
