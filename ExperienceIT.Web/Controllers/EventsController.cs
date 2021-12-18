@@ -8,19 +8,29 @@ using Microsoft.EntityFrameworkCore;
 using ExperienceIT.Web.Data;
 using ExperienceIT.Web.Models;
 using ExperienceIT.Web.ViewModels;
+using Microsoft.AspNetCore.Identity.UI.Services;
 
 namespace ExperienceIT.Web.Controllers
 {
     public class EventsController : Controller
     {
         private readonly ApplicationDbContext _context;
+        private readonly IEmailSender _emailSender;
 
-        public EventsController(ApplicationDbContext context)
+        public EventsController(ApplicationDbContext context, IEmailSender emailSender)
         {
             _context = context;
+            _emailSender = emailSender;
         }
 
-        // GET: EventMasters
+        public async Task<IActionResult> EventIndex()
+        {
+            //return View(await _context.EventMaster.ToListAsync());
+            var events = await _context.EventMaster.ToListAsync();
+            return View(events);
+        }
+
+            // GET: EventMasters
         public async Task<IActionResult> Index()
         {
             var events = await _context.EventMaster.ToListAsync();
@@ -74,6 +84,46 @@ namespace ExperienceIT.Web.Controllers
             }).OrderBy(x => x.ProgramName).ToList();
 
             return View(model);
+        }
+
+        public async Task<IActionResult> EventByProgramId(int programId)
+        {
+            var events = await _context.EventMaster.ToListAsync();
+
+            var programEventMapper = await _context.ProgramEventMapper
+                .Where(x => x.ProgramId == programId)
+                .Include(x => x.ProgramMaster)
+                .Include(x => x.EventMaster).ToListAsync();
+
+            var model = programEventMapper.Select(x => new ProgramEventViewModel()
+            {
+                Event = new EventMaster()
+                {
+                    Id = x.EventMaster.Id,
+                    Name = x.EventMaster.Name,
+                    Description = x.EventMaster.Description,
+                    StartingDate = x.EventMaster.StartingDate,
+                    EndingDate = x.EventMaster.EndingDate,
+                    EnrollmentDate = x.EventMaster.EnrollmentDate,
+                    Venue = x.EventMaster.Venue,
+                    Duration = x.EventMaster.Duration
+                },
+                ProgramName = x.ProgramMaster.Name,
+                ProgramId = x.ProgramMaster.Id
+            }).OrderBy(x => x.ProgramName).ToList();
+
+            return View("Index", model);
+        }
+
+        public async Task<bool> Register()
+        {
+            //Finish DB update
+
+            // Send Email
+
+            await _emailSender.SendEmailAsync(User.Identity.Name, "Volunteer Registration", "You are registered");
+
+            return true;
         }
 
         // GET: EventMasters/Details/5

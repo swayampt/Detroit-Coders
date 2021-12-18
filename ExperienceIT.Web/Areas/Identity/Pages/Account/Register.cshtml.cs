@@ -79,6 +79,9 @@ namespace ExperienceIT.Web.Areas.Identity.Pages.Account
             public string City { get; set; }
             public string State { get; set; }
             public string Zipcode { get; set; }
+            public string Skills { get; set; }
+            public int YearsOfExperience { get; set; }
+            public string WorkPlace { get; set; }
         }
 
         public async Task OnGetAsync(string returnUrl = null)
@@ -89,7 +92,11 @@ namespace ExperienceIT.Web.Areas.Identity.Pages.Account
 
         public async Task<IActionResult> OnPostAsync(string returnUrl = null)
         {
-            string role = Request.Form["rdUserRole"].ToString();
+            var IsVolunteer = !string.IsNullOrEmpty(Request.Form["Skills"].ToString()) ? true : false ;
+            string role = IsVolunteer ? Request.Form["rdUserRole"].ToString() : "";
+            string skills = IsVolunteer ? Request.Form["Skills"].ToString() : "";
+            int yearsOfExperience = IsVolunteer ? Convert.ToInt32(Request.Form["YearsOfExperience"].ToString()) : 0;
+            string workPlace = Request.Form["WorkPlace"].ToString();
 
             returnUrl = returnUrl ?? Url.Content("~/");
             ExternalLogins = (await _signInManager.GetExternalAuthenticationSchemesAsync()).ToList();
@@ -105,7 +112,7 @@ namespace ExperienceIT.Web.Areas.Identity.Pages.Account
                   City = Input.City,
                   State = Input.State,
                   Zipcode = Input.Zipcode,
-
+                  StreetAddress = Input.StreetAddress
                 };
                 var result = await _userManager.CreateAsync(user, Input.Password);
                 if (result.Succeeded)
@@ -122,10 +129,17 @@ namespace ExperienceIT.Web.Areas.Identity.Pages.Account
                             LastName = user.LastName,
                             FirstName = user.FirstName,
                             UserId = user.Id,
-                            Skills = "-",
-                            YearsOfExperience = 0,
+                            Skills = skills ,
+                            YearsOfExperience = yearsOfExperience,
                             AgeStatus = 0,
-                            Availability = true
+                            CurrentOrganization = workPlace,
+                            Availability = true,
+                            Phone = user.PhoneNumber,
+                            Address = user.StreetAddress,
+                            City = user.City,
+                            State = user.State,
+                            Zipcode = user.Zipcode,
+                            Country = "USA"
                         };
 
                         _context.Add(volunteer);
