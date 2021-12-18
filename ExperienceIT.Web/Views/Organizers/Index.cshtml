@@ -9,18 +9,19 @@
     }
 </style>
 <div class="border backgroundwhite">
-
+    @*adding border,background and image*@
     <div class="row">
+        @* the "row" class is used mainly to hold columns in it.*@
         <div class="col-6">
             @*element take half of the horizontal screen space devices.*@
-            <h2 class="text-info">The Experience IT Organizers</h2>
+            <h2 class="text-info">The Experience IT Organizers</h2>@*Add meaning through text-colors*@
         </div>
         <div class="col-6 text-right">
-
+            @* move the columns to the right*@
             <a><partial name="_CreateButtonPartial" /></a>
         </div>
     </div>
-    @*<div class="table table-striped border ">
+    <div class="table table-striped border ">
         <br />
         <div class="row">
             <div class="col-6">
@@ -69,38 +70,37 @@
                          width="180" height="60" alt="Image" loading="lazy">
                 </a>
             </div>
-            <hr />*@
-    <!--@*<br />*@-->
-    <!--<div class="col-6">
-                    <a class="x-image e46-36 m1a-s m1a-u m1a-v m1a-w"
-                       href="https://www.rockcentraldetroit.com/" target="_blank" style="outline: none;">
-                        <img src="https://experienceitdetroit.com/wp-content/uploads/2021/09/L-RockCentral-Stacked-O1542883-1024x540-1.png"
-                             width="180" height="60" alt="Image" loading="lazy">
-                    </a>
-                </div>
+            <hr />
+            @*<br />*@
+            <div class="col-6">
+                <a class="x-image e46-36 m1a-s m1a-u m1a-v m1a-w"
+                   href="https://www.rockcentraldetroit.com/" target="_blank" style="outline: none;">
+                    <img src="https://experienceitdetroit.com/wp-content/uploads/2021/09/L-RockCentral-Stacked-O1542883-1024x540-1.png"
+                         width="180" height="60" alt="Image" loading="lazy">
+                </a>
+            </div>
+            <br />
+        </div>
+        <hr />
+        <div class="row">
+            <div class="col-6">
+                <a class="x-image e46-38 m1a-s m1a-u"
+                   href="https://www.rocketmortgage.com/" target="_blank" style="outline: none;">
+                    <img src="https://experienceitdetroit.com/wp-content/uploads/2021/09/Rocket_Mortgage_Logo.jpg"
+                         width="180" height="60" alt="Image" loading="lazy">
+                </a>
                 <br />
             </div>
-            <hr />
-            <div class="row">
-                <div class="col-6">
-                    <a class="x-image e46-38 m1a-s m1a-u"
-                       href="https://www.rocketmortgage.com/" target="_blank" style="outline: none;">
-                        <img src="https://experienceitdetroit.com/wp-content/uploads/2021/09/Rocket_Mortgage_Logo.jpg"
-                             width="180" height="60" alt="Image" loading="lazy">
-                    </a>
-                    <br />
-                </div>
-                <div class="col-6">
-                    <a href="https://www.dynatrace.com/" target="_blank" style="outline: none;">
-                        <img src="~/images/dynatrace.png"
-                             width="180" height="60" alt="Image" loading="lazy">
-                    </a>
-                </div>
+            <div class="col-6">
+                <a href="https://www.dynatrace.com/" target="_blank" style="outline: none;">
+                    <img src="~/images/dynatrace.png"
+                         width="180" height="60" alt="Image" loading="lazy">
+                </a>
             </div>
         </div>
-    </div-->
-    >
-    <h1>Index</h1>
+    </div>
+</div>
+@*<h1>Index</h1>
     <p>
         <a asp-action="Create">Create New</a>
     </p>
@@ -110,18 +110,18 @@
                 <th>
                     @Html.DisplayNameFor(model => model.Name)
                 </th>
-                @*<th>
-                        @Html.DisplayNameFor(model => model.Address)
-                    </th>
-                    <th>
-                        @Html.DisplayNameFor(model => model.City)
-                    </th>
-                    <th>
-                        @Html.DisplayNameFor(model => model.State)
-                    </th>
-                    <th>
-                        @Html.DisplayNameFor(model => model.Zipcode)
-                    </th>*@
+                <th>
+                    @Html.DisplayNameFor(model => model.Address)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.City)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.State)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Zipcode)
+                </th>
                 <th>
                     @Html.DisplayNameFor(model => model.Country)
                 </th>
@@ -134,20 +134,19 @@
                 <tr>
                     <td>
                         @Html.DisplayFor(modelItem => item.Name)
-                      
                     </td>
-                    @*<td>
-                            @Html.DisplayFor(modelItem => item.Address)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.City)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.State)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.Zipcode)
-                        </td>*@
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Address)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.City)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.State)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Zipcode)
+                    </td>
                     <td>
                         @Html.DisplayFor(modelItem => item.Country)
                     </td>
@@ -159,5 +158,4 @@
                 </tr>
             }
         </tbody>
-    </table>
-</div>
+    </table>*@

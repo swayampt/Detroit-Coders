@@ -9,18 +9,22 @@ using ExperienceIT.Web.Data;
 using ExperienceIT.Web.Models;
 using ExperienceIT.Web.ViewModels;
 using Microsoft.AspNetCore.Identity.UI.Services;
+using Microsoft.AspNetCore.Identity;
 
 namespace ExperienceIT.Web.Controllers
 {
     public class EventsController : Controller
     {
         private readonly ApplicationDbContext _context;
+        private readonly UserManager<IdentityUser> _userManager;
         private readonly IEmailSender _emailSender;
 
-        public EventsController(ApplicationDbContext context, IEmailSender emailSender)
+        public EventsController(ApplicationDbContext context, 
+            IEmailSender emailSender, UserManager<IdentityUser> userManager)
         {
             _context = context;
             _emailSender = emailSender;
+            _userManager = userManager;
         }
 
         public async Task<IActionResult> EventIndex()
@@ -34,10 +38,24 @@ namespace ExperienceIT.Web.Controllers
         public async Task<IActionResult> Index()
         {
             var events = await _context.EventMaster.ToListAsync();
-            
+
+            var user = await _userManager.GetUserAsync(User);
+            var userId = user.Id;
+
+            var volunteer = await _context.VolunteerMaster
+                .Where(x => x.UserId == userId).FirstOrDefaultAsync();
+
+            var volunteerId = volunteer.Id;
+
+
             var programEventMapper = await _context.ProgramEventMapper
                 .Include(x => x.ProgramMaster)
                 .Include(x => x.EventMaster).ToListAsync();
+
+            var volunteerEventMapper = await _context.ProgramEventVolunteerMapper
+                .Where(x => x.VolunteerId == volunteerId).ToListAsync();
+
+            ViewBag.VEM = volunteerEventMapper;
 
             //For every record in the programeventmapper you will have to create an
             //instance of the programeventviewmodel and provide the values for all the
@@ -115,15 +133,51 @@ namespace ExperienceIT.Web.Controllers
             return View("Index", model);
         }
 
-        public async Task<bool> Register()
+        public async Task<string> Register(int eventId, int progId, int flag)
         {
-            //Finish DB update
+            //Get logged in volunteer details
+
+            var user = await _userManager.GetUserAsync(User);
+            var userId = user.Id;
+            var message = string.Empty;
+
+            var volunteer = await _context.VolunteerMaster
+                .Where(x => x.UserId == userId).FirstOrDefaultAsync();
+
+            var volunteerId = volunteer.Id;
+
+            if (flag == 1) //Register
+            {
+                var volunteerEventProgramMapper = new ProgramEventVolunteerMapper()
+                {
+                    ProgramId = progId,
+                    EventId = eventId,
+                    VolunteerId = volunteerId
+                };
+
+                await _context.ProgramEventVolunteerMapper.AddAsync(volunteerEventProgramMapper);
+                message = "You were successfully registered for this event.";
+            }
+            else //UnRegister
+            {
+                var mapper = await _context.ProgramEventVolunteerMapper.
+                    Where(x => x.VolunteerId == volunteerId && x.EventId == eventId && x.ProgramId == progId)
+                    .FirstOrDefaultAsync();
+
+                _context.ProgramEventVolunteerMapper.Remove(mapper);
+                message = "You were successfully un-registered from this event.";
+            }
+
+            await _context.SaveChangesAsync();
+
 
             // Send Email
 
-            await _emailSender.SendEmailAsync(User.Identity.Name, "Volunteer Registration", "You are registered");
+            //await _emailSender.SendEmailAsync(User.Identity.Name, "Volunteer Registration", "You are registered");
 
-            return true;
+
+            return message;
+            
         }
 
         // GET: EventMasters/Details/5

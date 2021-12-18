@@ -56,7 +56,7 @@ namespace ExperienceIT.Web.Controllers
             };
 
             return View(model);
-            
+
         }
 
         // POST: Organizers/Create

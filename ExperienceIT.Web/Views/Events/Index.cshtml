@@ -3,6 +3,12 @@
     ViewData["Title"] = "Index";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
+
+@{ 
+    var vems = (List<ProgramEventVolunteerMapper>)ViewBag.VEM;
+}
+
+
 <style>
     body {
         background-color: azure;
@@ -57,42 +63,51 @@
 
         @foreach (var item in Model)
         {
-            <tr>
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Event.Name)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Event.Description)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Event.StartingDate)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Event.EndingDate)
+        </td>
+        @*<td>
+            @Html.DisplayFor(modelItem => item.Event.EnrollmentDate)
+        </td>*@
+        <td>
+            @Html.DisplayFor(modelItem => item.ProgramName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Event.Venue)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Event.Duration)
+        </td>
+        @if (User.IsInRole("Admin"))
+        {
+            <partial name="_TableButtonPartial" model="item.Event.Id" />
+        }
+        else
+        {
+            if (vems.Any(x => x.EventId == item.Event.Id))
+            {
                 <td>
-                    @Html.DisplayFor(modelItem => item.Event.Name)
+                    <button class="btn btn-danger" id="Register" onclick="RegisterVolunteer(@item.Event.Id, @item.ProgramId,0)">UnRegister</button>
                 </td>
+            }
+            else
+            {
                 <td>
-                    @Html.DisplayFor(modelItem => item.Event.Description)
+                    <button class="btn btn-primary" id="Register" onclick="RegisterVolunteer(@item.Event.Id, @item.ProgramId,1)">Register</button>
                 </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Event.StartingDate)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Event.EndingDate)
-                </td>
-                @*<td>
-                        @Html.DisplayFor(modelItem => item.Event.EnrollmentDate)
-                    </td>*@
-                <td>
-                    @Html.DisplayFor(modelItem => item.ProgramName)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Event.Venue)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Event.Duration)
-                </td>
-                @if (User.IsInRole("Admin"))
-                {
-                    <partial name="_TableButtonPartial" model="item.Event.Id" />
-                }
-                else
-                {
-                    <td>
-                        <button class="btn btn-primary" id="Register"  onclick="this.disabled = true;">Register</button>
-                    </td>
-                }
-            </tr>
+            }
+        }
+    </tr>
         }
     </table>
 </div>
@@ -106,20 +121,26 @@
 
     <script type="text/javascript">
 
-        $("#Register").on('click',function (e) {
-            e.preventDefault();
-                    console.log(this.id);
-        });
-        //$(document).ready(function () {
-        //    $("#Register").click(function () {
-        //        var elmId = $("#test").attr("id");
-        //        alert(elmId);
-        //        console.log(this.id);
-        //    });
-        //});
+        
+        function RegisterVolunteer(evntId, progId,flag) {
+            var registerUrl = '@Url.Action("Register","Events")';
+            var indexUrl = '@Url.Action("Index","Events")';
+            var registerUrl = registerUrl + "?eventId=" + evntId + "&progId=" + progId + "&flag=" + flag;
 
-       
-    
+            $.ajax({
+                url: registerUrl,
+                method: 'GET',
+                success: function (response) {
+                    alert(response);
+                    window.location.href = indexUrl;
+                },
+                error: function (errorResponse) {
+                    console.log(errorResponse);
+                }
+            });
+        }
+
+
 
     </script>
 }
