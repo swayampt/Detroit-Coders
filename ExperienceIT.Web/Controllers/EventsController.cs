@@ -33,24 +33,23 @@ namespace ExperienceIT.Web.Controllers
         public async Task<IActionResult> Index()
         {
             var events = await _context.EventMaster.ToListAsync();
-
-            var user = await _userManager.GetUserAsync(User);
-            var userId = user.Id;
-
-            var volunteer = await _context.VolunteerMaster
-                .Where(x => x.UserId == userId).FirstOrDefaultAsync();
-
-            var volunteerId = volunteer.Id;
-
-
             var programEventMapper = await _context.ProgramEventMapper
                 .Include(x => x.ProgramMaster)
                 .Include(x => x.EventMaster).ToListAsync();
 
-            var volunteerEventMapper = await _context.ProgramEventVolunteerMapper
-                .Where(x => x.VolunteerId == volunteerId).ToListAsync();
-
-            ViewBag.VEM = volunteerEventMapper;
+            if (User.Identity.IsAuthenticated)
+            {
+                if (!User.IsInRole("ApplicationAdmin"))
+                {
+                    var user = await _userManager.GetUserAsync(User);
+                    var userId = user.Id;
+                    var volunteer = await _context.VolunteerMaster
+                        .Where(x => x.UserId == userId).FirstOrDefaultAsync();
+                    var volMapper = await _context.ProgramEventVolunteerMapper
+                                    .Where(x => x.VolunteerId == volunteer.Id).ToListAsync();
+                    ViewBag.VEM = volMapper;
+                }
+            }
 
             //For every record in the programeventmapper you will have to create an
             //instance of the programeventviewmodel and provide the values for all the
@@ -103,6 +102,19 @@ namespace ExperienceIT.Web.Controllers
         {
             var events = await _context.EventMaster.ToListAsync();
 
+            if (User.Identity.IsAuthenticated)
+            {
+                if (!User.IsInRole("ApplicationAdmin"))
+                {
+                    var user = await _userManager.GetUserAsync(User);
+                    var userId = user.Id;
+                    var volunteer = await _context.VolunteerMaster
+                        .Where(x => x.UserId == userId).FirstOrDefaultAsync();
+                    var volMapper = await _context.ProgramEventVolunteerMapper
+                                    .Where(x => x.VolunteerId == volunteer.Id).ToListAsync();
+                    ViewBag.VEM = volMapper;
+                }
+            }
             var programEventMapper = await _context.ProgramEventMapper
                 .Where(x => x.ProgramId == programId)
                 .Include(x => x.ProgramMaster)

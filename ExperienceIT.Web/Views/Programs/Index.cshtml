@@ -7,7 +7,7 @@
 
 <h1>Programs</h1>
 
-@if (User.IsInRole("Admin"))
+@if (User.IsInRole("ApplicationAdmin"))
 {
 <p>
     <a class="btn btn-primary" asp-action="Create">Create New</a>
@@ -69,7 +69,7 @@
         <td>
             @*This is for Admin authentication roll. We will make it later once all the functionalities
         and views will be done*@
-            @if (User.IsInRole("Admin"))
+            @if (User.IsInRole("ApplicationAdmin"))
             {
                 <a asp-action="Edit" asp-route-id="@item.Id">Edit</a>
             }
