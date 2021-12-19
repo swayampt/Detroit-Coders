@@ -98,7 +98,7 @@ namespace ExperienceIT.Web.Controllers
 
             return View(model);
         }
-
+        //Getting the event fot the specific program
         public async Task<IActionResult> EventByProgramId(int programId)
         {
             var events = await _context.EventMaster.ToListAsync();
