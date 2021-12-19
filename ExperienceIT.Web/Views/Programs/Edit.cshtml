@@ -12,6 +12,7 @@
 <hr />
 <div class="row">
     <div class="col-md-4">
+
         <form asp-action="Edit">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <input type="hidden" asp-for="Program.Id" />
@@ -41,10 +42,10 @@
                 </div>
             </div>
             <ul id="organizers">
-            @foreach(var org in Model.ProgramOrganizations)
-            {
-                <li>@org.Name</li>
-            }
+                @foreach (var org in Model.ProgramOrganizations)
+                {
+                    <li>@org.Name</li>
+                }
             </ul>
             <br /><br />
             <input type="hidden" id="orgIds" name="orgIds" />
@@ -64,10 +65,10 @@
                 </div>
             </div>
             <ul id="events">
-            @foreach (var evt in Model.ProgramEvents)
-            {
-                <li>@evt.Name</li>
-            }
+                @foreach (var evt in Model.ProgramEvents)
+                {
+                    <li>@evt.Name</li>
+                }
             </ul>
             <br /><br />
             <input type="hidden" id="eventIds" name="eventIds" />
@@ -75,6 +76,7 @@
                 <input type="submit" value="Save" class="btn btn-primary" />
                 <a asp-action="Index" class="btn btn-info">Back to List </a>
             </div>
+            
         </form>
         <br /><br />
     </div>
