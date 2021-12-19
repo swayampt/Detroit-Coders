@@ -27,12 +27,7 @@ namespace ExperienceIT.Web.Controllers
             _userManager = userManager;
         }
 
-        public async Task<IActionResult> EventIndex()
-        {
-            //return View(await _context.EventMaster.ToListAsync());
-            var events = await _context.EventMaster.ToListAsync();
-            return View(events);
-        }
+       
 
             // GET: EventMasters
         public async Task<IActionResult> Index()

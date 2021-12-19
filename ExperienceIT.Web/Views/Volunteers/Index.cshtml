@@ -9,54 +9,60 @@
     }
 </style>
 <div class="border backgroundwhite search-background">
-    @*adding border,background and image*@
-<div class="row">
-    @* the "row" class is used mainly to hold columns in it.*@
-<div class="col-6">
-    @*element take half of the horizontal screen space devices.*@
-<h2 class="text-info">Volunteer Role</h2>@*Add meaning through text-colors*@
-</div>
-<div class="col-6 text-right">
-    @* move the columns to the right*@
-    <a><partial name="_CreateButtonPartial" /></a>
-</div>
-</div>
-<p>
+    <div class="row">
+        <div class="col-6">
+            <h2 class="text-info">Volunteers List</h2>
+        </div>
+        @*<div class="col-6 text-right">
+                <a><partial name="_CreateButtonPartial" /></a>
+            </div>*@
+    </div>
+    <p>
 
-    <br />
-    <br />
-    <br />
-    <br />
-    <br />
-    <br />
-    <br />
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
 
-</p>
+    </p>
 
 
 </div>
 <div class="backgroundwhite">
-    @*to create table for dbtable*@
     @if (Model.Count() > 0)
     {
         <table class="table table-striped border">
             <tr class="table-secondary">
                 <th colspan="2">
-                    Volunteers
+                    First Name
+                </th>
+                <th colspan="4">
+                    Last Name
+                </th>
+                <th colspan="6">
+                    Current Organization
                 </th>
             </tr>
-            @*for all of the model in item to iterate list and
-                dispaly Volunteer names*@
+
             @foreach (var item in Model)
             {
-                <tr>
-                    <td>
-                        @Html.DisplayFor(m => item.FirstName)
+        <tr>
+            <td colspan="2">
+                @Html.DisplayFor(m => item.FirstName)
+            </td>
+            <td colspan="4">
+                @Html.DisplayFor(m => item.LastName)
+            </td>
+            <td colspan="6">
+                @Html.DisplayFor(m => item.CurrentOrganization)
+            </td>
+        </tr>
 
-                        @Html.DisplayFor(m => item.LastName)
-                    </td>
-                    <partial name="_TableButtonPartial" model="item.Id" />
-                </tr>
+                @*<partial name="_TableButtonPartial" model="item.Id" />*@
+
             }
         </table>
     }
