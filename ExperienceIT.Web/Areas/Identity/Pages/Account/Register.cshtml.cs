@@ -109,11 +109,12 @@ namespace ExperienceIT.Web.Areas.Identity.Pages.Account
                   FirstName = Input.FirstName,
                   LastName = Input.LastName,
                   PhoneNumber = Input.PhoneNumber,
+                  StreetAddress = Input.StreetAddress,
                   City = Input.City,
                   State = Input.State,
-                  Zipcode = Input.Zipcode,
-                  StreetAddress = Input.StreetAddress
+                  Zipcode = Input.Zipcode,                  
                 };
+
                 var result = await _userManager.CreateAsync(user, Input.Password);
                 if (result.Succeeded)
                 {
