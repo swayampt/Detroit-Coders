@@ -5,7 +5,14 @@
 }
 
 @{ 
-    var vems = (List<ProgramEventVolunteerMapper>)ViewBag.VEM;
+    var vems = new List<ProgramEventVolunteerMapper>();
+    if (User.Identity.IsAuthenticated)
+    {
+        if (!User.IsInRole("ApplicationAdmin"))
+        {
+            vems = (List<ProgramEventVolunteerMapper>)ViewBag.VEM;
+        }
+    }
 }
 
 
@@ -25,7 +32,7 @@
         <div class="col-6 text-right">
             @* move the columns to the right*@
 
-            @if (User.IsInRole("Admin"))
+            @if (User.IsInRole("ApplicationAdmin"))
             {
                 <a><partial name="_CreateButtonPartial" /></a>
             }
@@ -88,23 +95,26 @@
         <td>
             @Html.DisplayFor(modelItem => item.Event.Duration)
         </td>
-        @if (User.IsInRole("Admin"))
+        @if (User.Identity.IsAuthenticated)
         {
-            <partial name="_TableButtonPartial" model="item.Event.Id" />
-        }
-        else
-        {
-            if (vems.Any(x => x.EventId == item.Event.Id))
+            if (User.IsInRole("ApplicationAdmin"))
             {
-                <td>
-                    <button class="btn btn-danger" id="Register" onclick="RegisterVolunteer(@item.Event.Id, @item.ProgramId,0)">UnRegister</button>
-                </td>
+                <partial name="_TableButtonPartial" model="item.Event.Id" />
             }
             else
             {
-                <td>
-                    <button class="btn btn-primary" id="Register" onclick="RegisterVolunteer(@item.Event.Id, @item.ProgramId,1)">Register</button>
-                </td>
+                if (vems.Any(x => x.EventId == item.Event.Id))
+                {
+                    <td>
+                        <button class="btn btn-danger" id="Register" onclick="RegisterVolunteer(@item.Event.Id, @item.ProgramId,0)">UnRegister</button>
+                    </td>
+                }
+                else
+                {
+                    <td>
+                        <button class="btn btn-primary" id="Register" onclick="RegisterVolunteer(@item.Event.Id, @item.ProgramId,1)">Register</button>
+                    </td>
+                }
             }
         }
     </tr>
