@@ -28,6 +28,7 @@ namespace ExperienceIT.Web.Areas.Identity.Pages.Account
         private readonly IEmailSender _emailSender;
         private readonly RoleManager<IdentityRole> _roleManager;
         private readonly ApplicationDbContext _context;
+        
 
         public RegisterModel(
             UserManager<IdentityUser> userManager,
@@ -43,10 +44,12 @@ namespace ExperienceIT.Web.Areas.Identity.Pages.Account
             _emailSender = emailSender;
             _roleManager = roleManager;
             _context = context;
-        }
+         }
 
         [BindProperty]
         public InputModel Input { get; set; }
+
+        public List<OrganizerMaster> Organizations { get; private set; }
 
         public string ReturnUrl { get; set; }
 
@@ -88,6 +91,7 @@ namespace ExperienceIT.Web.Areas.Identity.Pages.Account
         {
             ReturnUrl = returnUrl;
             ExternalLogins = (await _signInManager.GetExternalAuthenticationSchemesAsync()).ToList();
+            Organizations = _context.OrganizerMaster.ToList();
         }
 
         public async Task<IActionResult> OnPostAsync(string returnUrl = null)
