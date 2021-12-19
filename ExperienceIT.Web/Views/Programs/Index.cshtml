@@ -5,17 +5,28 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h1>Programs</h1>
+<style>
+    body {
+        background-color: azure;
+    }
+</style>
 
-@if (User.IsInRole("Admin"))
-{
-<p>
-    <a class="btn btn-primary" asp-action="Create">Create New</a>
-</p>
-}
-<table class="table">
-    <thead>
-        <tr>
+<div class="border backgroundwhite">
+
+    <h1 class="text-info">Programs</h1>
+
+    @if (User.IsInRole("Admin"))
+
+    {
+        <p>
+            <a class="btn btn-primary" asp-action="Create">Create New</a>
+        </p>
+    }
+    <table class="table table-striped border">
+        <tr class="table-secondary">
+
+
+            @*<table class="table">*@
             <th>
                 <label>Name</label>
             </th>
@@ -30,55 +41,58 @@
             </th>
             <th></th>
         </tr>
-    </thead>
-    <tbody>
-    @foreach (var item in Model.ProgramList) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Name)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Description)
-            </td>
-            <td>
-                @{
-                    var orgIds = Model.ProgramOrganizerMappers.Where(x => x.ProgramId == item.Id)
-                        .Select(x => x.OrganizerId).ToArray();
-                    var orgs = Model.Organizations.Where(x => orgIds.Contains(x.Id)).ToList();
-                }
-                <ul>
-                    @foreach (var org in orgs)
-                    {
-                        <li>@org.Name</li>
-                    }
-                </ul>
-            </td>
-            <td>
-                @{
-                    var evtIds = Model.EventMappers.Where(x => x.ProgramId == item.Id)
-                        .Select(x => x.EventId).ToArray();
-                    var evts = Model.Events.Where(x => evtIds.Contains(x.Id)).ToList();
-                }
-                <ul>
-                    @foreach (var evt in evts)
-                    {
-                        <li>@evt.Name</li>
-                    }
-                </ul>
-            </td>
-        <td>
-            @*This is for Admin authentication roll. We will make it later once all the functionalities
-        and views will be done*@
-            @if (User.IsInRole("Admin"))
+
+        
+            @foreach (var item in Model.ProgramList)
             {
-                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a>
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Name)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Description)
+                    </td>
+                    <td>
+                        @{
+                            var orgIds = Model.ProgramOrganizerMappers.Where(x => x.ProgramId == item.Id)
+                                .Select(x => x.OrganizerId).ToArray();
+                            var orgs = Model.Organizations.Where(x => orgIds.Contains(x.Id)).ToList();
+                        }
+                        <ul>
+                            @foreach (var org in orgs)
+                            {
+                                <li>@org.Name</li>
+                            }
+                        </ul>
+                    </td>
+                    <td>
+                        @{
+                            var evtIds = Model.EventMappers.Where(x => x.ProgramId == item.Id)
+                                .Select(x => x.EventId).ToArray();
+                            var evts = Model.Events.Where(x => evtIds.Contains(x.Id)).ToList();
+                        }
+                        <ul>
+                            @foreach (var evt in evts)
+                            {
+                                <li>@evt.Name</li>
+                            }
+                        </ul>
+                    </td>
+                    <td>
+                        @*This is for Admin authentication roll. We will make it later once all the functionalities
+                            and views will be done*@
+                        @if (User.IsInRole("Admin"))
+                        {
+                            <a asp-action="Edit" asp-route-id="@item.Id">Edit</a>
+                        }
+
+                        @*<a asp-area="" asp-controller="Home" asp-action="Index">ExperienceIT</a>*@
+                        @Html.ActionLink("View More", "GetProgramPage", "Programs", new { programId = item.Id }, new { @class = "btn btn-primary btn-large" })
+
+                    </td>
+                </tr>
             }
-
-            @*<a asp-area="" asp-controller="Home" asp-action="Index">ExperienceIT</a>*@
-            @Html.ActionLink("View More", "GetProgramPage", "Programs", new { programId = item.Id }, new { @class = "btn btn-primary btn-large" })
-
-        </td>
-        </tr>
-}
-    </tbody>
-</table>
+           
+        
+    </table>
+</div>

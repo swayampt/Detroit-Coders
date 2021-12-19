@@ -11,27 +11,39 @@
 <div class="border backgroundwhite search-background">
     <div class="row">
         <div class="col-6">
-            <h2 class="text-info">Volunteers List</h2>
-        </div>
+            <h1 class="text-info">Volunteers Role</h1>
+                    </div>
         @*<div class="col-6 text-right">
                 <a><partial name="_CreateButtonPartial" /></a>
             </div>*@
     </div>
     <p>
 
-        <br />
-        <br />
-        <br />
-        <br />
-        <br />
-        <br />
-        <br />
-
+        @*The Volunteers interested in this Organization must be comfortable working
+        with a team and value diversity to deal with diverse backgrounds.*@
+       Before applying for this role, please check that you answer yes to all the following
+        questions:
+        <ul>
+        You believe in the life-changing value of education</ul>
+        <ul>
+            You celebrate and value diversity and the enrichment and benefit it brings to society
+        </ul>           
+        <ul>
+    You thrive in a fast-paced environment and can re-prioritise your work plans
+    according to events and needs
+</ul>
+            <ul>. You believe in an empathetic and caring approach to team working, valuing the
+            contribution of team members at all levels</ul>
+            5. You believe in the importance of continuous improvement and learning new skills
+            You might find out about a Events at Programs that you
+            would like to join.
+        </ul>
     </p>
 
 
 </div>
 <div class="backgroundwhite">
+
     @if (Model.Count() > 0)
     {
         <table class="table table-striped border">
