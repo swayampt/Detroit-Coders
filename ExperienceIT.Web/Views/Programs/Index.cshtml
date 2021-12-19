@@ -7,9 +7,12 @@
 
 <h1>Programs</h1>
 
+@if (User.IsInRole("Admin"))
+{
 <p>
-    <a asp-action="Create">Create New</a>
+    <a class="btn btn-primary" asp-action="Create">Create New</a>
 </p>
+}
 <table class="table">
     <thead>
         <tr>
@@ -66,12 +69,10 @@
         <td>
             @*This is for Admin authentication roll. We will make it later once all the functionalities
         and views will be done*@
-            @*@if (User.IsInRole("Admin"))
-        {*@
-            <a asp-action="Edit" asp-route-id="@item.Id">Edit</a>
-            @*}*@ |
-            @*<a asp-action="Details" asp-route-id="@item.Id">Details</a> |
-            <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>*@
+            @if (User.IsInRole("Admin"))
+            {
+                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a>
+            }
 
             @*<a asp-area="" asp-controller="Home" asp-action="Index">ExperienceIT</a>*@
             @Html.ActionLink("View More", "GetProgramPage", "Programs", new { programId = item.Id }, new { @class = "btn btn-primary btn-large" })
