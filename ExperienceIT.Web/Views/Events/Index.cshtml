@@ -32,7 +32,7 @@
         <div class="col-6 text-right">
             @* move the columns to the right*@
 
-            @if (User.IsInRole("ApplicationAdmin"))
+          @if (User.IsInRole("ApplicationAdmin"))
             {
                 <a><partial name="_CreateButtonPartial" /></a>
             }
@@ -41,7 +41,7 @@
 
     <table class="table table-striped border">
         <tr class="table-secondary">
-            <th>
+            <th col="2">
                 @Html.DisplayNameFor(model => model.Event.Name)
             </th>
             <th>
@@ -56,9 +56,9 @@
             @*<th>
                     @Html.DisplayNameFor(model => model.Event.EnrollmentDate)
                 </th>*@
-            <th>
+            @*<th>
                 @Html.DisplayNameFor(model => model.ProgramName)
-            </th>
+            </th>*@
             <th>
                 @Html.DisplayNameFor(model => model.Event.Venue)
             </th>
@@ -86,9 +86,9 @@
         @*<td>
             @Html.DisplayFor(modelItem => item.Event.EnrollmentDate)
         </td>*@
-        <td>
+        @*<td>
             @Html.DisplayFor(modelItem => item.ProgramName)
-        </td>
+        </td>*@
         <td>
             @Html.DisplayFor(modelItem => item.Event.Venue)
         </td>

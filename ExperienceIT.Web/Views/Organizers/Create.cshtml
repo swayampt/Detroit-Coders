@@ -4,51 +4,60 @@
     ViewData["Title"] = "Create";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
+<style>
+    body {
+        background-color: azure;
+    }
+</style>
 
-<h1>Create</h1>
-
-<h4>OrganizerMaster</h4>
-<hr />
-<div class="row">
-    <div class="col-md-4">
-        <form asp-action="Create">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <div class="form-group">
-                <label asp-for="Organizer.Name" class="control-label"></label>
-                <input asp-for="Organizer.Name" class="form-control" />
-                <span asp-validation-for="Organizer.Name" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Organizer.Address" class="control-label"></label>
-                <input asp-for="Organizer.Address" class="form-control" />
-                <span asp-validation-for="Organizer.Address" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Organizer.City" class="control-label"></label>
-                <input asp-for="Organizer.City" class="form-control" />
-                <span asp-validation-for="Organizer.City" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Organizer.State" class="control-label"></label>
-                <input asp-for="Organizer.State" class="form-control" />
-                <span asp-validation-for="Organizer.State" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Organizer.Zipcode" class="control-label"></label>
-                <input asp-for="Organizer.Zipcode" class="form-control" />
-                <span asp-validation-for="Organizer.Zipcode" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Organizer.Country" class="control-label"></label>
-                <input asp-for="Organizer.Country" class="form-control" />
-                <span asp-validation-for="Organizer.Country" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-primary" />
-            </div>
-        </form>
-    </div>
+<div class="border backgroundwhite ">
+    <h4 class="text-info">New Organizer</h4>
+    <form enctype="multipart/form-data" asp-action="Create">
+        <hr />
+        <div class="row">
+            <div class="col-md-4">
+                @*<form asp-action="Create">*@
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <div class="form-group">
+                    <label asp-for="Organizer.Name" class="control-label"></label>
+                    <input asp-for="Organizer.Name" class="form-control" />
+                    <span asp-validation-for="Organizer.Name" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Organizer.Address" class="control-label"></label>
+                    <input asp-for="Organizer.Address" class="form-control" />
+                    <span asp-validation-for="Organizer.Address" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Organizer.City" class="control-label"></label>
+                    <input asp-for="Organizer.City" class="form-control" />
+                    <span asp-validation-for="Organizer.City" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Organizer.State" class="control-label"></label>
+                    <input asp-for="Organizer.State" class="form-control" />
+                    <span asp-validation-for="Organizer.State" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Organizer.Zipcode" class="control-label"></label>
+                    <input asp-for="Organizer.Zipcode" class="form-control" />
+                    <span asp-validation-for="Organizer.Zipcode" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Organizer.Country" class="control-label"></label>
+                    <input asp-for="Organizer.Country" class="form-control" />
+                    <span asp-validation-for="Organizer.Country" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <input type="submit" value="Create" class="btn btn-primary" />
+                </div>
+    
+                
+        </div>
 </div>
+        </form>
+        
+<partial name="_CreateAndBackToListButton" />
 
 <div>
     <a asp-action="Index">Back to List</a>
