@@ -58,37 +58,46 @@ namespace ExperienceIT.Web.Areas.Identity.Pages.Account.Manage
             var phoneNumber = await _userManager.GetPhoneNumberAsync(user);
 
             var userId = user.Id;
+            
             var volunteer = await _context.VolunteerMaster
-                .Where(x => x.UserId == userId).FirstOrDefaultAsync();
+            .Where(x => x.UserId == userId).FirstOrDefaultAsync();
 
             Username = userName;
+            //if (!User.IsInRole("ApplicationAdmin"))
+            //{
+                Input = new InputModel
+                {
+                    PhoneNumber = phoneNumber,
+                    LastName = ((ApplicationUser)user).FirstName,
+                    FirstName = ((ApplicationUser)user).LastName,
+                    Skills = volunteer.Skills,
+                    YearsOfExperience = volunteer.YearsOfExperience,
+                    WorkPlace = volunteer.CurrentOrganization,
+                    StreetAddress = volunteer.Address,
+                    City = volunteer.City,
+                    State = volunteer.State,
+                    Zipcode = volunteer.Zipcode,
+                    Email = userName
+                };
+            //}
 
-            Input = new InputModel
-            {
-                PhoneNumber = phoneNumber,
-                LastName = ((ApplicationUser)user).FirstName,
-                FirstName = ((ApplicationUser)user).LastName,
-                Skills = volunteer.Skills,
-                YearsOfExperience = volunteer.YearsOfExperience,
-                WorkPlace = volunteer.CurrentOrganization,
-                StreetAddress = volunteer.Address,
-                City = volunteer.City,
-                State = volunteer.State,
-                Zipcode = volunteer.Zipcode,
-                Email = userName
-            };
         }
 
         public async Task<IActionResult> OnGetAsync()
         {
             var user = await _userManager.GetUserAsync(User);
+            
             if (user == null)
             {
                 return NotFound($"Unable to load user with ID '{_userManager.GetUserId(User)}'.");
             }
-
+            if (User.IsInRole("ApplicationAdmin"))
+            {
+                return NotFound($" {_userManager.GetUserName(User)}'.User is not a Volunteer");
+            }
             await LoadAsync(user);
             return Page();
+            
         }
 
         public async Task<IActionResult> OnPostAsync()
@@ -99,7 +108,8 @@ namespace ExperienceIT.Web.Areas.Identity.Pages.Account.Manage
                 return NotFound($"Unable to load user with ID '{_userManager.GetUserId(User)}'.");
             }
 
-            if (!ModelState.IsValid)
+
+            if ((!ModelState.IsValid))
             {
                 await LoadAsync(user);
                 return Page();
