@@ -25,6 +25,12 @@
                 <input asp-for="Program.Description" class="form-control" />
                 <span asp-validation-for="Program.Description" class="text-danger"></span>
             </div>
+            <div class="form-group">
+                <label asp-for="Program.ProgramUrl" class="control-label"></label>
+                <input asp-for="Program.ProgramUrl" class="form-control" />
+                <span asp-validation-for="Program.ProgramUrl" class="text-danger"></span>
+            </div>
+
             <hr />
             <h4>Organizers</h4>
             <div class="row">
@@ -41,10 +47,10 @@
                 </div>
             </div>
             <ul id="organizers">
-            @foreach(var org in Model.ProgramOrganizations)
-            {
-                <li>@org.Name</li>
-            }
+                @foreach (var org in Model.ProgramOrganizations)
+                {
+                    <li>@org.Name</li>
+                }
             </ul>
             <br /><br />
             <input type="hidden" id="orgIds" name="orgIds" />
@@ -64,10 +70,10 @@
                 </div>
             </div>
             <ul id="events">
-            @foreach (var evt in Model.ProgramEvents)
-            {
-                <li>@evt.Name</li>
-            }
+                @foreach (var evt in Model.ProgramEvents)
+                {
+                    <li>@evt.Name</li>
+                }
             </ul>
             <br /><br />
             <input type="hidden" id="eventIds" name="eventIds" />

@@ -23,6 +23,11 @@
                 <input asp-for="Program.Description" class="form-control" />
                 <span asp-validation-for="Program.Description" class="text-danger"></span>
             </div>
+            <div class="form-group">
+                <label asp-for="Program.ProgramUrl" class="control-label"></label>
+                <input asp-for="Program.ProgramUrl" class="form-control" />
+                <span asp-validation-for="Program.ProgramUrl" class="text-danger"></span>
+            </div>
             <hr />
 
             <h4>Organizers</h4>
@@ -43,7 +48,7 @@
             <br /><br />
             <input type="hidden" id="orgIds" name="orgIds" />
 
-            
+
             <h4>Events</h4>
             <div class="row">
                 <div class="col col-8">

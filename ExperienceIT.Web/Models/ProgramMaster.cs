@@ -19,5 +19,9 @@ namespace ExperienceIT.Web.Models
         [Required]
         [Display(Name = "Program Description")]
         public string Description { get; set; }
+
+        [Display(Name = "Program Url")]
+        public string ProgramUrl { get; set; }
+
     }
 }
