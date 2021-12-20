@@ -57,14 +57,13 @@ namespace ExperienceIT.Web.Areas.Identity.Pages.Account.Manage
             var userName = await _userManager.GetUserNameAsync(user);
             var phoneNumber = await _userManager.GetPhoneNumberAsync(user);
 
-            var userId = user.Id;
-            
-            var volunteer = await _context.VolunteerMaster
-            .Where(x => x.UserId == userId).FirstOrDefaultAsync();
+            if (!User.IsInRole("ApplicationAdmin"))
+            {
+                var userId = user.Id;
+                var volunteer = await _context.VolunteerMaster
+                .Where(x => x.UserId == userId).FirstOrDefaultAsync();
 
-            Username = userName;
-            //if (!User.IsInRole("ApplicationAdmin"))
-            //{
+                Username = userName;
                 Input = new InputModel
                 {
                     PhoneNumber = phoneNumber,
@@ -79,7 +78,15 @@ namespace ExperienceIT.Web.Areas.Identity.Pages.Account.Manage
                     Zipcode = volunteer.Zipcode,
                     Email = userName
                 };
-            //}
+            }
+            else
+            {
+                Input = new InputModel
+                {
+                    PhoneNumber = phoneNumber
+                };
+                Username = userName;
+            }
 
         }
 
@@ -90,10 +97,6 @@ namespace ExperienceIT.Web.Areas.Identity.Pages.Account.Manage
             if (user == null)
             {
                 return NotFound($"Unable to load user with ID '{_userManager.GetUserId(User)}'.");
-            }
-            if (User.IsInRole("ApplicationAdmin"))
-            {
-                return NotFound($" {_userManager.GetUserName(User)}'.User is not a Volunteer");
             }
             await LoadAsync(user);
             return Page();
