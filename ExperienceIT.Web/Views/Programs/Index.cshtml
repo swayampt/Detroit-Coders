@@ -15,7 +15,7 @@
 
     <h1 class="text-info">Programs</h1>
 
-    @if (User.IsInRole("Admin"))
+    @if (User.IsInRole("ApplicationAdmin"))
 
     {
         <p>
@@ -81,13 +81,13 @@
                     <td>
                         @*This is for Admin authentication roll. We will make it later once all the functionalities
                             and views will be done*@
-                        @if (User.IsInRole("Admin"))
+                        @if (User.IsInRole("ApplicationAdmin"))
                         {
-                            <a asp-action="Edit" asp-route-id="@item.Id">Edit</a>
+                            <a asp-action="Edit" class="btn btn-primary" asp-route-id="@item.Id">Edit</a>
                         }
 
                         @*<a asp-area="" asp-controller="Home" asp-action="Index">ExperienceIT</a>*@
-                        @Html.ActionLink("View More", "GetProgramPage", "Programs", new { programId = item.Id }, new { @class = "btn btn-primary btn-large" })
+                        @Html.ActionLink("View Events", "Index", "Events", null, new { @class = "btn btn-primary btn-large" })
 
                     </td>
                 </tr>
