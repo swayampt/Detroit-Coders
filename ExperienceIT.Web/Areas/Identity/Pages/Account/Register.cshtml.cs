@@ -1,4 +1,9 @@
-﻿using System;
+﻿
+// Author: Swayam Tripathy
+// Date: 12/15/2021
+// Description: Register.cshtml lets user to Sign UP and get a role assigned.
+
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
@@ -28,7 +33,7 @@ namespace ExperienceIT.Web.Areas.Identity.Pages.Account
         private readonly IEmailSender _emailSender;
         private readonly RoleManager<IdentityRole> _roleManager;
         private readonly ApplicationDbContext _context;
-        
+
 
         public RegisterModel(
             UserManager<IdentityUser> userManager,
@@ -44,7 +49,7 @@ namespace ExperienceIT.Web.Areas.Identity.Pages.Account
             _emailSender = emailSender;
             _roleManager = roleManager;
             _context = context;
-         }
+        }
 
         [BindProperty]
         public InputModel Input { get; set; }
@@ -82,6 +87,8 @@ namespace ExperienceIT.Web.Areas.Identity.Pages.Account
             public string City { get; set; }
             public string State { get; set; }
             public string Zipcode { get; set; }
+
+            // Fields for Volunteer Only
             public string Skills { get; set; }
             public int YearsOfExperience { get; set; }
             public string WorkPlace { get; set; }
@@ -96,7 +103,7 @@ namespace ExperienceIT.Web.Areas.Identity.Pages.Account
 
         public async Task<IActionResult> OnPostAsync(string returnUrl = null)
         {
-            var IsVolunteer = !string.IsNullOrEmpty(Request.Form["Skills"].ToString()) ? true : false ;
+            var IsVolunteer = !string.IsNullOrEmpty(Request.Form["Skills"].ToString()) ? true : false;
             string role = IsVolunteer ? Request.Form["rdUserRole"].ToString() : "";
             string skills = IsVolunteer ? Request.Form["Skills"].ToString() : "";
             int yearsOfExperience = IsVolunteer ? Convert.ToInt32(Request.Form["YearsOfExperience"].ToString()) : 0;
@@ -107,16 +114,16 @@ namespace ExperienceIT.Web.Areas.Identity.Pages.Account
             if (ModelState.IsValid)
             {
                 var user = new ApplicationUser
-                { 
-                  UserName = Input.Email, 
-                  Email = Input.Email, 
-                  FirstName = Input.FirstName,
-                  LastName = Input.LastName,
-                  PhoneNumber = Input.PhoneNumber,
-                  StreetAddress = Input.StreetAddress,
-                  City = Input.City,
-                  State = Input.State,
-                  Zipcode = Input.Zipcode,                  
+                {
+                    UserName = Input.Email,
+                    Email = Input.Email,
+                    FirstName = Input.FirstName,
+                    LastName = Input.LastName,
+                    PhoneNumber = Input.PhoneNumber,
+                    StreetAddress = Input.StreetAddress,
+                    City = Input.City,
+                    State = Input.State,
+                    Zipcode = Input.Zipcode,
                 };
 
                 var result = await _userManager.CreateAsync(user, Input.Password);
@@ -134,7 +141,7 @@ namespace ExperienceIT.Web.Areas.Identity.Pages.Account
                             LastName = user.LastName,
                             FirstName = user.FirstName,
                             UserId = user.Id,
-                            Skills = skills ,
+                            Skills = skills,
                             YearsOfExperience = yearsOfExperience,
                             AgeStatus = 0,
                             CurrentOrganization = workPlace,
@@ -149,7 +156,7 @@ namespace ExperienceIT.Web.Areas.Identity.Pages.Account
 
                         _context.Add(volunteer);
                         await _context.SaveChangesAsync();
-                        
+
                     }
                     else
                     {
@@ -171,30 +178,13 @@ namespace ExperienceIT.Web.Areas.Identity.Pages.Account
                             }
                         }
                     }
-                                        
 
                     _logger.LogInformation("User created a new account with password.");
 
-                    /*var code = await _userManager.GenerateEmailConfirmationTokenAsync(user);
-                    code = WebEncoders.Base64UrlEncode(Encoding.UTF8.GetBytes(code));
-                    var callbackUrl = Url.Page(
-                        "/Account/ConfirmEmail",
-                        pageHandler: null,
-                        values: new { area = "Identity", userId = user.Id, code = code, returnUrl = returnUrl },
-                        protocol: Request.Scheme);
 
-                    await _emailSender.SendEmailAsync(Input.Email, "Confirm your email",
-                        $"Please confirm your account by <a href='{HtmlEncoder.Default.Encode(callbackUrl)}'>clicking here</a>.");
-
-                    if (_userManager.Options.SignIn.RequireConfirmedAccount)
-                    {
-                        return RedirectToPage("RegisterConfirmation", new { email = Input.Email, returnUrl = returnUrl });
-                    }
-                    else
-                    {*/
                     await _signInManager.SignInAsync(user, isPersistent: false);
-                        return LocalRedirect(returnUrl);
-                    /*}*/
+                    return LocalRedirect(returnUrl);
+
                 }
                 foreach (var error in result.Errors)
                 {

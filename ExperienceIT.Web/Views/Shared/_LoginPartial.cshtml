@@ -1,4 +1,13 @@
-﻿@using Microsoft.AspNetCore.Identity
+﻿@*
+    Author: Swayam Tripathy
+    Date: 12/16/2021
+    Description: _LoginPartial.cshtml view created and linked in _Layout.cshtml to provide UI in Nav-bar for
+    1. Log In and Sign Up nav-pills which will redirect to corresponding pages.
+    2. Greet the user once logged in.
+    3. Profile icon with dropdown (Edit Profile, Change Password, Logout).
+*@
+
+@using Microsoft.AspNetCore.Identity
 
 @inject SignInManager<IdentityUser> SignInManager
 @inject UserManager<IdentityUser> UserManager
@@ -7,24 +16,33 @@
 {
     <ul class="navbar-nav ">
         <li class="nav-item">
+
+            @*Profile icon with Collapse Navbar*@
             <div class="collapse navbar-collapse" id="navbar-list-4">
                 <ul class="navbar-nav">
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             <i class="fas fa-user-circle fa-2x"></i>
                         </a>
-                        <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                            <a  class="nav-link text-dark" asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage">Edit Profile</a>
-                            <a  class="nav-link text-dark" asp-area="Identity" asp-page="/Account/Manage/ChangePassword" title="Manage">Change Password</a>
-                            <form  class="form-inline" asp-area="Identity" asp-page="/Account/Logout">
-                                <button  type="submit" class="nav-link btn btn-link text-dark">Logout</button>
+
+                        @*Profile DropDown: Edit Profile, Change Password, Logout*@
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink" style="font-size:small">
+                            <a class="nav-link text-dark" asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage">Edit Profile</a>
+                            <a class="nav-link text-dark" asp-area="Identity" asp-page="/Account/Manage/Profile" title="Manage"></a>
+                            <a class="nav-link text-dark" asp-area="Identity" asp-page="/Account/Manage/ChangePassword" title="Manage">Change Password</a>
+                            <form class="form-inline" asp-area="Identity" asp-page="/Account/Logout">
+                                <button type="submit" class="nav-link btn btn-link text-dark" style="font-size:small">Logout</button>
                             </form>
                         </div>
-                    </li>   
+
+                    </li>
                 </ul>
             </div>
+
         </li>
     </ul>
+
+    @*Hello Username*@
     <ul class="navbar-nav">
         <li class="nav-item">
             <a class="nav-link disabled font-italic text-secondary text-monospace" asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage">Hello @User.Identity.Name!</a>
@@ -33,15 +51,16 @@
 }
 else
 {
+    @*Nav-Pills: Log In, Sign Up which will redirect to corresponding pages*@
     <ul class="nav nav-pills">
         <li class="nav-item">
             <a class="nav-link active bg-primary" asp-area="Identity" asp-page="/Account/Register">Sign Up</a>
-         </li>
+        </li>
     </ul>
     <span>&nbsp;</span>
     <ul class="nav nav-pills">
-         <li class="nav-item">
+        <li class="nav-item">
             <a class="nav-link active bg-success" asp-area="Identity" asp-page="/Account/Login">Log In</a>
-         </li>
-    </ul>    
+        </li>
+    </ul>
 }
