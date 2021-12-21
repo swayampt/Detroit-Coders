@@ -140,25 +140,37 @@
                  <div class="col-md-5">
                      <div class="form-group">
                          <label asp-for="Input.Skills" class="col-form-label">Skills<span style="color:#ff0000">*</span></label>
-                         <input asp-for="Input.Skills" name="Skills" class="form-control"/>
+                         <input asp-for="Input.Skills" name="Skills" class="form-control" />
                          <span asp-validation-for="Input.Skills" class="text-danger"></span>
                      </div>
                  </div>
                  <div class="col-md-5">
                      <div class="form-group">
                          <label asp-for="Input.YearsOfExperience" class="col-form-label">Years Of Experience<span style="color:#ff0000">*</span></label>
-                         <input asp-for="Input.YearsOfExperience" name ="YearsOfExperience" class="form-control" />
+                         <input asp-for="Input.YearsOfExperience" name="YearsOfExperience" class="form-control" />
                          <span asp-validation-for="Input.YearsOfExperience" class="text-danger"></span>
                      </div>
                  </div>
                  <div class="col-sm-1"></div>
              </div>
+             @*<div class="row">
+                <div class="col-sm-1"></div>
+                <div class="col-md-5">
+                    <div class="form-group">
+                        <label asp-for="Input.WorkPlace" class="col-form-label">Work Place<span style="color:#ff0000">*</span></label>
+                        <input asp-for="Input.WorkPlace" name="WorkPlace" class="form-control"/>
+                        <span asp-validation-for="Input.WorkPlace" class="text-danger"></span>
+                    </div>
+                </div>
+            </div>
+        </div>*@
              <div class="row">
                  <div class="col-sm-1"></div>
                  <div class="col-md-5">
                      <div class="form-group">
                          <label asp-for="Input.WorkPlace" class="col-form-label">Work Place<span style="color:#ff0000">*</span></label>
-                         <input asp-for="Input.WorkPlace" name="WorkPlace" class="form-control"/>
+                         @Html.DropDownListFor(s => Model.Input.WorkPlace,
+                          new SelectList(Model.Organizations, "Id", "Name"), "--Select One--", new { @class = "form-control" })
                          <span asp-validation-for="Input.WorkPlace" class="text-danger"></span>
                      </div>
                  </div>
