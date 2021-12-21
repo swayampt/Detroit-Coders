@@ -30,7 +30,7 @@ namespace ExperienceIT.Web.Controllers
        
 
             // GET: EventMasters
-        public async Task<IActionResult> Index(int? programId)
+        public async Task<IActionResult> Index(int? programId)//passing program id to redirect into respective page.
         {
             var events = await _context.EventMaster.ToListAsync();
             var programEventMapper= new List<ProgramEventMapper>();
