@@ -30,12 +30,24 @@ namespace ExperienceIT.Web.Controllers
        
 
             // GET: EventMasters
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(int? programId)
         {
             var events = await _context.EventMaster.ToListAsync();
-            var programEventMapper = await _context.ProgramEventMapper
+            var programEventMapper= new List<ProgramEventMapper>();
+            if (programId == null || programId == 0 )
+            {
+                programEventMapper = await _context.ProgramEventMapper
                 .Include(x => x.ProgramMaster)
                 .Include(x => x.EventMaster).ToListAsync();
+
+            } else
+            {
+                programEventMapper = await _context.ProgramEventMapper
+                    .Where (x=>x.ProgramId==programId)
+               .Include(x => x.ProgramMaster)
+               .Include(x => x.EventMaster).ToListAsync();
+            }
+            
 
             if (User.Identity.IsAuthenticated)
             {

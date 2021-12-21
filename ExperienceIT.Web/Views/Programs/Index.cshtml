@@ -8,20 +8,28 @@
 <style>
     body {
         background-color: azure;
+            }
+    a{
+        color:blue;
     }
 </style>
-
 <div class="border backgroundwhite">
+    @*adding border,background and image*@
+    <div class="row">
+        @*the "row" class is used mainly to hold columns in it.*@
+        <div class="col-6">
+            @*element take half of the horizontal screen space devices.*@
+            <h2 class="text-info">Programs</h2>@*Add meaning through text-colors*@
+        </div>
+        @if (User.IsInRole("ApplicationAdmin"))
+        {
+            <div class="col-6 text-right">
+                @*move the columns to the right*@
+                <a><partial name="_CreateButtonPartial" /></a>
+            </div>
+        }
+    </div>
 
-    <h1 class="text-info">Programs</h1>
-
-    @if (User.IsInRole("ApplicationAdmin"))
-
-    {
-        <p>
-            <a class="btn btn-primary" asp-action="Create">Create New</a>
-        </p>
-    }
     <table class="table table-striped border">
         <tr class="table-secondary">
 
@@ -39,59 +47,64 @@
             <th>
                 <label>&emsp;&nbsp;Events</label>
             </th>
-            <th></th>
+            <th colspan="2"></th>
         </tr>
 
-        
-            @foreach (var item in Model.ProgramList)
-            {
-                <tr>
-                    <td>
-                        <a href="@item.ProgramUrl" style="text-decoration:underline" target="_blank">@item.Name</a>
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Description)
-                    </td>
-                    <td>
-                        @{
-                            var orgIds = Model.ProgramOrganizerMappers.Where(x => x.ProgramId == item.Id)
-                                .Select(x => x.OrganizerId).ToArray();
-                            var orgs = Model.Organizations.Where(x => orgIds.Contains(x.Id)).ToList();
-                        }
-                        <ul>
-                            @foreach (var org in orgs)
-                            {
-                                <li>@org.Name</li>
-                            }
-                        </ul>
-                    </td>
-                    <td>
-                        @{
-                            var evtIds = Model.EventMappers.Where(x => x.ProgramId == item.Id)
-                                .Select(x => x.EventId).ToArray();
-                            var evts = Model.Events.Where(x => evtIds.Contains(x.Id)).ToList();
-                        }
-                        <ul>
-                            @foreach (var evt in evts)
-                            {
-                                <li>@evt.Name</li>
-                            }
-                        </ul>
-                    </td>
-                    <td>
-                        
-                        @if (User.IsInRole("ApplicationAdmin"))
+
+        @foreach (var item in Model.ProgramList)
+        {
+            <tr>
+                <td>
+                    <a href="@item.ProgramUrl" style="text-decoration:underline" target="_blank">@item.Name</a>
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Description)
+                </td>
+                <td>
+                    @{
+                        var orgIds = Model.ProgramOrganizerMappers.Where(x => x.ProgramId == item.Id)
+                            .Select(x => x.OrganizerId).ToArray();
+                        var orgs = Model.Organizations.Where(x => orgIds.Contains(x.Id)).ToList();
+                    }
+                    <ul>
+                        @foreach (var org in orgs)
                         {
-                            <a asp-action="Edit" class="btn btn-primary" asp-route-id="@item.Id">Edit</a>
+                            <li>@org.Name</li>
                         }
+                    </ul>
+                </td>
+                <td>
+                    @{
+                        var evtIds = Model.EventMappers.Where(x => x.ProgramId == item.Id)
+                            .Select(x => x.EventId).ToArray();
+                        var evts = Model.Events.Where(x => evtIds.Contains(x.Id)).ToList();
+                    }
+                    <ul>
+                        @foreach (var evt in evts)
+                        {
+                            <li>@evt.Name</li>
+                        }
+                    </ul>
+                </td>
+                <td>
+                    @*This is for Admin authentication roll. We will make it later once all the functionalities
+                        and views will be done*@
+                    @if (User.IsInRole("ApplicationAdmin"))
+                    {
 
-                        @*<a asp-area="" asp-controller="Home" asp-action="Index">ExperienceIT</a>*@
-                        @Html.ActionLink("View Events", "Index", "Events", new { programId=item.Id }, new { @class = "btn btn-primary btn-large" })
+                        <a asp-action="Edit" class="btn btn-primary" asp-route-id="@item.Id">Edit</a>
+                    }
 
-                    </td>
-                </tr>
-            }
-           
-        
+
+
+                </td>
+                <td>
+                    @Html.ActionLink("View Events", "Index", "Events", new { programId = item.Id }, new { @class = "btn btn-primary btn-large" })
+                </td>
+            </tr>
+        }
+
+
     </table>
+
 </div>

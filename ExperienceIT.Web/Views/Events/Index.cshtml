@@ -38,112 +38,101 @@
             }
         </div>
     </div>
+    <div class="row">
+        <div class="col-6">
+            <table class="table table-striped border" width="90%">
+                <tr class="table-secondary">
+                    <th>
+                        @Html.DisplayNameFor(model => model.Event.Name)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Event.Description)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Event.StartingDate)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Event.EndingDate)
+                    </th>
+                    @*<th>
+                        @Html.DisplayNameFor(model => model.Event.EnrollmentDate)
+                    </th>*@
+                    <th>
+                        @Html.DisplayNameFor(model => model.ProgramName)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Event.Venue)
+                    </th>
+                    <th colspan="2">
+                        @Html.DisplayNameFor(model => model.Event.Duration)
+                    </th>
+                </tr>
 
-    <table class="table table-striped border">
-        <tr class="table-secondary">
-            <th>
-                @Html.DisplayNameFor(model => model.Event.Name)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Event.Description)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Event.StartingDate)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Event.EndingDate)
-            </th>
-            @*<th>
-                    @Html.DisplayNameFor(model => model.Event.EnrollmentDate)
-                </th>*@
-            <th>
-                @Html.DisplayNameFor(model => model.ProgramName)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Event.Venue)
-            </th>
-            <th colspan="2">
-                @Html.DisplayNameFor(model => model.Event.Duration)
-            </th>
-        </tr>
 
-
-        @foreach (var item in Model)
-        {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.Event.Name)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Event.Description)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Event.StartingDate)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Event.EndingDate)
-        </td>
-        @*<td>
-            @Html.DisplayFor(modelItem => item.Event.EnrollmentDate)
-        </td>*@
-        <td>
-            @Html.DisplayFor(modelItem => item.ProgramName)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Event.Venue)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Event.Duration)
-        </td>
-        @if (User.Identity.IsAuthenticated)
-        {
-            if (User.IsInRole("ApplicationAdmin"))
-            {
-                <partial name="_TableButtonPartial" model="item.Event.Id" />
-            }
-            else
-            {
-                if (vems.Any(x => x.EventId == item.Event.Id))
+                @foreach (var item in Model)
                 {
-                    <td>
-                        <button class="btn btn-danger" id="Register" onclick="RegisterVolunteer(@item.Event.Id, @item.ProgramId,0)">UnRegister</button>
-                    </td>
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Event.Name)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Event.Description)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Event.StartingDate)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Event.EndingDate)
+                        </td>
+                        @*<td>
+                            @Html.DisplayFor(modelItem => item.Event.EnrollmentDate)
+                        </td>*@
+                        <td>
+                            @Html.DisplayFor(modelItem => item.ProgramName)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Event.Venue)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Event.Duration)
+                        </td>
+                        @if (User.Identity.IsAuthenticated)
+                        {
+                            if (User.IsInRole("ApplicationAdmin"))
+                            {
+                                <partial name="_TableButtonPartial" model="item.Event.Id" />
+                            }
+                            else
+                            {
+                                if (vems.Any(x => x.EventId == item.Event.Id))
+                                {
+                                    <td>
+                                        <button class="btn btn-danger" id="Register" onclick="RegisterVolunteer(@item.Event.Id, @item.ProgramId,0)">UnRegister</button>
+                                    </td>
+                                }
+                                else
+                                {
+                                    <td>
+                                        <button class="btn btn-primary" id="Register" onclick="RegisterVolunteer(@item.Event.Id, @item.ProgramId,1)">Register</button>
+                                    </td>
+                                }
+                            }
+                        }
+                    </tr>
                 }
-                else
-                {
-                    <td>
-                        <button class="btn btn-primary" id="Register" onclick="RegisterVolunteer(@item.Event.Id, @item.ProgramId,1)">Register</button>
-                    </td>
-                }
-            }
-
-            @*if (vems.Any(x => x.EventId == item.Event.Id))
-            {
-                <td>
-                    <button class="btn btn-danger" id="EmailRegister" onclick="ConfirmByEmail(@item.Event.Id, @item.ProgramId,0)">ConfirmByEmail</button>
-                </td>
-            }
-            else
-            {
-                <td>
-                    <button class="btn btn-primary" id="EmailRegister" onclick="ConfirmByEmail(@item.Event.Id, @item.ProgramId,1)">ConfirmByEmail</button>
-                </td>
-            }*@
-
-        }
-    </tr>
-        }
-    </table>
-</div>
+            </table>
+            </div>
+        </div>
+    </div>
 
 
 
 
 
 
-@section Scripts {
+    @section Scripts {
 
-    <script type="text/javascript">
+        <script type="text/javascript">
 
 
         function RegisterVolunteer(evntId, progId,flag) {
@@ -170,5 +159,5 @@
         }*@
 
 
-    </script>
-}
+        </script>
+    }
