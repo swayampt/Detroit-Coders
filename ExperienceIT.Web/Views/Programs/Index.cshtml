@@ -5,17 +5,30 @@
 }
 <style>
     body {
-        background-color: azure;
+        background-color: azure;      
+
+    }
+    a {
+        color: blue;
     }
 </style>
 <div class="border backgroundwhite">
-    <h1 class="text-info">Programs</h1>
-    @if (User.IsInRole("ApplicationAdmin"))
-    {
-        <p>
-            <a class="btn btn-primary" asp-action="Create">Create New</a>
-        </p>
-    }
+    @*adding border,background and image*@
+    <div class="row">
+        @*the "row" class is used mainly to hold columns in it.*@
+        <div class="col-6">
+            @*element take half of the horizontal screen space devices.*@
+            <h2 class="text-info">Programs</h2>@*Add meaning through text-colors*@
+        </div>
+        @if (User.IsInRole("ApplicationAdmin"))
+        {
+            <div class="col-6 text-right">
+                @*move the columns to the right*@
+                <a><partial name="_CreateButtonPartial" /></a>
+            </div>
+        }
+
+    </div>
     <table class="table table-striped border">
         <tr class="table-secondary">
             @*<table class="table">*@
@@ -75,12 +88,14 @@
                     {
                         <a asp-action="Edit" class="btn btn-primary" asp-route-id="@item.Id">Edit</a>
                     }
+                    <br />
+                    <br/>
 
                     @*<a asp-area="" asp-controller="Home" asp-action="Index">ExperienceIT</a>*@
                     @Html.ActionLink("View Events", "Index", "Events", null, new { @class = "btn btn-primary btn-large" })
 
                 </td>
             </tr>
-         }
+        }
     </table>
 </div>

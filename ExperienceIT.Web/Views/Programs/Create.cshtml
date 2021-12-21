@@ -5,79 +5,79 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h1>Create New </h1>
+<style>
+    body {
+        background-color: azure;
+    }
+</style>
+<h4 class="text-info">New Sponsor</h4>
+<div class="border backgroundwhite ">
+    <form enctype="multipart/form-data" asp-action="Create">
+        @* allows entire files to be included in the data(server)*@
 
-<h4>Program</h4>
-<hr />
-<div class="row">
-    <div class="col-md-4">
-        <form asp-action="Create">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <div class="form-group">
-                <label asp-for="Program.Name" class="control-label"></label>
-                <input asp-for="Program.Name" class="form-control" />
-                <span asp-validation-for="Program.Name" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Program.Description" class="control-label"></label>
-                <input asp-for="Program.Description" class="form-control" />
-                <span asp-validation-for="Program.Description" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Program.ProgramUrl" class="control-label"></label>
-                <input asp-for="Program.ProgramUrl" class="form-control" />
-                <span asp-validation-for="Program.ProgramUrl" class="text-danger"></span>
-            </div>
-            <hr />
-
-            <h4>Organizers</h4>
-            <div class="row">
-                <div class="col col-8">
-                    <div class="form-group">
-                        @Html.DropDownListFor(s => s.OrganizationId,
-                            new SelectList(Model.Organizations, "Id", "Name"), "--Select Organizer--", new { @class = "form-control" })
-                        <span asp-validation-for="OrganizationId" class="text-danger"></span>
-
+        <div class="row">
+            <div class="col-md-4">
+                @*<form asp-action="Create">*@
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <div class="form-group">
+                    <label asp-for="Program.Name" class="control-label"></label>
+                    <input asp-for="Program.Name" class="form-control" />
+                    <span asp-validation-for="Program.Name" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Program.Description" class="control-label"></label>
+                    <input asp-for="Program.Description" class="form-control" />
+                    <span asp-validation-for="Program.Description" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Program.ProgramUrl" class="control-label"></label>
+                    <input asp-for="Program.ProgramUrl" class="form-control" />
+                    <span asp-validation-for="Program.ProgramUrl" class="text-danger"></span>
+                </div>
+                <hr />
+                <h4>Organizers</h4>
+                <div class="row">
+                    <div class="col col-8">
+                        <div class="form-group">
+                            @Html.DropDownListFor(s => s.OrganizationId,
+                                new SelectList(Model.Organizations, "Id", "Name"), "--Select Organizer--", new { @class = "form-control" })
+                            <span asp-validation-for="OrganizationId" class="text-danger"></span>
+                        </div>
+                    </div>
+                    <div class="col col-4">
+                        <input type="button" class="btn btn-primary" id="addOrganizer" value="Add" />
                     </div>
                 </div>
-                <div class="col col-4">
-                    <input type="button" class="btn btn-primary" id="addOrganizer" value="Add" />
-                </div>
-            </div>
-            <ul id="organizers"></ul>
-            <br /><br />
-            <input type="hidden" id="orgIds" name="orgIds" />
-
-
-            <h4>Events</h4>
-            <div class="row">
-                <div class="col col-8">
-                    <div class="form-group">
-                        @Html.DropDownListFor(s => s.EventId,
-                            new SelectList(Model.Events, "Id", "Name"), "--Select Event--", new { @class = "form-control" })
-                        <span asp-validation-for="EventId" class="text-danger"></span>
-
+                <ul id="organizers"></ul>
+                @*<br /><br />*@
+                <input type="hidden" id="orgIds" name="orgIds" />
+                <h4>Events</h4>
+                <div class="row">
+                    <div class="col col-8">
+                        <div class="form-group">
+                            @Html.DropDownListFor(s => s.EventId,
+                                new SelectList(Model.Events, "Id", "Name"), "--Select Event--", new { @class = "form-control" })
+                            <span asp-validation-for="EventId" class="text-danger"></span>
+                        </div>
+                    </div>
+                    <div class="col col-4">
+                        <input type="button" class="btn btn-primary" id="addEvent" value="Add" />
                     </div>
                 </div>
-                <div class="col col-4">
-                    <input type="button" class="btn btn-primary" id="addEvent" value="Add" />
+                <ul id="events"></ul>
+                @*<br /><br />*@
+                <input type="hidden" id="evetIds" name="eventIds" />
+                <div class="form-group">
+                    <partial name="_CreateAndBackToListButton" />
+                    @*<a asp-action="Index">Back to List</a>*@
+                    @*<input type="submit" value="Create" class="btn btn-primary" />
+                        <a asp-action="Index" class="btn btn-info">Back to List </a>*@
                 </div>
             </div>
-            <ul id="events"></ul>
-            <br /><br />
-            <input type="hidden" id="evetIds" name="eventIds" />
-            <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-primary" />
-                <a asp-action="Index" class="btn btn-info">Back to List </a>
-            </div>
-        </form>
-    </div>
+        </div>
+    </form>
 </div>
-
-
 @section Scripts {
-    
-    
     <script type="text/javascript">
         var orgIds = '';
         $("#addOrganizer").click(function () {
