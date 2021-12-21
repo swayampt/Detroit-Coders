@@ -16,10 +16,15 @@
             @*element take half of the horizontal screen space devices.*@
             <h2 class="text-info">Sponsors</h2>@*Add meaning through text-colors*@
         </div>
-        <div class="col-6 text-right">
-            @*move the columns to the right*@
-            <a><partial name="_CreateButtonPartial" /></a>
-        </div>
+        @if (User.IsInRole("ApplicationAdmin"))
+        {
+            <div class="col-6 text-right">
+                @*move the columns to the right*@
+                <a><partial name="_CreateButtonPartial" /></a>
+            </div>
+        }
+
+
     </div>
     <!--<div class="table table-striped border ">
         <br />
@@ -133,32 +138,39 @@
 
         @foreach (var item in Model)
         {
-            <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Name)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Address)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.City)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.State)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Zipcode)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Country)
-                </td>
-                <td>
-                    <partial name="_TableButtonPartial" model="item.Id" />
-                    @*<a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
-                        <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
-                        <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>*@
-                </td>
-            </tr>
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Name)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Address)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.City)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.State)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Zipcode)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Country)
+        </td>
+       
+        @if (User.IsInRole("ApplicationAdmin"))
+        {
+            <td>
+                <partial name="_TableButtonPartial" model="item.Id" />
+                @*<a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>*@
+            </td>
+
+
+        }
+
+    </tr>
         }
 
     </table>

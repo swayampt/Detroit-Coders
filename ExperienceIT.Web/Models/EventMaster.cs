@@ -21,12 +21,12 @@ namespace ExperienceIT.Web.Models
         public string Description { get; set; }
 
         [Required]
-        [Display(Name = "Starting Date")]
+        [Display(Name = "Start Date")]
         [DataType(DataType.Date)]
         public DateTime StartingDate { get; set; }
 
         [Required]
-        [Display(Name = "Ending Date")]
+        [Display(Name = "End Date")]
         [DataType(DataType.Date)]
         public DateTime EndingDate { get; set; }
 
