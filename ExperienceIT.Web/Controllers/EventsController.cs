@@ -178,14 +178,59 @@ namespace ExperienceIT.Web.Controllers
             await _context.SaveChangesAsync();
 
 
-            // Send Email
+            //Send Email
 
             //await _emailSender.SendEmailAsync(User.Identity.Name, "Volunteer Registration", "You are registered");
+
 
 
             return message;
             
         }
+
+        //public async Task<string> EmailConfirmation(int eventId, int progId, int flag)
+        //{
+        //    //Get logged in volunteer details
+
+        //    var user = await _userManager.GetUserAsync(User);
+        //    var userId = user.Id;
+        //    var message = string.Empty;
+
+        //    var volunteer = await _context.VolunteerMaster
+        //        .Where(x => x.UserId == userId).FirstOrDefaultAsync();
+
+        //    var volunteerId = volunteer.Id;
+
+        //    if (flag == 1) //Register
+        //    {
+        //        var volunteerEventProgramMapper = new ProgramEventVolunteerMapper()
+        //        {
+        //            ProgramId = progId,
+        //            EventId = eventId,
+        //            VolunteerId = volunteerId
+        //        };
+
+        //        await _context.ProgramEventVolunteerMapper.AddAsync(volunteerEventProgramMapper);
+        //        message = "You were successfully registered for this event.";
+        //    }
+        //    else //UnRegister
+        //    {
+        //        var mapper = await _context.ProgramEventVolunteerMapper.
+        //            Where(x => x.VolunteerId == volunteerId && x.EventId == eventId && x.ProgramId == progId)
+        //            .FirstOrDefaultAsync();
+
+        //        _context.ProgramEventVolunteerMapper.Remove(mapper);
+        //        message = "You were successfully un-registered from this event.";
+        //    }
+
+            
+            //Send Email
+
+        //    await _emailSender.SendEmailAsync(User.Identity.Name, "Volunteer Registration", "You are registered");
+
+        //    return message;
+
+        //}
 
         // GET: EventMasters/Details/5
         public async Task<IActionResult> Details(int? id)

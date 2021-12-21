@@ -116,6 +116,20 @@
                     </td>
                 }
             }
+
+            @*if (vems.Any(x => x.EventId == item.Event.Id))
+            {
+                <td>
+                    <button class="btn btn-danger" id="EmailRegister" onclick="ConfirmByEmail(@item.Event.Id, @item.ProgramId,0)">ConfirmByEmail</button>
+                </td>
+            }
+            else
+            {
+                <td>
+                    <button class="btn btn-primary" id="EmailRegister" onclick="ConfirmByEmail(@item.Event.Id, @item.ProgramId,1)">ConfirmByEmail</button>
+                </td>
+            }*@
+
         }
     </tr>
         }
@@ -131,7 +145,7 @@
 
     <script type="text/javascript">
 
-        
+
         function RegisterVolunteer(evntId, progId,flag) {
             var registerUrl = '@Url.Action("Register","Events")';
             var indexUrl = '@Url.Action("Index","Events")';
@@ -149,7 +163,11 @@
                 }
             });
         }
-
+        @*function ConfirmByEmail(evntId, progId, flag) {
+            var registerUrl = '@Url.Action("EmailConfirmation","Events")';
+            var indexUrl = '@Url.Action("Index","Events")';
+            var registerUrl = registerUrl + "?eventId=" + evntId + "&progId=" + progId + "&flag=" + flag;
+        }*@
 
 
     </script>
