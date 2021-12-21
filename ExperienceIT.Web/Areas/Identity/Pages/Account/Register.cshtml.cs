@@ -100,7 +100,7 @@ namespace ExperienceIT.Web.Areas.Identity.Pages.Account
             string role = IsVolunteer ? Request.Form["rdUserRole"].ToString() : "";
             string skills = IsVolunteer ? Request.Form["Skills"].ToString() : "";
             int yearsOfExperience = IsVolunteer ? Convert.ToInt32(Request.Form["YearsOfExperience"].ToString()) : 0;
-            string workPlace = Request.Form["WorkPlace"].ToString();
+            string workPlace = IsVolunteer ? Request.Form["Input.WorkPlace"].ToString():"";
             
             returnUrl = returnUrl ?? Url.Content("~/");
             ExternalLogins = (await _signInManager.GetExternalAuthenticationSchemesAsync()).ToList();
