@@ -70,18 +70,45 @@ body {
   line-height: 60px; /* Vertically center the text there */
 }
 
-.bg-image {
+.bg-image {/*ExperienceIT Volunteer Homepage Image*/
     background-position: center;
     background-size: cover;
     background-repeat: no-repeat;
     background-attachment: inherit;
     height: 100%;
     min-height: 100%;
-    /* filter: blur(4px);
-    -webkit-filter: blur(4px);/*/
+    /* filter: blur(0px);
+    -webkit-filter: blur(4px);*/
 }
+
+.dashbaord-image {
+    filter: blur(2px);
+    -webkit-filter: blur(2px);
+    height: 100%;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+/* Position text in the middle of the page/image */
+.bg-text {
+    background-color: rgb(0,0,0); /*Fallback color */
+    background-color: rgba(0,0,0, 0.4); /* Black w/opacity/see-through */
+    color: white;
+    font-weight: bold;
+    border: 3px solid #f1f1f1;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 2;
+    width: 80%;
+    padding: 20px;
+    text-align: center;
+}
+
 .search-background {
-    background: url('/images/volunteer.jpg'); /*this will set background form this image*/
+    background: url('/images/volunteer.jpg'); /*this will set background form this image */
 }
 
 .backgroundwhite {
