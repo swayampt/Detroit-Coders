@@ -28,6 +28,9 @@
         <div class="col-6">
             @*element take half of the horizontal screen space devices.*@
             <h2 class="text-info">Events List</h2>@*Add meaning through text-colors*@
+            @if (!User.Identity.IsAuthenticated) {
+                <h3>To Register to an Event, Please <a href="/Identity/Account/Register">Sign Up!</a></h3> 
+            }
         </div>
         <div class="col-6 text-right">
             @* move the columns to the right*@
@@ -49,14 +52,9 @@
                         @Html.DisplayNameFor(model => model.Event.Description)
                     </th>
                     <th>
-                        @Html.DisplayNameFor(model => model.Event.StartingDate)
-                    </th>
-                    <th>
+                        @Html.DisplayNameFor(model => model.Event.StartingDate)-
                         @Html.DisplayNameFor(model => model.Event.EndingDate)
                     </th>
-                    @*<th>
-                        @Html.DisplayNameFor(model => model.Event.EnrollmentDate)
-                    </th>*@
                     <th>
                         @Html.DisplayNameFor(model => model.ProgramName)
                     </th>
@@ -79,14 +77,9 @@
                             @Html.DisplayFor(modelItem => item.Event.Description)
                         </td>
                         <td>
-                            @Html.DisplayFor(modelItem => item.Event.StartingDate)
-                        </td>
-                        <td>
+                            @Html.DisplayFor(modelItem => item.Event.StartingDate)-<BR>
                             @Html.DisplayFor(modelItem => item.Event.EndingDate)
                         </td>
-                        @*<td>
-                            @Html.DisplayFor(modelItem => item.Event.EnrollmentDate)
-                        </td>*@
                         <td>
                             @Html.DisplayFor(modelItem => item.ProgramName)
                         </td>

@@ -19,30 +19,21 @@ namespace ExperienceIT.Web.Services
         }
         public Task SendEmailAsync(string email, string subject, string message)
         {
-            return Execute(Options.SendGridKey, subject, message, email);
+            return Execute(Options.SendGridKey, subject, message, email,Options.FromEmailID);
         }
 
-        private Task Execute(string sendGridKey, string subject, string message, string email)
+        private async Task Execute(string sendGridKey, string subject, string message, string email, string fromEmail)
         {
+            
+            //var apiKey = Environment.GetEnvironmentVariable("NAME_OF_THE_ENVIRONMENT_VARIABLE_FOR_YOUR_SENDGRID_KEY");
             var client = new SendGridClient(sendGridKey);
-            var msg = new SendGridMessage()
-            {
-                From = new EmailAddress("skalaiarasy@gmil.com", "Experience IT Final"),
-                Subject = subject,
-                PlainTextContent = message,
-                HtmlContent = message
-            };
-            msg.AddTo(new EmailAddress(email));
-            try
-            {
-                return client.SendEmailAsync(msg);
-            }
-            catch (Exception ex)
-            {
-
-            }
-            return null;
-        }
+            var from = new EmailAddress(fromEmail, "TechFlight Admin");
+            var to = new EmailAddress(email, "Example User");
+            var plainTextContent = message;
+            var htmlContent = message;
+            var msg = MailHelper.CreateSingleEmail(from, to, subject, plainTextContent, htmlContent);
+            var response = await client.SendEmailAsync(msg);
+       }
     }
 }
 

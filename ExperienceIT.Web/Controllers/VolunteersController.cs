@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using ExperienceIT.Web.Data;
 using ExperienceIT.Web.Models;
+using ExperienceIT.Web.ViewModels;
 
 namespace ExperienceIT.Web.Controllers
 {
@@ -23,7 +24,12 @@ namespace ExperienceIT.Web.Controllers
         public async Task<IActionResult> Index()
         {
             var applicationDbContext = _context.VolunteerMaster.Include(v => v.User);
-            return View(await applicationDbContext.ToListAsync());
+            VolunteerOrganizationViewModel viewModel = new VolunteerOrganizationViewModel()
+            {
+                volunteers = await _context.VolunteerMaster.ToListAsync(),
+                organizationList = await _context.OrganizerMaster.ToListAsync()
+            };
+            return View(viewModel);
         }
 
         // GET: VolunteerMasters/Details/5

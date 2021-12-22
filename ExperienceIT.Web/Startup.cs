@@ -37,8 +37,10 @@ namespace ExperienceIT.Web
                 .AddEntityFrameworkStores<ApplicationDbContext>();
 
             services.AddScoped<IDbInitializer, DbInitializer>();
-
             services.AddSingleton<IEmailSender, EmailSender>();
+            //added the EmailOptions and getting the send grid key and sender email id from appsettings.json
+            services.Configure<EmailOptions>(Configuration);
+            
             services.AddControllersWithViews();
             services.AddRazorPages();
         }

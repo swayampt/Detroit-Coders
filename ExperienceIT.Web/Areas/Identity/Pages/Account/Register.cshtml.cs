@@ -28,6 +28,7 @@ namespace ExperienceIT.Web.Areas.Identity.Pages.Account
         private readonly IEmailSender _emailSender;
         private readonly RoleManager<IdentityRole> _roleManager;
         private readonly ApplicationDbContext _context;
+
         
 
         public RegisterModel(
@@ -48,10 +49,10 @@ namespace ExperienceIT.Web.Areas.Identity.Pages.Account
 
         [BindProperty]
         public InputModel Input { get; set; }
-
-        public List<OrganizerMaster> Organizations { get; private set; }
+          
 
         public string ReturnUrl { get; set; }
+        public List<OrganizerMaster> Organizations { get; set; }
 
         public IList<AuthenticationScheme> ExternalLogins { get; set; }
 
@@ -96,6 +97,10 @@ namespace ExperienceIT.Web.Areas.Identity.Pages.Account
 
         public async Task<IActionResult> OnPostAsync(string returnUrl = null)
         {
+            if (Organizations == null)
+            {
+                Organizations = _context.OrganizerMaster.ToList();
+            }
             var IsVolunteer = !string.IsNullOrEmpty(Request.Form["Skills"].ToString()) ? true : false ;
             string role = IsVolunteer ? Request.Form["rdUserRole"].ToString() : "";
             string skills = IsVolunteer ? Request.Form["Skills"].ToString() : "";
@@ -174,6 +179,7 @@ namespace ExperienceIT.Web.Areas.Identity.Pages.Account
                                         
 
                     _logger.LogInformation("User created a new account with password.");
+                    _emailSender.SendEmailAsync(user.Email,"User Registered Successfully","<b>Hi, User registered successfully</b>");
 
                     /*var code = await _userManager.GenerateEmailConfirmationTokenAsync(user);
                     code = WebEncoders.Base64UrlEncode(Encoding.UTF8.GetBytes(code));
