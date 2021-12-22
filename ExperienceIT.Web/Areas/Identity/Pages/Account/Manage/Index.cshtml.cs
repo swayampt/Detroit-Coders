@@ -124,22 +124,27 @@ namespace ExperienceIT.Web.Areas.Identity.Pages.Account.Manage
             var phoneNumber = await _userManager.GetPhoneNumberAsync(user);
 
             //Update Volunteer Master 
-            if (Organizations == null)
+            if (Organizations == null)               
+                {
+                    Organizations = _context.OrganizerMaster.ToList();
+                }
+            if (!User.IsInRole("ApplicationAdmin"))
             {
-                Organizations = _context.OrganizerMaster.ToList();
+
+
+                var volunteer = await _context.VolunteerMaster.Where(x => x.UserId == user.Id).FirstOrDefaultAsync();
+
+                volunteer.Phone = Input.PhoneNumber;
+                volunteer.Skills = Input.Skills;
+                volunteer.YearsOfExperience = Input.YearsOfExperience;
+                volunteer.CurrentOrganization = Input.WorkPlace;
+                volunteer.Address = Input.StreetAddress;
+                volunteer.City = Input.City;
+                volunteer.State = Input.State;
+                volunteer.Zipcode = Input.Zipcode;
+
+                _context.Update(volunteer).State = EntityState.Modified;
             }
-            var volunteer = await _context.VolunteerMaster.Where(x => x.UserId == user.Id).FirstOrDefaultAsync();
-
-            volunteer.Phone = Input.PhoneNumber;
-            volunteer.Skills = Input.Skills;
-            volunteer.YearsOfExperience = Input.YearsOfExperience;
-            volunteer.CurrentOrganization = Input.WorkPlace;
-            volunteer.Address = Input.StreetAddress;
-            volunteer.City = Input.City;
-            volunteer.State = Input.State;
-            volunteer.Zipcode = Input.Zipcode;
-
-            _context.Update(volunteer).State = EntityState.Modified;
             await _context.SaveChangesAsync();
 
 
