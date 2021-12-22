@@ -145,7 +145,11 @@
                 }
             });
         }
-
+        @*function ConfirmByEmail(evntId, progId, flag) {
+            var registerUrl = '@Url.Action("EmailConfirmation","Events")';
+            var indexUrl = '@Url.Action("Index","Events")';
+            var registerUrl = registerUrl + "?eventId=" + evntId + "&progId=" + progId + "&flag=" + flag;
+        }*@
 
 
         </script>
