@@ -29,6 +29,8 @@ namespace ExperienceIT.Web.Areas.Identity.Pages.Account.Manage
 
         public string Username { get; set; }
 
+        public string Role { get; set; } // 12/21-Swayam
+
         [TempData]
         public string StatusMessage { get; set; }
 
@@ -56,6 +58,7 @@ namespace ExperienceIT.Web.Areas.Identity.Pages.Account.Manage
         {
             var userName = await _userManager.GetUserNameAsync(user);
             var phoneNumber = await _userManager.GetPhoneNumberAsync(user);
+            var userRoles = await _userManager.GetRolesAsync(user); // 12/21-Swayam
 
             if (!User.IsInRole("ApplicationAdmin"))
             {
@@ -64,11 +67,15 @@ namespace ExperienceIT.Web.Areas.Identity.Pages.Account.Manage
                 .Where(x => x.UserId == userId).FirstOrDefaultAsync();
 
                 Username = userName;
+                var Role = userRoles[0]; // 12/21-Swayam
+                Console.WriteLine("Logged in user's role: " + Role); // 12/21-Swayam
+
                 Input = new InputModel
                 {
                     PhoneNumber = phoneNumber,
-                    LastName = ((ApplicationUser)user).FirstName,
-                    FirstName = ((ApplicationUser)user).LastName,
+                    FirstName = ((ApplicationUser) user).FirstName,
+                    LastName = ((ApplicationUser) user).LastName,
+                    //Zipcode = ((ApplicationUser)user).Zipcode,
                     Skills = volunteer.Skills,
                     YearsOfExperience = volunteer.YearsOfExperience,
                     WorkPlace = volunteer.CurrentOrganization,
@@ -123,6 +130,11 @@ namespace ExperienceIT.Web.Areas.Identity.Pages.Account.Manage
             //Update Volunteer Master 
 
             var volunteer = await _context.VolunteerMaster.Where(x => x.UserId == user.Id).FirstOrDefaultAsync();
+
+            if ( volunteer == null)
+            {
+
+            }
 
             volunteer.Phone = Input.PhoneNumber;
             volunteer.Skills = Input.Skills;
