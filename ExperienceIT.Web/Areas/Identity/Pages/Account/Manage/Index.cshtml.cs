@@ -32,6 +32,8 @@ namespace ExperienceIT.Web.Areas.Identity.Pages.Account.Manage
         [TempData]
         public string StatusMessage { get; set; }
 
+        public List<OrganizerMaster> Organizations { get; private set; }
+
         [BindProperty]
         public InputModel Input { get; set; }
 
@@ -98,6 +100,7 @@ namespace ExperienceIT.Web.Areas.Identity.Pages.Account.Manage
             {
                 return NotFound($"Unable to load user with ID '{_userManager.GetUserId(User)}'.");
             }
+            Organizations = _context.OrganizerMaster.ToList();
             await LoadAsync(user);
             return Page();
             
@@ -121,7 +124,10 @@ namespace ExperienceIT.Web.Areas.Identity.Pages.Account.Manage
             var phoneNumber = await _userManager.GetPhoneNumberAsync(user);
 
             //Update Volunteer Master 
-
+            if (Organizations == null)
+            {
+                Organizations = _context.OrganizerMaster.ToList();
+            }
             var volunteer = await _context.VolunteerMaster.Where(x => x.UserId == user.Id).FirstOrDefaultAsync();
 
             volunteer.Phone = Input.PhoneNumber;

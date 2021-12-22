@@ -128,7 +128,8 @@
                         <div class="col-md-5">
                             <div class="form-group">
                                 <label asp-for="Input.WorkPlace" class="col-form-label">WorkPlace<span style="color:#ff0000">*</span></label>
-                                <input asp-for="Input.WorkPlace" class="form-control" placeholder="MI" />
+                                @Html.DropDownListFor(s => s.Input.WorkPlace,
+                                new SelectList(Model.Organizations, "Id", "Name"), "--Select One--", new { @class = "form-control" })
                                 <span asp-validation-for="Input.WorkPlace" class="text-danger"></span>
                             </div>
                         </div>
