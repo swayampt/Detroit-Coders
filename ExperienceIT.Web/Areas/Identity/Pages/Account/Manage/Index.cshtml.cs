@@ -67,11 +67,11 @@ namespace ExperienceIT.Web.Areas.Identity.Pages.Account.Manage
             public string State { get; set; }
 
             public string Zipcode { get; set; }
-            [Required]
+            
             public string Skills { get; set; }
 
             public int YearsOfExperience { get; set; }
-            [Required]
+            
             public string WorkPlace { get; set; }
         }
 
