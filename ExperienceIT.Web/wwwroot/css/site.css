@@ -106,3 +106,14 @@ body {
     border-radius: 10px;
     border: 1px solid #ddd;
 }
+
+.carousel-caption{
+    top:35%;
+    font-size:20px;
+    color:black;
+}
+.navBackground{
+    background-color:darkseagreen;
+    color:white;
+}
+

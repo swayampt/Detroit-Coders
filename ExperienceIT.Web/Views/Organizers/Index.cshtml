@@ -129,10 +129,19 @@
             <th>
                 @Html.DisplayNameFor(model => model.Zipcode)
             </th>
-            <th colspan="2">
+            <th>
                 @Html.DisplayNameFor(model => model.Country)
-             </th>
-            
+            </th>
+            @if (User.IsInRole("ApplicationAdmin"))
+            {
+                <th>Action</th>
+            }
+            else if (User.Identity.IsAuthenticated)
+            {
+
+                <th>Action</th>
+            }
+
         </tr>
 
 
