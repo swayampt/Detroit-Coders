@@ -1,4 +1,8 @@
-﻿using ExperienceIT.Web.Models;
+﻿// Author: ExperienceIT group2
+// Date: 12/14/2021
+// Description: DbInitializer.cs file is created to seed roles data and also creates default application admin user.
+
+using ExperienceIT.Web.Models;
 using ExperienceIT.Web.Utility;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
@@ -13,6 +17,7 @@ namespace ExperienceIT.Web.Data
         private readonly UserManager<IdentityUser> _userManager;
         private readonly RoleManager<IdentityRole> _roleManager;
 
+        // Constructor of DbInitializer
         public DbInitializer(ApplicationDbContext db, UserManager<IdentityUser> userManager, RoleManager<IdentityRole> roleManager)
         {
             _db = db;
@@ -20,7 +25,7 @@ namespace ExperienceIT.Web.Data
             _userManager = userManager;
         }
 
-
+        // Overriding Initiliaze() method of IDbInitializer
         public async void Initialize()
         {
             try
@@ -37,11 +42,13 @@ namespace ExperienceIT.Web.Data
 
             if (_db.Roles.Any(r => r.Name == Utility.SD.ManagerUser)) return;
 
+            // If roles do not exist in DB, then create.
             _roleManager.CreateAsync(new IdentityRole(SD.ManagerUser)).GetAwaiter().GetResult();
             _roleManager.CreateAsync(new IdentityRole(SD.VolunteerUser)).GetAwaiter().GetResult();
             _roleManager.CreateAsync(new IdentityRole(SD.StudentUser)).GetAwaiter().GetResult();
             _roleManager.CreateAsync(new IdentityRole(SD.GuestUser)).GetAwaiter().GetResult();
 
+            // Data seeding for Admin User
             _userManager.CreateAsync(new ApplicationUser
             {
                 UserName = "ExpITGroup2@gmail.com",

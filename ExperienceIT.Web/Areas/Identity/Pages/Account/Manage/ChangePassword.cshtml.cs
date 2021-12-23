@@ -1,4 +1,8 @@
-﻿using System;
+﻿// Author: ExperienceIT group2
+// Date: 12/19/2021 
+// Description: ChangePassword.cshtml.cs used as it is provided by Core and linked to _LoginPartialView for profile Dropdown.
+
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
