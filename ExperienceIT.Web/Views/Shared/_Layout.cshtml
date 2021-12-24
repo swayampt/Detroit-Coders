@@ -30,7 +30,7 @@
 
 
                     <div class="navbar-header pull-left">
-                        <a class="nav-link " asp-area="" asp-controller="Home" asp-action="Index">
+                        <a class="nav-link active font-weight-bold" asp-area="" asp-controller="Home" asp-action="Index">
                             <img src="~/Images/logo_200x200 (2).png" alt="ITech Volunteer" style="height:55px; width: 55px" />
                         </a>
                     </div>
@@ -39,19 +39,19 @@
                     <ul class="navbar-nav flex-md-grow-1">
                         @if (User.IsInRole("ApplicationAdmin"))
                         {
-                            <li class="nav-item">
-                                <a class="nav-link " asp-area="" asp-controller="Volunteers" asp-action="Index">Volunteers</a>
+                            <li class="nav-item font-weight-bold">
+                                <a class="nav-link  active " asp-area="" asp-controller="Volunteers" asp-action="Index">Volunteers</a>
                             </li>
 
                         }
-                        <li class="nav-item">
+                        <li class="nav-item font-weight-bold">
                             <a class="nav-link  active" asp-controller="Programs" asp-action="Index">Programs</a>
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link " asp-area="" asp-controller="Events" asp-action="Index">Events</a>
+                        <li class="nav-item font-weight-bold">
+                            <a class="nav-link active" asp-area="" asp-controller="Events" asp-action="Index">Events</a>
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link " asp-area="" asp-controller="Organizers" asp-action="Index">Organizers</a>
+                        <li class="nav-item font-weight-bold">
+                            <a class="nav-link active" asp-area="" asp-controller="Organizers" asp-action="Index">Organizers</a>
                         </li>
 
                     </ul>
