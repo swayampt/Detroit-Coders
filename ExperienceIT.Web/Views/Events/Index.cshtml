@@ -20,8 +20,9 @@
     body {
         background-color: azure;
     }
-    a{
-        color:red;
+
+    a {
+        color: red;
     }
 </style>
 <div class="border backgroundwhite">
@@ -51,11 +52,13 @@
             <table class="table table-striped border">
                 <tr class="table-secondary">
                     <th>
-                        @Html.DisplayNameFor(model => model.Event.Name)
+                        Events
+                        @*@Html.DisplayNameFor(model => model.Event.Name)-
+                            @Html.DisplayNameFor(model => model.Event.Description)*@
                     </th>
-                    <th>
-                        @Html.DisplayNameFor(model => model.Event.Description)
-                    </th>
+                    <!--<th>-->
+                    @*@Html.DisplayNameFor(model => model.Event.Description)*@
+                    <!--</th>-->
                     <th>
                         @Html.DisplayNameFor(model => model.Event.StartingDate)-
                         @Html.DisplayNameFor(model => model.Event.EndingDate)
@@ -70,15 +73,15 @@
                         @Html.DisplayNameFor(model => model.Event.Duration)
                     </th>
                     @if (User.IsInRole("ApplicationAdmin"))
-            {
-                <th>Action</th>
+                    {
+                        <th>Action</th>
                     }
                     else if (User.Identity.IsAuthenticated)
                     {
 
-                <th>Action</th>
+                        <th>Action</th>
                     }
-                    
+
 
                 </tr>
 
@@ -87,11 +90,15 @@
                 {
                     <tr>
                         <td>
-                            @Html.DisplayFor(modelItem => item.Event.Name)
-                        </td>
-                        <td>
+                            <b>
+                                @Html.DisplayFor(modelItem => item.Event.Name)
+                            </b>
+                            -<br />                           
                             @Html.DisplayFor(modelItem => item.Event.Description)
                         </td>
+                        @*<td>
+                                @Html.DisplayFor(modelItem => item.Event.Description)
+                            </td>*@
                         <td>
                             @Html.DisplayFor(modelItem => item.Event.StartingDate)-
                             @Html.DisplayFor(modelItem => item.Event.EndingDate)
