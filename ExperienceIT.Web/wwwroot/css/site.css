@@ -82,7 +82,7 @@ body {
 }
 
 .search-background {
-    background: url('/images/volunteer.jpg'); /*this will set background form this image*/
+    background: url('/images/bg.jpg'); /*this will set background form this image*/
 }
 
 .backgroundwhite {
@@ -107,13 +107,41 @@ body {
     border: 1px solid #ddd;
 }
 
-.carousel-caption{
+/*.carousel-caption{
     top:35%;
     font-size:20px;
     color:black;
-}
+}*/
 .navBackground{
     background-color:darkseagreen;
     color:white;
+}
+section.hero h1 {
+    color: #fff;
+    font-size: 3.125em;
+}
+/*h1{
+    font-style: normal;
+    font-weight: normal;
+    font-family: 'Titillium Web', sans-serif;
+    font-weight: 700;
+    text-transform: uppercase;
+}
+.wrap article h1 {
+    margin-top: 0;
+}*/
+
+/*.item {
+    background: #333;
+    text-align: center;
+    height: 300px;*/
+}
+
+h1 {
+    /*margin: 0;
+    color: #888;
+    padding-top: 80px;*/
+    font-size: 100px;
+    text-align: center;
 }
 
