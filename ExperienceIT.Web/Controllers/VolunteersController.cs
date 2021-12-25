@@ -23,10 +23,10 @@ namespace ExperienceIT.Web.Controllers
         // GET: VolunteerMasters
         public async Task<IActionResult> Index()
         {
-            var applicationDbContext = _context.VolunteerMaster.Include(v => v.User);
+            
             VolunteerOrganizationViewModel viewModel = new VolunteerOrganizationViewModel()
             {
-                volunteers = await _context.VolunteerMaster.ToListAsync(),
+                volunteers = await _context.VolunteerMaster.Include(u=>u.User).ToListAsync(),
                 organizationList = await _context.OrganizerMaster.ToListAsync()
             };
             return View(viewModel);
