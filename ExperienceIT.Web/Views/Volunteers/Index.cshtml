@@ -6,7 +6,6 @@
 <style>
     body {
         background-color: azure;
-       
     }
 </style>
 <div class="border backgroundwhite ">
@@ -14,74 +13,82 @@
         <div class="col-6">
             <h1 class="text-info">Volunteers Role</h1>
         </div>-->
-        @*<div class="col-6 text-right">
-                <a><partial name="_CreateButtonPartial" /></a>
-            </div>*@
+    @*<div class="col-6 text-right">
+            <a><partial name="_CreateButtonPartial" /></a>
+        </div>*@
     <!--</div>
-    <div class="text-primary">
-    <p>
-        Before applying for this role, please check that you answer yes to all the following
-        questions:
-        <ul>
-            <li>You believe in the life-changing value of education</li>
-        </ul>
-        <ul>
-            <li>You celebrate and value diversity and the enrichment and benefit it brings to society</li>
-        </ul>
-        <ul>
-            <li>You thrive in a fast-paced environment and can re-prioritise your work plans according to events and needs.</li>
-        </ul>
-        <h6 class="text-info">
-            You might find out about a Events at Programs that you
-            would like to join.
-        </h6>
-    </p>
-        </div>
+        <div class="text-primary">
+        <p>
+            Before applying for this role, please check that you answer yes to all the following
+            questions:
+            <ul>
+                <li>You believe in the life-changing value of education</li>
+            </ul>
+            <ul>
+                <li>You celebrate and value diversity and the enrichment and benefit it brings to society</li>
+            </ul>
+            <ul>
+                <li>You thrive in a fast-paced environment and can re-prioritise your work plans according to events and needs.</li>
+            </ul>
+            <h6 class="text-info">
+                You might find out about a Events at Programs that you
+                would like to join.
+            </h6>
+        </p>
+            </div>
     </div>-->
-<div class="backgroundwhite">
+    <div class="backgroundwhite">
 
-    @if (Model.volunteers.Count() > 0)
-    {
-        <table class="table table-striped border">
-            <tr class="table-secondary">
-                <th>
-                    First Name
-                </th>
-                <th>
-                    Last Name
-                </th>
-                <th>
-                    Organization Name
-                </th>
-            </tr>
+        @if (Model.volunteers.Count() > 0)
+        {
+            <table class="table table-striped border">
+                <tr class="table-secondary">
+                    <th>
+                        First Name
+                    </th>
+                    <th>
+                        Last Name
+                    </th>
+                    <th>
+                        Organization Name
+                    </th>
+                </tr>
 
-            @foreach (var item in Model.volunteers)
-            {
-        <tr>
-            <td>
-                @Html.DisplayFor(m => item.FirstName)
-            </td>
-            <td>
-                @Html.DisplayFor(m => item.LastName)
-            </td>
-            <td>
-                @{
-                    var org = Model.organizationList.FirstOrDefault(o => o.Id.ToString() == item.CurrentOrganization);
-                    var orgName = org == null ? "" : org.Name;
+                @foreach (var item in Model.volunteers)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(m => item.FirstName)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(m => item.LastName)
+                        </td>
+                        <td>
+                            @{
+                                var org = Model.organizationList.FirstOrDefault(o => o.Id.ToString() == item.CurrentOrganization);
+                                var orgName = org == null ? "" : org.Name;
+                            }
+                            @orgName
+                        </td>
+                        <td style="width: 150px">
+                            <div class="btn-group" role="group">
+                                <a class="btn btn-success text-white" asp-action="Details" asp-route-Id="@item.Id">
+                                    <i class="fas fa-list-alt"></i>
+                                </a>
+                                @*change color to danger*@
+                                <a class="btn btn-danger text-white" asp-action="Delete" asp-route-Id="@item.Id">
+                                    <i class="fas fa-trash-alt"></i>
+                                </a>
+                            </div>
+                        </td>
+                    </tr>
                 }
-                @orgName
-            </td >
-        </tr>
-
-            @*<partial name="_TableButtonPartial" model="item.Id" />*@
-
-}
-</table>
-    }
-    else
-    {
-        <p>No Volunteer Exists...</p>
-    }
-</div>
+            </table>
+        }
+        else
+        {
+            <p>No Volunteer Exists...</p>
+        }
+    </div>
 
 

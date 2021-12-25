@@ -11,7 +11,7 @@
 <h2 class="text-info">Volunteer Details  </h2>
 <br />
 <div class="border backgroundwhite">
-    <form enctype="multipart/form-data" asp-action="Edit">
+    <form enctype="multipart/form-data" asp-action="Details">
         @* allows entire files to be included in the data(server)*@
         <!--<div class="row">
             <div class="col-md-6">-->
@@ -226,8 +226,12 @@
         </dl>
 
         <div class="form-group row">
-            <div class="col-5 offset-2">
-                <partial name="_DetailsAndBackToListButton" model="Model.Id" />
+
+            @*<div class="col-5 offset-2">
+            <partial name="_DetailsAndBackToListButton" model="Model.Id" />
+        </div>*@
+            <div class="col-6">
+                <a asp-action="Index" class="btn btn-success form-control">Back To List</a>
             </div>
         </div>
     </form>
