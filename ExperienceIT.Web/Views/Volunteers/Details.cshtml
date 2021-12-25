@@ -225,8 +225,11 @@
         </dl>
 
         <div class="form-group row">
-            <div class="col-5 offset-2">
-                <partial name="_DetailsAndBackToListButton" model="Model.Id" />
+            @*<div class="col-5 offset-2">
+            <partial name="_DetailsAndBackToListButton" model="Model.Id" />
+        </div>*@
+            <div class="col-6">
+                <a asp-action="Index" class="btn btn-success ">Back To List</a>
             </div>
         </div>
     @*</form>*@
