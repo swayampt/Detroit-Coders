@@ -196,11 +196,16 @@ namespace ExperienceIT.Web.Areas.Identity.Pages.Account.Manage
             if (Input.LastName != user.LastName)
             {
                 user.LastName = Input.LastName;
-            }
+            }                     
 
             if (Input.StreetAddress != user.StreetAddress)
             {
                 user.StreetAddress = Input.StreetAddress;
+            }
+
+            if (Input.PhoneNumber != user.PhoneNumber)
+            {
+                user.PhoneNumber = Input.PhoneNumber;
             }
 
             if (Input.City != user.City)
