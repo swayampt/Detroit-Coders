@@ -135,11 +135,36 @@
                 }
 
                 <br />
-                <div class="row">
-                    <div class="col-md-6 form-group offset-md-3">
-                        <button type="submit" class="btn btn-primary form-control"><b>Save</b></button>
+
+                @if (User.IsInRole("Volunteer"))
+                {
+                    <div class="row">
+                        <div class="col-sm-1"></div>
+                        <div class="col-md-5">
+                            <div>
+                                <button type="submit" class="btn btn-primary form-control"><b>Save</b></button>
+                            </div>
+                        </div>
+                        <div class="col-md-5">
+                            <div>                                
+                                <button type="submit" class="btn btn-primary form-control" asp-area="Views" asp-controller="Events" asp-action="Index"><b>My Events</b></button>
+                            </div>
+                            <div>
+                            </div>
+                            <div class="col-sm-1"></div>
+                        </div>
                     </div>
-                </div>
+                    <br/>
+                }
+
+                else
+                {
+                    <div class="row">
+                        <div class="col-md-6 form-group offset-md-3">
+                            <button type="submit" class="btn btn-primary form-control"><b>Save</b></button>
+                        </div>
+                    </div>
+                }
             </form>
         </div>
     </div>
