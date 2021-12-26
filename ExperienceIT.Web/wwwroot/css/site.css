@@ -25,6 +25,13 @@ a {
     border-radius: 16px;
     cursor: pointer;
 }
+.navigation-item.active:after {
+    background-color: #3a9cac;
+    content: " ";
+    display: block;
+    height: 5px;
+    width: 100%;
+}
 
 /* Sticky footer styles
 -------------------------------------------------- */
