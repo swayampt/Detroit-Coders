@@ -5,27 +5,12 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<style>
-    body {
-        background-color: azure;
-    }
-
-    a {
-        color: blue;
-    }
-</style>
+<h1 class="text-info">Our Programs</h1>
 <div class="border backgroundwhite">
-    @*adding border,background and image*@
-    <div class="row">
-        @*the "row" class is used mainly to hold columns in it.*@
-        <div class="col-6">
-            @*element take half of the horizontal screen space devices.*@
-            <h2 class="text-info">Programs</h2>@*Add meaning through text-colors*@
-        </div>
+    <div class="row">        
         @if (User.IsInRole("ApplicationAdmin"))
         {
-            <div class="col-6 text-right">
-                @*move the columns to the right*@
+            <div class="col-12 text-right">
                 <a><partial name="_CreateButtonPartial" /></a>
             </div>
         }
@@ -45,63 +30,55 @@
             <th>
                 <label>&emsp;&nbsp;Organizers</label>
             </th>
-            <th>
-                <label>&emsp;&nbsp;Events</label>
-            </th>
-            <th colspan="2"></th>
-        </tr>
+            @if (User.IsInRole("ApplicationAdmin"))
+            {
+                <th>
+                    <label>Action</label>
+                </th>
+            }
+                <th colspan="2"></th>
+            </tr>
 
 
         @foreach (var item in Model.ProgramList)
         {
-            <tr>
-                <td>
-                    <a href="@item.ProgramUrl" style="text-decoration:underline" target="_blank">@item.Name</a>
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Description)
-                </td>
-                <td>
-                    @{
-                        var orgIds = Model.ProgramOrganizerMappers.Where(x => x.ProgramId == item.Id)
-                            .Select(x => x.OrganizerId).ToArray();
-                        var orgs = Model.Organizations.Where(x => orgIds.Contains(x.Id)).ToList();
-                    }
-                    <ul>
-                        @foreach (var org in orgs)
-                        {
-                            <li>@org.Name</li>
-                        }
-                    </ul>
-                </td>
-                @*<td>
-                        @{
-                            var evtIds = Model.EventMappers.Where(x => x.ProgramId == item.Id)
-                                .Select(x => x.EventId).ToArray();
-                            var evts = Model.Events.Where(x => evtIds.Contains(x.Id)).ToList();
-                        }
-                        <ul>
-                            @foreach (var evt in evts)
-                            {
-                                <li>@evt.Name</li>
-                            }
-                        </ul>
-                    </td>*@
-                    <td>
-                @*This is for Admin authentication roll. We will make it later once all the functionalities
-                    and views will be done*@
-
-                @if (User.IsInRole("ApplicationAdmin"))
+    <tr>
+        <td>
+            <a href="@item.ProgramUrl" style="text-decoration:underline" target="_blank">@item.Name</a>
+        </td>
+        <td>
+            @Html.TextAreaFor(modelItem => item.Description)
+        </td>
+        <td>
+            @{
+                var orgIds = Model.ProgramOrganizerMappers.Where(x => x.ProgramId == item.Id)
+                    .Select(x => x.OrganizerId).ToArray();
+                var orgs = Model.Organizations.Where(x => orgIds.Contains(x.Id)).ToList();
+            }
+            <ul>
+                @foreach (var org in orgs)
                 {
-
-                    <a asp-action="Edit" class="btn btn-primary" asp-route-id="@item.Id">Edit</a>
+                    <li>@org.Name</li>
                 }
+            </ul>
+        </td>
 
-                </td>
-                <td>
-                    @Html.ActionLink("View Events", "Index", "Events", new { programId = item.Id }, new { @class = "btn btn-primary btn-large" })
-                </td>
-            </tr>
+        <td>
+
+            @if (User.IsInRole("ApplicationAdmin"))
+            {
+
+                <a asp-action="Edit" class="btn btn-primary px-md-5" asp-route-id="@item.Id">Edit</a>
+            }
+
+        </td>
+        @if (!User.IsInRole("ApplicationAdmin"))
+        {
+            <td>
+                @Html.ActionLink("View Events", "Index", "Events", new { programId = item.Id }, new { @class = "btn btn-primary btn-large" })
+            </td>
+        }
+        </tr>
         }
 
 

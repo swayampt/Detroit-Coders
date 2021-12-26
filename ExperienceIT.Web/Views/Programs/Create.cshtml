@@ -6,41 +6,48 @@
 }
 <h1 class="text-info">Program</h1>
 <h3 class="text-info">Create New </h3>
-<hr />
 <div class="border backgroundwhite">
+    <div class="col-md-6"><span style="color:#ff0000">* </span><i>is required field</i></div>
+
     <div class="row">
         <div class="col-md-4">
             <form asp-action="Create">
                 <div asp-validation-summary="ModelOnly" class="text-danger"></div>
                 <div class="form-group">
-                    <label asp-for="Program.Name" class="control-label"></label>
+                    <label asp-for="Program.Name" class="control-label">Name<span style="color:#ff0000">*</span></label>
                     <input asp-for="Program.Name" class="form-control" />
                     <span asp-validation-for="Program.Name" class="text-danger"></span>
                 </div>
+                @*<div class="form-group">
+                        <label asp-for="Program.Description" class="control-label"></label>
+                        <textarea asp-for="Program.Description" class="form-control" />
+                        <span asp-validation-for="Program.Description" class="text-danger"></span>
+                    </div>*@
+            <div class="form-group">
+                <label asp-for="Program.Description" class="control-label">Description <span style="color:#ff0000">*</span></label>
+                @Html.TextAreaFor(model => model.Program.Description)
+                @Html.ValidationMessageFor(model => model.Program.Description, "", new { @class = "text-danger" })
+
+            </div>
+
                 <div class="form-group">
-                    <label asp-for="Program.Description" class="control-label"></label>
-                    <input asp-for="Program.Description" class="form-control" />
-                    <span asp-validation-for="Program.Description" class="text-danger"></span>
-                </div>
-                <div class="form-group">
-                    <label asp-for="Program.ProgramUrl" class="control-label"></label>
+                    <label asp-for="Program.ProgramUrl" class="control-label">Url</label>
                     <input asp-for="Program.ProgramUrl" class="form-control" />
                     <span asp-validation-for="Program.ProgramUrl" class="text-danger"></span>
                 </div>
-                <hr />
 
-                <h4>Organizers</h4>
+                <h4>Sponsors<span style="color:#ff0000">*</span></h4>
                 <div class="row">
                     <div class="col col-8">
                         <div class="form-group">
                             @Html.DropDownListFor(s => s.OrganizationId,
-                                new SelectList(Model.Organizations, "Id", "Name"), "--Select Organizer--", new { @class = "form-control" })
+         new SelectList(Model.Organizations, "Id", "Name"), "--Select Sponsor--", new { @class = "form-control" })
                             <span asp-validation-for="OrganizationId" class="text-danger"></span>
 
                         </div>
                     </div>
                     <div class="col col-4">
-                        <input type="button" class="btn btn-primary" id="addOrganizer" value="Add" />
+                        <input type="button" class="btn btn-primary px-md-4" id="addOrganizer" value="  Add  " />
                     </div>
                 </div>
                 <ul id="organizers"></ul>
@@ -76,7 +83,8 @@
 
 
 @section Scripts {
-
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
 
     <script type="text/javascript">
         var orgIds = '';

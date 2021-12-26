@@ -213,23 +213,6 @@ namespace ExperienceIT.Web.Controllers
                 }
 
             }
-
-            foreach (var evtId in eventIds)
-            {
-                if (!string.IsNullOrEmpty(evtId))
-                {
-                    var eventId = Convert.ToInt32(evtId);
-                    var eventMapper = new ProgramEventMapper()
-                    {
-                        EventId = eventId,
-                        ProgramId = programId
-                    };
-                    _context.Add(eventMapper);
-                    await _context.SaveChangesAsync();
-                }
-
-            }
-
             return RedirectToAction(nameof(Index));
         }
 
