@@ -8,9 +8,10 @@
 <style>
     body {
         background-color: azure;
-            }
-    a{
-        color:blue;
+    }
+
+    a {
+        color: blue;
     }
 </style>
 <div class="border backgroundwhite">
@@ -73,29 +74,28 @@
                         }
                     </ul>
                 </td>
-                <td>
-                    @{
-                        var evtIds = Model.EventMappers.Where(x => x.ProgramId == item.Id)
-                            .Select(x => x.EventId).ToArray();
-                        var evts = Model.Events.Where(x => evtIds.Contains(x.Id)).ToList();
-                    }
-                    <ul>
-                        @foreach (var evt in evts)
-                        {
-                            <li>@evt.Name</li>
+                @*<td>
+                        @{
+                            var evtIds = Model.EventMappers.Where(x => x.ProgramId == item.Id)
+                                .Select(x => x.EventId).ToArray();
+                            var evts = Model.Events.Where(x => evtIds.Contains(x.Id)).ToList();
                         }
-                    </ul>
-                </td>
-                <td>
-                    @*This is for Admin authentication roll. We will make it later once all the functionalities
-                        and views will be done*@
-                    @if (User.IsInRole("ApplicationAdmin"))
-                    {
+                        <ul>
+                            @foreach (var evt in evts)
+                            {
+                                <li>@evt.Name</li>
+                            }
+                        </ul>
+                    </td>*@
+                    <td>
+                @*This is for Admin authentication roll. We will make it later once all the functionalities
+                    and views will be done*@
 
-                        <a asp-action="Edit" class="btn btn-primary" asp-route-id="@item.Id">Edit</a>
-                    }
+                @if (User.IsInRole("ApplicationAdmin"))
+                {
 
-
+                    <a asp-action="Edit" class="btn btn-primary" asp-route-id="@item.Id">Edit</a>
+                }
 
                 </td>
                 <td>

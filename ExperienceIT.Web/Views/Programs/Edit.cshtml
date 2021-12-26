@@ -58,7 +58,7 @@
                 <br /><br />
                 <input type="hidden" id="orgIds" name="orgIds" />
 
-                <h4>Events</h4>
+                @*<h4>Events</h4>
                 <div class="row">
                     <div class="col col-8">
                         <div class="form-group">
@@ -79,7 +79,7 @@
                     }
                 </ul>
                 <br /><br />
-                <input type="hidden" id="eventIds" name="eventIds" />
+                <input type="hidden" id="eventIds" name="eventIds" />*@
                 <div class="form-group">
                     <input type="submit" value="Save" class="btn btn-primary" />
                     <a asp-action="Index" class="btn btn-info">Back to List </a>
@@ -104,16 +104,16 @@
                 $("#orgIds").val(orgIds);
             }
         });
-        var eventIds = '';
-        $("#addEvent").click(function () {
-            var eventText = $("#EventId").find('option:selected').text();
-            var event = $("#EventId").val();
-            if (event > 0) {
-                var li = '<li>' + eventText + '</li>'
-                $("#events").append(li);
-                eventIds = eventIds + event + ',';
-                $("#eventIds").val(eventIds);
-            }
-        });
+        //var eventIds = '';
+        //$("#addEvent").click(function () {
+        //    var eventText = $("#EventId").find('option:selected').text();
+        //    var event = $("#EventId").val();
+        //    if (event > 0) {
+        //        var li = '<li>' + eventText + '</li>'
+        //        $("#events").append(li);
+        //        eventIds = eventIds + event + ',';
+        //        $("#eventIds").val(eventIds);
+        //    }
+        //});
     </script>
 }
