@@ -13,9 +13,9 @@ a {
 }
 
 .btn-primary {
-  color: #fff;
-  background-color: #1b6ec2;
-  border-color: #1861ac;
+    color: #fff;
+    background-color: #1b6ec2;
+    border-color: #1861ac;
 }
 
 .nav-pills .nav-link.active, .nav-pills .show > .nav-link {
@@ -25,6 +25,7 @@ a {
     border-radius: 16px;
     cursor: pointer;
 }
+/*for nav active link*/
 .navigation-item.active:after {
     background-color: #3a9cac;
     content: " ";
@@ -32,51 +33,94 @@ a {
     height: 5px;
     width: 100%;
 }
+/*slickCarousel*/
+.items {
+    width: 100%;
+    margin: 5px auto;
+    
+}
 
+.slick-slide {
+    margin: 10px
+}
+
+.slick-slide img {
+        width: 100%;
+        border: 2px solid #fff
+}
+
+.section-title, .text-block h2 {
+    color: #3a9cac;
+    /*font-family: AbrilFatface,cursive;*/
+    font-size: 40px;
+   /* font-style: italic;
+    font-weight: 400;
+    line-height: 1;
+    margin-bottom: 0.85em;*/
+    text-align: center;
+}
+
+.section-subtitle, .text-block h3 {
+    display: block;
+    font-family: Poppins,sans-serif;
+    font-size: 18px;
+    font-stretch: normal;
+    font-style: normal;
+    font-weight: 600;
+    letter-spacing: .2em;
+    line-height: 1;
+    margin-bottom: 1em;
+    margin-top: 1em;
+    text-align: center;
+    text-transform: uppercase;
+}
 /* Sticky footer styles
 -------------------------------------------------- */
 html {
-  font-size: 14px;
+    font-size: 14px;
 }
+
 @media (min-width: 768px) {
-  html {
-    font-size: 16px;
-  }
+    html {
+        font-size: 16px;
+    }
 }
 
 .border-top {
-  border-top: 1px solid #e5e5e5;
+    border-top: 1px solid #e5e5e5;
 }
+
 .border-bottom {
-  border-bottom: 1px solid #e5e5e5;
+    border-bottom: 1px solid #e5e5e5;
 }
 
 .box-shadow {
-  box-shadow: 0 .25rem .75rem rgba(0, 0, 0, .05);
+    box-shadow: 0 .25rem .75rem rgba(0, 0, 0, .05);
 }
 
 button.accept-policy {
-  font-size: 1rem;
-  line-height: inherit;
+    font-size: 1rem;
+    line-height: inherit;
 }
 
 /* Sticky footer styles
 -------------------------------------------------- */
 html {
-  position: relative;
-  min-height: 100%;
+    position: relative;
+    min-height: 100%;
 }
 
 body {
-  /* Margin bottom by footer height */
-  margin-bottom: 60px;
+    /* Margin bottom by footer height */
+    margin-bottom: 60px;
 }
+
 .footer {
-  position: absolute;
-  bottom: 0;
-  width: 100%;
-  white-space: nowrap;
-  line-height: 60px; /* Vertically center the text there */
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    white-space: nowrap;
+    line-height: 60px; /* Vertically center the text there */
 }
 
 .bg-image {
@@ -121,10 +165,11 @@ body {
     font-size:20px;
     color:black;
 }*/
-.navBackground{
-    background-color:darkseagreen;
-    color:white;
+.navBackground {
+    background-color: darkseagreen;
+    color: white;
 }
+
 section.hero h1 {
     color: #fff;
     font-size: 3.125em;
@@ -153,7 +198,7 @@ h1 {
     font-size: 100px;
     text-align: center;
 }
-.card{
-    border-radius:10px;
-}
 
+.card {
+    border-radius: 10px;
+}
