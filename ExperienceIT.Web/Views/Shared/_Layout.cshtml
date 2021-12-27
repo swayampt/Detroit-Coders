@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>@ViewData["Title"] - iTechVolunteers </title>
+    <title>@ViewData["Title"] - Code N Social </title>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" />
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css" integrity="sha384-DyZ88mC6Up2uqS4h/KRgHuoeGwBcD4Ng9SiP4dIRy0EXTlnuz47vAwmeGwVChigm" crossorigin="anonymous">
@@ -12,6 +12,13 @@
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
+    @*for slickcarousel*@
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/gh/kenwheeler/slick@1.8.1/slick/slick-theme.css" >
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css" >
+    @*this script content is downloaded from internet and copied into a local js file under lib folder*@
+    <script src="~/lib/slick.min.js"></script>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" >
+   
 
 </head>
 <body class="search-background">
@@ -33,7 +40,7 @@
 
                     <div class="navbar-header pull-left">
                         <a class="nav-link active font-weight-bold" asp-area="" asp-controller="Home" asp-action="Index">
-                            <img src="~/Images/logo_200x200 (2).png" alt="ITech Volunteer" style="height:55px; width: 55px" />
+                            <img src="~/Images/logo.png" alt="Code N Social" height="70" width="70" />
                         </a>
                     </div>
                     @*<a class="nav-link " asp-area="" asp-controller="Home" asp-action="Index">iTechVolunteers</a>*@
@@ -51,10 +58,10 @@
                             <a class="nav-link navigation-link" asp-controller="Programs" asp-action="Index"><h4>Programs</h4></a>
                         </li>
                         <li class="nav-item navigation-item font-weight-bold">
-                            <a class="nav-link navigation-link "  asp-controller="Events" asp-action="Index"><h4>Events</h4></a>
+                            <a class="nav-link navigation-link " asp-controller="Events" asp-action="Index"><h4>Events</h4></a>
                         </li>
                         <li class="nav-item navigation-item font-weight-bold">
-                            <a class="nav-link navigation-link"  asp-controller="Organizers" asp-action="Index"><h4>Organizers</h4></a>
+                            <a class="nav-link navigation-link" asp-controller="Organizers" asp-action="Index"><h4>Organizers</h4></a>
                         </li>
 
                     </ul>
@@ -76,11 +83,23 @@
         </footer>*@
 
     @RenderSection("Scripts", required: false)
-<script>
-   $(document).ready(function () {
-        $('li.active').removeClass('active');
-        $('a[href="' + location.pathname + '"]').closest('li').addClass('active');
+    <script>
+        $(document).ready(function () {
+            $('li.active').removeClass('active');
+            $('a[href="' + location.pathname + '"]').closest('li').addClass('active');
+            $('.items').slick({
+                infinite: true,
+                slidesToShow: 3,
+                slidesToScroll: 3
+            });
         });
-</script>
+       
+
+
+
+        
+           
+
+    </script>
 </body>
 </html>
