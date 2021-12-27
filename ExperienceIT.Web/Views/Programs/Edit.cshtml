@@ -5,91 +5,70 @@
     ViewData["Title"] = "Edit";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-<h1 class="text-info">Program</h1>
-<h3 class="text-info">Edit</h3>
-<div class="border backgroundwhite ">
-    <div class="col-md-6"><span style="color:#ff0000">* </span><i>is required field</i></div>
-    <div class="row">
-        <div class="col-md-4">
-            <form asp-action="Edit">
-                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-                <input type="hidden" asp-for="Program.Id" />
-                <div class="form-group">
-                    <label asp-for="Program.Name" class="control-label">Name<span style="color:#ff0000">*</span></label>
-                    <input asp-for="Program.Name" class="form-control" />
-                    <span asp-validation-for="Program.Name" class="text-danger"></span>
-                </div>
-                @*<div class="form-group">
-                        <label asp-for="Program.Description" class="control-label"></label>
-                        <input asp-for="Program.Description" class="form-control" />
-                        <span asp-validation-for="Program.Description" class="text-danger"></span>
-                    </div>*@
-                <div class="form-group">
-                    <label asp-for="Program.Description" class="control-label">Description <span style="color:#ff0000">*</span></label>
+<div class="card w-75" style="margin-left:160px">
+    <form asp-action="Create" method="post">
+        <div class="row">
+            <div class="col-md-6 form-group offset-md-5 align-content-md-center text-info"><h2>Program-Edit</h2></div>
+        </div>
+        <div class="col-md-4 ml-4"><span style="color:#ff0000">* </span><i>is required field</i></div>
 
-                    @Html.TextAreaFor(model => model.Program.Description)
-                    @Html.ValidationMessageFor(model => model.Program.Description, "", new { @class = "text-danger" })
 
-                </div>
-
-                <div class="form-group">
-                    <label asp-for="Program.ProgramUrl" class="control-label">Url</label>
-                    <input asp-for="Program.ProgramUrl" class="form-control" />
-                    <span asp-validation-for="Program.ProgramUrl" class="text-danger"></span>
-                </div>                
-                <h4>Sponsors<span style="color:#ff0000">*</span></h4>
-                <div class="row">
-                    <div class="col col-8">
-                        <div class="form-group">
-                            @Html.DropDownListFor(s => s.OrganizationId,
-                                new SelectList(Model.Organizations, "Id", "Name"), "--Select Sponsor--", new { @class = "form-control" })
-                            <span asp-validation-for="OrganizationId" class="text-danger"></span>
-                        </div>
-                    </div>
-                    <div class="col col-4">
-                        <input type="button" class="btn btn-primary" id="addOrganizer" value="    Add    " />
-                    </div>
-                </div>
-                <ul id="organizers">
-                    @foreach (var org in Model.ProgramOrganizations)
-                    {
-                        <li>@org.Name</li>
-                    }
-                </ul>
-                <br /><br />
-                <input type="hidden" id="orgIds" name="orgIds" />
-
-                @*<h4>Events</h4>
-                    <div class="row">
-                        <div class="col col-8">
-                            <div class="form-group">
-                                @Html.DropDownListFor(s => s.EventId,
-                                    new SelectList(Model.Events, "Id", "Name"), "--Select Event--", new { @class = "form-control" })
-                                <span asp-validation-for="EventId" class="text-danger"></span>
-
-                            </div>
-                        </div>
-                        <div class="col col-4">
-                            <input type="button" class="btn btn-primary" id="addEvent" value="Add events to program" />
-                        </div>
-                    </div>
-                    <ul id="events">
-                        @foreach (var evt in Model.ProgramEvents)
-                        {
-                            <li>@evt.Name</li>
-                        }
-                    </ul>
-                    <br /><br />
-                    <input type="hidden" id="eventIds" name="eventIds" />*@
-                <div class="form-group">
-                    <input type="submit" value="Save" class="btn btn-primary" />
-                    <a asp-action="Index" class="btn btn-info">Back to List </a>
-                </div>
-            </form>
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+        <div class="form-group row">
+            <div class="col-md-4 col-xs-6">
+                <label asp-for="Program.Name" class="col-form-label ml-5"></label>
+            </div>
+            <div class="col-xs-12 col-sm-6 col-md-8">
+                <input asp-for="Program.Name" class="form-control" style="width:342px" />
+            </div>
+            <span asp-validation-for="Program.Name" class="text-danger"></span>
         </div>
 
-        <br /><br />
-    </div>
+        <div class="form-group row">
+            <div class="col-md-4 col-xs-6">
+                <label asp-for="Program.Description" class="col-form-label ml-5"></label>
+            </div>
+            <div class="col-xs-12 col-sm-6 col-md-8">
+                <div>
+                    @Html.TextAreaFor(model => model.Program.Description)
+                </div>
+            </div>
+            @Html.ValidationMessageFor(model => model.Program.Description, "", new { @class = "text-danger" })
+        </div>
+
+        <div class="form-group row">
+            <div class="col-md-4 col-xs-6">
+                <label asp-for="Program.ProgramUrl" class="col-form-label ml-5"></label>
+            </div>
+            <div class="col-xs-12 col-sm-6 col-md-8">
+                <input asp-for="Program.ProgramUrl" class="form-control" style="width:342px" />
+            </div>
+            <span asp-validation-for="Program.ProgramUrl" class="text-danger"></span>
+        </div>
+        <div class="form-group row">
+            <div class="col-md-4 col-xs-6">
+                <h2 class="col-form-label ml-5 font-weight-normal">Sponsors<span style="color:#ff0000">*</span></h2>
+
+            </div>
+            <div class="col-xs-12 col-sm-6 col-md-6">
+                @Html.DropDownListFor(s => s.OrganizationId,
+new SelectList(Model.Organizations, "Id", "Name"), "--Select Sponsor--", new { @class = "form-control", style = "width:342px" })
+            </div>
+            <span asp-validation-for="OrganizationId" class="text-danger"></span>
+            <div class="col-2">
+                <input type="button" class="btn btn-primary px-md-4" id="addOrganizer" value="Add" />
+
+            </div>
+        </div>
+        <ul id="organizers"></ul>
+        <br />
+        <br />
+        <input type="hidden" id="orgIds" name="orgIds" />
+        <div class="d-flex justify-content-center align-items-center">
+            <input type="submit" value="Edit" class="btn btn-primary mx-2 px-4" />
+            <a asp-action="Index" class="btn btn-info mx-3">Back to List </a>
+        </div>
+    </form>
 </div>
 
 @section Scripts {
@@ -105,16 +84,6 @@
                 $("#orgIds").val(orgIds);
             }
         });
-        //var eventIds = '';
-        //$("#addEvent").click(function () {
-        //    var eventText = $("#EventId").find('option:selected').text();
-        //    var event = $("#EventId").val();
-        //    if (event > 0) {
-        //        var li = '<li>' + eventText + '</li>'
-        //        $("#events").append(li);
-        //        eventIds = eventIds + event + ',';
-        //        $("#eventIds").val(eventIds);
-        //    }
-        //});
+                                   
     </script>
 }
