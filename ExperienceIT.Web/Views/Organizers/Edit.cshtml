@@ -4,69 +4,88 @@
     ViewData["Title"] = "Edit";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-<style>
-    body {
-        background-color: azure;
-    }
-</style>
-<h1>Edit Sponsor</h1>
-<hr />
-<div class="border backgroundwhite ">
-    <form enctype="multipart/form-data" asp-action="Edit">
+<div class="card w-75" style="margin-left:160px">
+    <form asp-action="Create" method="post">
         <div class="row">
-            <div class="col-md-4">
-                @*<form asp-action="Edit">*@
-                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-                <input type="hidden" asp-for="Id" />
-                <div class="form-group">
-                    <label asp-for="Name" class="control-label"></label>
-                    <input asp-for="Name" class="form-control" />
-                    <span asp-validation-for="Name" class="text-danger"></span>
-                </div>
-                <div class="form-group">
-                    <label asp-for="Address" class="control-label"></label>
-                    <input asp-for="Address" class="form-control" />
-                    <span asp-validation-for="Address" class="text-danger"></span>
-                </div>
-                <div class="form-group">
-                    <label asp-for="City" class="control-label"></label>
-                    <input asp-for="City" class="form-control" />
-                    <span asp-validation-for="City" class="text-danger"></span>
-                </div>
-                <div class="form-group">
-                    <label asp-for="State" class="control-label"></label>
-                    <input asp-for="State" class="form-control" />
-                    <span asp-validation-for="State" class="text-danger"></span>
-                </div>
-                <div class="form-group">
-                    <label asp-for="Zipcode" class="control-label"></label>
-                    <input asp-for="Zipcode" class="form-control" />
-                    <span asp-validation-for="Zipcode" class="text-danger"></span>
-                </div>
-                <div class="form-group">
-                    <label asp-for="Country" class="control-label"></label>
-                    <input asp-for="Country" class="form-control" />
-                    <span asp-validation-for="Country" class="text-danger"></span>
-                </div>
-                @*<div class="form-group">
-                        <input type="submit" value="Save" class="btn btn-primary" />
-                    </div>*@
-                <div class="form-group">
-                    <div class="col-12 ">
-                        <partial name="_EditAndBackToListButton" model="Model.Id" />
-                    </div>
+            <div class="col-md-6 form-group offset-md-5 align-content-md-center text-info"><h2>Edit Organizers</h2></div>
+        </div>
+
+        <div class="col-md-4 ml-4"><span style="color:#ff0000">* </span><i>is required field</i></div>
+
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+        <div class="form-group row">
+            <div class="col-md-4 col-xs-6">
+                <label asp-for="Name" class="col-form-label ml-5">Sponsoring Company<span style="color:#ff0000">*</span></label>
+            </div>
+            <div class="col-xs-12 col-sm-6 col-md-8">
+                <input asp-for="Name" class="form-control" style="width:342px" />
+            </div>
+            <span asp-validation-for="Name" class="text-danger"></span>
+        </div>
+
+        <div class="form-group row">
+            <div class="col-md-4 col-xs-6">
+                <label asp-for="Address" class="col-form-label ml-5"></label>
+            </div>
+            <div class="col-xs-12 col-sm-6 col-md-8">
+                <div>
+                    @Html.TextAreaFor(model => model.Address)
                 </div>
             </div>
+            @Html.ValidationMessageFor(model => model.Address, "", new { @class = "text-danger" })
         </div>
+
+        <div class="form-group row">
+            <div class="col-md-4 col-xs-6">
+                <label asp-for="City" class="col-form-label ml-5"></label>
+            </div>
+            <div class="col-xs-12 col-sm-6 col-md-8">
+                <input asp-for="City" class="form-control" style="width:342px" />
+            </div>
+            <span asp-validation-for="City" class="text-danger"></span>
+        </div>
+
+        <div class="form-group row">
+            <div class="col-md-4 col-xs-6">
+                <label asp-for="State" class="col-form-label ml-5"></label>
+            </div>
+            <div class="col-xs-12 col-sm-6 col-md-8">
+                <input asp-for="State" class="form-control" style="width:342px" />
+            </div>
+            <span asp-validation-for="State" class="text-danger"></span>
+        </div>
+
+        <div class="form-group row">
+            <div class="col-md-4 col-xs-6">
+                <label asp-for="Zipcode" class="col-form-label ml-5"></label>
+            </div>
+            <div class="col-xs-12 col-sm-6 col-md-8">
+                <input asp-for="Zipcode" class="form-control" style="width:342px" />
+            </div>
+            <span asp-validation-for="Zipcode" class="text-danger"></span>
+        </div>
+
+        <div class="form-group row">
+            <div class="col-md-4 col-xs-6">
+                <label asp-for="Country" class="col-form-label ml-5"></label>
+            </div>
+            <div class="col-xs-12 col-sm-6 col-md-8">
+                <input asp-for="Country" class="form-control" style="width:342px" />
+            </div>
+            <span asp-validation-for="Country" class="text-danger"></span>
+        </div>
+        <div class="col-6 offset-3">
+            <partial name="_EditAndBackToListButton" model="Model.Id" />
+        </div>
+
+        <br />
+        <br />
     </form>
 </div>
 
 
-@*<div>
-        <a asp-action="Index">Back to List</a>
-    </div>*@
 
-@section Scripts {
 
-    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
-}
+
+
+
