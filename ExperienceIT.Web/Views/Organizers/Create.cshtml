@@ -27,9 +27,7 @@
                 <label asp-for="Organizer.Address" class="col-form-label ml-5"></label>
             </div>
             <div class="col-xs-12 col-sm-6 col-md-8">
-                <div>
-                    @Html.TextAreaFor(model => model.Organizer.Address)
-                </div>
+                <input asp-for="Organizer.Name" class="form-control" style="width:342px" />
             </div>
             @Html.ValidationMessageFor(model => model.Organizer.Address, "", new { @class = "text-danger" })
         </div>
