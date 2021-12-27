@@ -4,60 +4,94 @@
     ViewData["Title"] = "Create";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-<style>
-    body {
-        background-color: azure;
-    }
-</style>
-<h4 class="text-info">New Sponsor</h4>
-<div class="border backgroundwhite ">
-    <form enctype="multipart/form-data" asp-action="Create">
-        @* allows entire files to be included in the data(server)*@
+
+<div class="card w-75" style="margin-left:160px">
+    <form asp-action="Create" method="post">
         <div class="row">
-            <div class="col-md-4">
-                @*<form asp-action="Create">*@
-                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-                <div class="form-group">
-                    <label asp-for="Organizer.Name" class="control-label"> Sponsoring Company<span style="color:#ff0000">*</span> </label>
-                    <input asp-for="Organizer.Name" class="form-control" />
-                    <span asp-validation-for="Organizer.Name" class="text-danger"></span>
-                </div>
-                <div class="form-group">
-                    <label asp-for="Organizer.Address" class="control-label"></label>
-                    <input asp-for="Organizer.Address" class="form-control" />
-                    <span asp-validation-for="Organizer.Address" class="text-danger"></span>
-                </div>
-                <div class="form-group">
-                    <label asp-for="Organizer.City" class="control-label"></label>
-                    <input asp-for="Organizer.City" class="form-control" />
-                    <span asp-validation-for="Organizer.City" class="text-danger"></span>
-                </div>
-                <div class="form-group">
-                    <label asp-for="Organizer.State" class="control-label"></label>
-                    <input asp-for="Organizer.State" class="form-control" />
-                    <span asp-validation-for="Organizer.State" class="text-danger"></span>
-                </div>
-                <div class="form-group">
-                    <label asp-for="Organizer.Zipcode" class="control-label"></label>
-                    <input asp-for="Organizer.Zipcode" class="form-control" />
-                    <span asp-validation-for="Organizer.Zipcode" class="text-danger"></span>
-                </div>
-                <div class="form-group">
-                    <label asp-for="Organizer.Country" class="control-label"></label>
-                    <input asp-for="Organizer.Country" class="form-control" />
-                    <span asp-validation-for="Organizer.Country" class="text-danger"></span>
-                </div>
-                <div class="form-group">
-                    <partial name="_CreateAndBackToListButton" />
-                    @*<a asp-action="Index">Back to List</a>*@
-                </div>
-                @*<div class="form-group">
-                        <input type="submit" value="Create" class="btn btn-primary" />
-                    </div>*@
-            </div>
+            <div class="col-md-6 form-group offset-md-5 align-content-md-center text-info"><h2>Our Organizers</h2></div>
         </div>
+        <div class="col-md-4 ml-4"><span style="color:#ff0000">* </span><i>is required field</i></div>
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+        <div class="form-group row">
+            <div class="col-md-4 col-xs-6">
+                <label asp-for="Organizer.Name" class="col-form-label ml-5">Sponsoring Company<span style="color:#ff0000">*</span></label>
+            </div>
+            <div class="col-xs-12 col-sm-6 col-md-8">
+                <input asp-for="Organizer.Name" class="form-control" style="width:342px" />
+            </div>
+            <span asp-validation-for="Organizer.Name" class="text-danger"></span>
+        </div>
+
+        <div class="form-group row">
+            <div class="col-md-4 col-xs-6">
+                <label asp-for="Organizer.Address" class="col-form-label ml-5"></label>
+            </div>
+            <div class="col-xs-12 col-sm-6 col-md-8">
+                <div>
+                    @Html.TextAreaFor(model => model.Organizer.Address)
+                </div>
+            </div>
+            @Html.ValidationMessageFor(model => model.Organizer.Address, "", new { @class = "text-danger" })
+        </div>
+
+        <div class="form-group row">
+            <div class="col-md-4 col-xs-6">
+                <label asp-for="Organizer.City" class="col-form-label ml-5"></label>
+            </div>
+            <div class="col-xs-12 col-sm-6 col-md-8">
+                <input asp-for="Organizer.City" class="form-control" style="width:342px" />
+            </div>
+            <span asp-validation-for="Organizer.City" class="text-danger"></span>
+        </div>
+
+        <div class="form-group row">
+            <div class="col-md-4 col-xs-6">
+                <label asp-for="Organizer.State" class="col-form-label ml-5"></label>
+            </div>
+            <div class="col-xs-12 col-sm-6 col-md-8">
+                <input asp-for="Organizer.State" class="form-control" style="width:342px" />
+            </div>
+            <span asp-validation-for="Organizer.State" class="text-danger"></span>
+        </div>
+
+        <div class="form-group row">
+            <div class="col-md-4 col-xs-6">
+                <label asp-for="Organizer.Zipcode" class="col-form-label ml-5"></label>
+            </div>
+            <div class="col-xs-12 col-sm-6 col-md-8">
+                <input asp-for="Organizer.Zipcode" class="form-control" style="width:342px" />
+            </div>
+            <span asp-validation-for="Organizer.Zipcode" class="text-danger"></span>
+        </div>
+
+        <div class="form-group row">
+            <div class="col-md-4 col-xs-6">
+                <label asp-for="Organizer.Country" class="col-form-label ml-5"></label>
+            </div>
+            <div class="col-xs-12 col-sm-6 col-md-8">
+                <input asp-for="Organizer.Country" class="form-control" style="width:342px" />
+            </div>
+            <span asp-validation-for="Organizer.Country" class="text-danger"></span>
+        </div>
+        <div class="d-flex justify-content-center align-items-center">
+            <input type="submit" value="Create" class="btn btn-primary mx-2 px-4" />
+            <a asp-action="Index" class="btn btn-info mx-3">Back to List </a>
+        </div>
+        <br />
+        <br />
     </form>
 </div>
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
 }
+
+
+
+
+
+
+
+
+
+
+
