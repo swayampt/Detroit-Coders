@@ -14,14 +14,6 @@
         }
     }
 }
-
-
-<style>
-   
-    a {
-        color: red;
-    }
-</style>
 <div class="border backgroundwhite">
     @*adding border,background and image*@
     <div class="row">
@@ -44,6 +36,8 @@
             }
         </div>
     </div>
+    <a><partial name="_EventUserView" /></a>
+
     <div class="row">
         <div class="col-md-12">
             <table class="table table-striped border">
@@ -54,7 +48,7 @@
                     <th>
                         Events
                         @*@Html.DisplayNameFor(model => model.Event.Name)-
-            @Html.DisplayNameFor(model => model.Event.Description)*@
+                            @Html.DisplayNameFor(model => model.Event.Description)*@
                     </th>
                     <!--<th>-->
                     @*@Html.DisplayNameFor(model => model.Event.Description)*@
@@ -64,14 +58,14 @@
                         @Html.DisplayNameFor(model => model.Event.EndingDate)
                     </th>
                     <!--<div class="form-group row">
-        <div class="col-2">-->
+                    <div class="col-2">-->
                     @*to add label*@
                     <!--<label asp-for="MenuItem.Image" class="col-form-label"></label>
-        </div>
-        <div class="col-5">
-            <input type="file" name="files" multiple class="form-control" />
-        </div>
-    </div>-->
+                        </div>
+                        <div class="col-5">
+                            <input type="file" name="files" multiple class="form-control" />
+                        </div>
+                    </div>-->
                     <th>
                         @Html.DisplayNameFor(model => model.ProgramName)
                     </th>
@@ -97,56 +91,56 @@
 
                 @foreach (var item in Model)
                 {
-            <tr>
-                <td>
-                    <img src=@Html.DisplayFor(modelItem => item.Event.ImageUrl) width="75px" height="75px"/>
-                </td>
-                <td>
-                    <b>
-                        @Html.DisplayFor(modelItem => item.Event.Name)
-                    </b>
-                    -<br />
-                    @Html.DisplayFor(modelItem => item.Event.Description)
-                </td>
-                @*<td>
-            @Html.DisplayFor(modelItem => item.Event.Description)
-        </td>*@
-                <td>
-                    @Html.DisplayFor(modelItem => item.Event.StartingDate)-
-                    @Html.DisplayFor(modelItem => item.Event.EndingDate)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.ProgramName)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Event.Venue)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Event.Duration)
-                </td>
-                @if (User.Identity.IsAuthenticated)
-                {
-                    if (User.IsInRole("ApplicationAdmin"))
-                    {
-                        <partial name="_TableButtonPartial" model="item.Event.Id" />
-                    }
-                    else
-                    {
-                        if (vems.Any(x => x.EventId == item.Event.Id))
+                    <tr>
+                        <td>
+                            <img src=@Html.DisplayFor(modelItem => item.Event.ImageUrl) width="75px" height="75px" />
+                        </td>
+                        <td>
+                            <b>
+                                @Html.DisplayFor(modelItem => item.Event.Name)
+                            </b>
+                            -<br />
+                            @Html.DisplayFor(modelItem => item.Event.Description)
+                        </td>
+                        @*<td>
+                                @Html.DisplayFor(modelItem => item.Event.Description)
+                            </td>*@
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Event.StartingDate)-
+                            @Html.DisplayFor(modelItem => item.Event.EndingDate)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.ProgramName)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Event.Venue)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Event.Duration)
+                        </td>
+                        @if (User.Identity.IsAuthenticated)
                         {
-                            <td>
-                                <button class="btn btn-danger" id="Register" onclick="RegisterVolunteer(@item.Event.Id, @item.ProgramId,0)">UnRegister</button>
-                            </td>
+                            if (User.IsInRole("ApplicationAdmin"))
+                            {
+                                <partial name="_TableButtonPartial" model="item.Event.Id" />
+                            }
+                            else
+                            {
+                                if (vems.Any(x => x.EventId == item.Event.Id))
+                                {
+                                    <td>
+                                        <button class="btn btn-danger" id="Register" onclick="RegisterVolunteer(@item.Event.Id, @item.ProgramId,0)">UnRegister</button>
+                                    </td>
+                                }
+                                else
+                                {
+                                    <td>
+                                        <button class="btn btn-primary px-md-4" id="Register" onclick="RegisterVolunteer(@item.Event.Id, @item.ProgramId,1)">Register</button>
+                                    </td>
+                                }
+                            }
                         }
-                        else
-                        {
-                            <td>
-                                <button class="btn btn-primary px-md-4" id="Register" onclick="RegisterVolunteer(@item.Event.Id, @item.ProgramId,1)">Register</button>
-                            </td>
-                        }
-                    }
-                }
-            </tr>
+                    </tr>
                 }
             </table>
         </div>
@@ -197,11 +191,7 @@
             });
         }
 
-        @*function ConfirmByEmail(evntId, progId, flag) {
-            var registerUrl = '@Url.Action("EmailConfirmation","Events")';
-            var indexUrl = '@Url.Action("Index","Events")';
-            var registerUrl = registerUrl + "?eventId=" + evntId + "&progId=" + progId + "&flag=" + flag;
-        }*@
+        
 
 
     </script>
