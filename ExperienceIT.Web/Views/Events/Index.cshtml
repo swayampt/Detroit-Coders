@@ -17,10 +17,7 @@
 
 
 <style>
-    body {
-        background-color: azure;
-    }
-
+   
     a {
         color: red;
     }
@@ -52,9 +49,12 @@
             <table class="table table-striped border">
                 <tr class="table-secondary">
                     <th>
+                        @Html.DisplayNameFor(model => model.Event.ImageUrl)
+                    </th>
+                    <th>
                         Events
                         @*@Html.DisplayNameFor(model => model.Event.Name)-
-                            @Html.DisplayNameFor(model => model.Event.Description)*@
+            @Html.DisplayNameFor(model => model.Event.Description)*@
                     </th>
                     <!--<th>-->
                     @*@Html.DisplayNameFor(model => model.Event.Description)*@
@@ -63,6 +63,15 @@
                         @Html.DisplayNameFor(model => model.Event.StartingDate)-
                         @Html.DisplayNameFor(model => model.Event.EndingDate)
                     </th>
+                    <!--<div class="form-group row">
+        <div class="col-2">-->
+                    @*to add label*@
+                    <!--<label asp-for="MenuItem.Image" class="col-form-label"></label>
+        </div>
+        <div class="col-5">
+            <input type="file" name="files" multiple class="form-control" />
+        </div>
+    </div>-->
                     <th>
                         @Html.DisplayNameFor(model => model.ProgramName)
                     </th>
@@ -88,53 +97,56 @@
 
                 @foreach (var item in Model)
                 {
-                    <tr>
-                        <td>
-                            <b>
-                                @Html.DisplayFor(modelItem => item.Event.Name)
-                            </b>
-                            -<br />                           
-                            @Html.DisplayFor(modelItem => item.Event.Description)
-                        </td>
-                        @*<td>
-                                @Html.DisplayFor(modelItem => item.Event.Description)
-                            </td>*@
-                        <td>
-                            @Html.DisplayFor(modelItem => item.Event.StartingDate)-
-                            @Html.DisplayFor(modelItem => item.Event.EndingDate)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.ProgramName)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.Event.Venue)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.Event.Duration)
-                        </td>
-                        @if (User.Identity.IsAuthenticated)
+            <tr>
+                <td>
+                    <img src=@Html.DisplayFor(modelItem => item.Event.ImageUrl) width="75px" height="75px"/>
+                </td>
+                <td>
+                    <b>
+                        @Html.DisplayFor(modelItem => item.Event.Name)
+                    </b>
+                    -<br />
+                    @Html.DisplayFor(modelItem => item.Event.Description)
+                </td>
+                @*<td>
+            @Html.DisplayFor(modelItem => item.Event.Description)
+        </td>*@
+                <td>
+                    @Html.DisplayFor(modelItem => item.Event.StartingDate)-
+                    @Html.DisplayFor(modelItem => item.Event.EndingDate)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ProgramName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Event.Venue)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Event.Duration)
+                </td>
+                @if (User.Identity.IsAuthenticated)
+                {
+                    if (User.IsInRole("ApplicationAdmin"))
+                    {
+                        <partial name="_TableButtonPartial" model="item.Event.Id" />
+                    }
+                    else
+                    {
+                        if (vems.Any(x => x.EventId == item.Event.Id))
                         {
-                            if (User.IsInRole("ApplicationAdmin"))
-                            {
-                                <partial name="_TableButtonPartial" model="item.Event.Id" />
-                            }
-                            else
-                            {
-                                if (vems.Any(x => x.EventId == item.Event.Id))
-                                {
-                                    <td>
-                                        <button class="btn btn-danger" id="Register" onclick="RegisterVolunteer(@item.Event.Id, @item.ProgramId,0)">UnRegister</button>
-                                    </td>
-                                }
-                                else
-                                {
-                                    <td>
-                                        <button class="btn btn-primary px-md-4" id="Register" onclick="RegisterVolunteer(@item.Event.Id, @item.ProgramId,1)">Register</button>
-                                    </td>
-                                }
-                            }
+                            <td>
+                                <button class="btn btn-danger" id="Register" onclick="RegisterVolunteer(@item.Event.Id, @item.ProgramId,0)">UnRegister</button>
+                            </td>
                         }
-                    </tr>
+                        else
+                        {
+                            <td>
+                                <button class="btn btn-primary px-md-4" id="Register" onclick="RegisterVolunteer(@item.Event.Id, @item.ProgramId,1)">Register</button>
+                            </td>
+                        }
+                    }
+                }
+            </tr>
                 }
             </table>
         </div>
@@ -149,7 +161,24 @@
 @section Scripts {
 
     <script type="text/javascript">
-
+        //please refer http://bootboxjs.com/examples.html
+        function alertResponse(response,indexUrl) {
+            bootbox.dialog({
+                title: 'Event Confirmation',
+                message: response,
+                size: 'large',
+                buttons: {
+                    ok: {
+                        label: "OK",
+                        className: 'btn-info',
+                        callback: function () {
+                            console.log('Custom OK clicked');
+                            window.location.href = indexUrl;
+                        }
+                    }
+                }
+            });
+        }
 
         function RegisterVolunteer(evntId, progId,flag) {
             var registerUrl = '@Url.Action("Register","Events")';
@@ -160,8 +189,7 @@
                 url: registerUrl,
                 method: 'GET',
                 success: function (response) {
-                    alert(response);
-                    window.location.href = indexUrl;
+                    alertResponse(response, indexUrl);//for bootbox to activate,added alert Respose method.(line150)
                 },
                 error: function (errorResponse) {
                     console.log(errorResponse);
