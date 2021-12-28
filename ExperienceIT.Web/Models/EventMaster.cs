@@ -40,7 +40,7 @@ namespace ExperienceIT.Web.Models
         public string Venue { get; set; }
 
         [Required]
-        [Display(Name = "Duration")]
+        [Display(Name = "Timings")]
         public string Duration { get; set; }
         
     }

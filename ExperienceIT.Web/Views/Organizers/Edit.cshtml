@@ -7,7 +7,7 @@
 <div class="card w-75" style="margin-left:160px">
     <form asp-action="Create" method="post">
         <div class="row">
-            <div class="col-md-6 form-group offset-md-5 align-content-md-center text-info"><h2>Edit Organizers</h2></div>
+            <div class="col-md-6 form-group offset-md-5 align-content-md-center text-info"><h2>Edit Sponsors</h2></div>
         </div>
 
         <div class="col-md-4 ml-4"><span style="color:#ff0000">* </span><i>is required field</i></div>
@@ -28,9 +28,7 @@
                 <label asp-for="Address" class="col-form-label ml-5"></label>
             </div>
             <div class="col-xs-12 col-sm-6 col-md-8">
-                <div>
-                    @Html.TextAreaFor(model => model.Address)
-                </div>
+                <input asp-for="Name" class="form-control" style="width:342px" />
             </div>
             @Html.ValidationMessageFor(model => model.Address, "", new { @class = "text-danger" })
         </div>
