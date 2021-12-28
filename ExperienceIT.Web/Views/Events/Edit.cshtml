@@ -3,28 +3,17 @@
     ViewData["Title"] = "Edit";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-<style>
-    body {
-        background-color: azure;
-    }
-</style>
-<h1>Edit Event</h1>
-<hr />
-<div class="border backgroundwhite ">
-    <div class="row">
-        <div class="col-md-4">
-            <form enctype="multipart/form-data" asp-action="Edit">
+
+<div class="row">
+    <div class="col-md-10 offset-md-1">
+        <div class="card">
+            <form asp-action="Edit">
+                <br />
+                <div class="row">
+                    <div class="col-md-6 form-group offset-md-5 align-content-md-center text-info"><h2>Edit Event</h2></div>
+                </div>
                 <div asp-validation-summary="ModelOnly" class="text-danger"></div>
                 <input type="hidden" asp-for="Id" />
-                <div class="form-group row">
-                    <div class="col-4">
-                        @*to add label*@
-                        <label asp-for="ImageUrl" class="col-form-label"></label>
-                    </div>
-                    <div class="col-8">
-                        <input type="file" name="files" multiple class="form-control" />
-                    </div>
-                </div>
                 <div class="form-group">
                     <label asp-for="Name" class="control-label"></label>
                     <input asp-for="Name" class="form-control" />
@@ -46,10 +35,10 @@
                     <span asp-validation-for="EndingDate" class="text-danger"></span>
                 </div>
                 @*<div class="form-group">
-            <label asp-for="EnrollmentDate" class="control-label"></label>
-            <input asp-for="EnrollmentDate" class="form-control" />
-            <span asp-validation-for="EnrollmentDate" class="text-danger"></span>
-        </div>*@
+                        <label asp-for="EnrollmentDate" class="control-label"></label>
+                        <input asp-for="EnrollmentDate" class="form-control" />
+                        <span asp-validation-for="EnrollmentDate" class="text-danger"></span>
+                    </div>*@
                 <div class="form-group">
                     <label asp-for="Venue" class="control-label"></label>
                     <input asp-for="Venue" class="form-control" />
@@ -61,11 +50,6 @@
                     <span asp-validation-for="Duration" class="text-danger"></span>
                 </div>
                 <div class="form-group">
-                    <label asp-for="ImageUrl" class="control-label"></label>
-                    <img src="@Model.ImageUrl" width="75px" height="75px"  />
-                    <input hidden asp-for="ImageUrl" class="form-control" />
-                </div>
-                <div class="form-group">
                     <input type="submit" value="Save" class="btn btn-primary" />
                 </div>
             </form>
@@ -73,10 +57,8 @@
     </div>
 </div>
 
-@*<div>
-        <a asp-action="Index">Back to List</a>
-    </div>*@
-
 @section Scripts {
-    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    @{
+    await Html.RenderPartialAsync("_ValidationScriptsPartial");
+}
 }
