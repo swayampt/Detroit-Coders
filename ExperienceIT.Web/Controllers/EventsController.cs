@@ -10,6 +10,9 @@ using ExperienceIT.Web.Models;
 using ExperienceIT.Web.ViewModels;
 using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Hosting;
+using System.IO;
+using ExperienceIT.Web.Utility;
 
 namespace ExperienceIT.Web.Controllers
 {
@@ -18,18 +21,21 @@ namespace ExperienceIT.Web.Controllers
         private readonly ApplicationDbContext _context;
         private readonly UserManager<IdentityUser> _userManager;
         private readonly IEmailSender _emailSender;
+        //for using images from server ,use iwebhost env
+        private readonly IWebHostEnvironment _webHostEnvironment;//IWebhostEnvironment already exists in startup.cs in Configure mtd.
 
-        public EventsController(ApplicationDbContext context, 
-            IEmailSender emailSender, UserManager<IdentityUser> userManager)
+
+        public EventsController(ApplicationDbContext context,
+            IEmailSender emailSender, UserManager<IdentityUser> userManager, IWebHostEnvironment webHostEnvironment)
         {
             _context = context;
             _emailSender = emailSender;
             _userManager = userManager;
+            _webHostEnvironment = webHostEnvironment;
         }
 
-       
 
-            // GET: EventMasters
+        // GET: EventMasters
         public async Task<IActionResult> Index(int? programId)//passing program id to redirect into respective page.
         {
             var events = await _context.EventMaster.ToListAsync();
@@ -101,7 +107,8 @@ namespace ExperienceIT.Web.Controllers
                     EndingDate = x.EventMaster.EndingDate,
                     EnrollmentDate = x.EventMaster.EnrollmentDate,
                     Venue = x.EventMaster.Venue,
-                    Duration = x.EventMaster.Duration
+                    Duration = x.EventMaster.Duration,
+                    ImageUrl = x.EventMaster.ImageUrl
                 },
                 ProgramName = x.ProgramMaster.Name,
                 ProgramId = x.ProgramMaster.Id
@@ -143,7 +150,8 @@ namespace ExperienceIT.Web.Controllers
                     EndingDate = x.EventMaster.EndingDate,
                     EnrollmentDate = x.EventMaster.EnrollmentDate,
                     Venue = x.EventMaster.Venue,
-                    Duration = x.EventMaster.Duration
+                    Duration = x.EventMaster.Duration,
+                    ImageUrl = x.EventMaster.ImageUrl
                 },
                 ProgramName = x.ProgramMaster.Name,
                 ProgramId = x.ProgramMaster.Id
@@ -288,6 +296,33 @@ namespace ExperienceIT.Web.Controllers
 
                 // Update the ProgramEventMapper
 
+                //Work on the image saving section
+
+                string webRootPath = _webHostEnvironment.WebRootPath;
+                var files = HttpContext.Request.Form.Files;
+
+                var eventItemFromDb = await _context.EventMaster.FindAsync(model.Event.Id);
+
+                if (files.Count > 0)
+                {
+                    //files has been uploaded by the user
+                    var uploads = Path.Combine(webRootPath, "images");//final uploading of the locations of the img
+                    var extension = Path.GetExtension(files[0].FileName);//allowing only one file will get uploaded
+                                                                         //id and ext actual img renaming to
+                    using (var filesStream = new FileStream(Path.Combine(uploads, eventItemFromDb.Id + extension), FileMode.Create))//id and extnsn are the name of the img we are renaming into
+                    {
+                        files[0].CopyTo(filesStream);//copy the file location to the server and rename it.
+                    }
+                    eventItemFromDb.ImageUrl = @"\images\" + model.Event.Id + extension;//user uploads img
+                }
+                else
+                {
+                    //no file was uploaded,  use default img
+                    var uploads = Path.Combine(webRootPath, @"images\" + SD.DefaultEventImage);//name and the extnsn of the img
+                    System.IO.File.Copy(uploads, webRootPath + @"\images\" + model.Event.Id + ".png");//copy and upload in the rootpath
+                    eventItemFromDb.ImageUrl = @"\images\" + model.Event.Id + ".png";//update entry into the db
+                }
+                await _context.SaveChangesAsync();//save the changes 
                 var mapper = new ProgramEventMapper()
                 {
                     EventId = model.Event.Id,
@@ -305,10 +340,12 @@ namespace ExperienceIT.Web.Controllers
         // GET: EventMasters/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
+
             if (id == null)
             {
                 return NotFound();
             }
+
 
             var eventMaster = await _context.EventMaster.FindAsync(id);
             if (eventMaster == null)
@@ -323,7 +360,7 @@ namespace ExperienceIT.Web.Controllers
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Name,Description,StartingDate,EndingDate,EnrollmentDate,Venue,Duration")] EventMaster eventMaster)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,Name,Description,StartingDate,EndingDate,EnrollmentDate,Venue,Duration,ImageUrl")] EventMaster eventMaster)
         {
             if (id != eventMaster.Id)
             {
@@ -335,10 +372,42 @@ namespace ExperienceIT.Web.Controllers
                 try
                 {
                     _context.Update(eventMaster);
-                    await _context.SaveChangesAsync();
-                }
-                catch (DbUpdateConcurrencyException)
-                {
+                    //Work on the image saving section
+                    string webRootPath = _webHostEnvironment.WebRootPath;
+                    var files = HttpContext.Request.Form.Files;
+
+                   if (files.Count > 0)
+                    {
+                        //files has been uploaded by the user
+                        var uploads = Path.Combine(webRootPath, "images");//final uploading of the locations of the img
+                        var extension = Path.GetExtension(files[0].FileName);//allowing only one file will get uploaded
+                                                                             //id and ext actual img renaming to
+                                                                             ////Delete the original file
+                        if (eventMaster.ImageUrl !=null ) { 
+                        var imagePath = Path.Combine(webRootPath, eventMaster.ImageUrl.TrimStart('\\'));
+
+                        if (System.IO.File.Exists(imagePath))
+                        {
+                            System.IO.File.Delete(imagePath);
+                        }
+                        }
+
+                        using (var filesStream = new FileStream(Path.Combine(uploads, eventMaster.Id + extension), FileMode.Create))//id and extnsn are the name of the img we are renaming into
+                        {
+                            files[0].CopyTo(filesStream);//copy the file location to the server and rename it.
+                        }
+                        eventMaster.ImageUrl = @"\images\" + eventMaster.Id+ extension;//user uploads img
+                    }
+                    else if (eventMaster.ImageUrl==null)
+                    {
+                        //no file was uploaded,  use default img
+                        var uploads = Path.Combine(webRootPath, @"images\" + SD.DefaultEventImage);//name and the extnsn of the img
+                        System.IO.File.Copy(uploads, webRootPath + @"\images\" + eventMaster.Id + ".png");//copy and upload in the rootpath
+                        eventMaster.ImageUrl = @"\images\" +eventMaster.Id + ".png";//update entry into the db
+                    }
+                    await _context.SaveChangesAsync();//save the changes 
+                
+                }  catch (DbUpdateConcurrencyException) {
                     if (!EventMasterExists(eventMaster.Id))
                     {
                         return NotFound();
@@ -377,6 +446,16 @@ namespace ExperienceIT.Web.Controllers
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
             var eventMaster = await _context.EventMaster.FindAsync(id);
+            string webRootPath = _webHostEnvironment.WebRootPath;
+            if (eventMaster.ImageUrl != null)
+            {
+                var imagePath = Path.Combine(webRootPath, eventMaster.ImageUrl.TrimStart('\\'));
+
+                if (System.IO.File.Exists(imagePath))
+                {
+                    System.IO.File.Delete(imagePath);
+                }
+            }
             _context.EventMaster.Remove(eventMaster);
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));

@@ -59,6 +59,12 @@
                 <dd class="col-sm-10">
                     @Html.DisplayFor(model => model.Duration)
                 </dd>
+                <dt class="col-sm-2">
+                    @Html.DisplayNameFor(model => model.ImageUrl)
+                </dt>
+                <dd class="col-sm-10">
+                    <img src="@Model.ImageUrl" width="100px" height="100px" />
+                </dd>
             </dl>
             <div class="col-5 offset-2">
                 <partial name="_DeleteAndBackToListButton" model="Model.Id" />

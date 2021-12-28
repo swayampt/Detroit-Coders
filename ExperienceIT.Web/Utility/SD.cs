@@ -10,6 +10,9 @@ namespace ExperienceIT.Web.Utility
         public const string VolunteerUser = "Volunteer";
         public const string StudentUser = "Student";
         public const string GuestUser = "Guest";
+        //for image
+        public const string DefaultEventImage = "Default.jfif";
+
 
 
     }

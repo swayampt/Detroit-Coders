@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -8,6 +9,7 @@ namespace ExperienceIT.Web.Models
 {
     public class EventMaster
     {
+        
         [Key]
         public int Id { get; set; }
 
@@ -20,6 +22,11 @@ namespace ExperienceIT.Web.Models
         [Display(Name = "Event Description")]
         public string Description { get; set; }
 
+
+        //saving image in server
+        [Display(Name="Image")]
+        public string ImageUrl { get; set; }
+        
         [Required]
         [Display(Name = "Start Date")]
         [DataType(DataType.Date)]
@@ -42,6 +49,6 @@ namespace ExperienceIT.Web.Models
         [Required]
         [Display(Name = "Timings")]
         public string Duration { get; set; }
-        
+
     }
 }
