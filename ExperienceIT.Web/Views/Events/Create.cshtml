@@ -12,6 +12,15 @@
 <div class="border backgroundwhite ">
     <form enctype="multipart/form-data" asp-action="Create">
         @* allows entire files to be included in the data(server)*@
+        <div class="form-group row">
+            <div class="col-2">
+                @*to add label*@
+                <label asp-for="Event.ImageUrl" class="col-form-label"></label>
+            </div>
+            <div class="col-5">
+                <input type="file" name="files" multiple class="form-control" />
+            </div>
+        </div>
         <div class="row">
             <div class="col-md-6">
                 <div asp-validation-summary="ModelOnly" class="text-danger"></div>
