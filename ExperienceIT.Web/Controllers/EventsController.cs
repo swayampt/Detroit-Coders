@@ -340,10 +340,12 @@ namespace ExperienceIT.Web.Controllers
         // GET: EventMasters/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
+
             if (id == null)
             {
                 return NotFound();
             }
+
 
             var eventMaster = await _context.EventMaster.FindAsync(id);
             if (eventMaster == null)
@@ -358,7 +360,7 @@ namespace ExperienceIT.Web.Controllers
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Name,Description,StartingDate,EndingDate,EnrollmentDate,Venue,Duration")] EventMaster eventMaster)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,Name,Description,StartingDate,EndingDate,EnrollmentDate,Venue,Duration,ImageUrl")] EventMaster eventMaster)
         {
             if (id != eventMaster.Id)
             {
@@ -370,10 +372,42 @@ namespace ExperienceIT.Web.Controllers
                 try
                 {
                     _context.Update(eventMaster);
-                    await _context.SaveChangesAsync();
-                }
-                catch (DbUpdateConcurrencyException)
-                {
+                    //Work on the image saving section
+                    string webRootPath = _webHostEnvironment.WebRootPath;
+                    var files = HttpContext.Request.Form.Files;
+
+                   if (files.Count > 0)
+                    {
+                        //files has been uploaded by the user
+                        var uploads = Path.Combine(webRootPath, "images");//final uploading of the locations of the img
+                        var extension = Path.GetExtension(files[0].FileName);//allowing only one file will get uploaded
+                                                                             //id and ext actual img renaming to
+                                                                             ////Delete the original file
+                        if (eventMaster.ImageUrl !=null ) { 
+                        var imagePath = Path.Combine(webRootPath, eventMaster.ImageUrl.TrimStart('\\'));
+
+                        if (System.IO.File.Exists(imagePath))
+                        {
+                            System.IO.File.Delete(imagePath);
+                        }
+                        }
+
+                        using (var filesStream = new FileStream(Path.Combine(uploads, eventMaster.Id + extension), FileMode.Create))//id and extnsn are the name of the img we are renaming into
+                        {
+                            files[0].CopyTo(filesStream);//copy the file location to the server and rename it.
+                        }
+                        eventMaster.ImageUrl = @"\images\" + eventMaster.Id+ extension;//user uploads img
+                    }
+                    else if (eventMaster.ImageUrl==null)
+                    {
+                        //no file was uploaded,  use default img
+                        var uploads = Path.Combine(webRootPath, @"images\" + SD.DefaultEventImage);//name and the extnsn of the img
+                        System.IO.File.Copy(uploads, webRootPath + @"\images\" + eventMaster.Id + ".png");//copy and upload in the rootpath
+                        eventMaster.ImageUrl = @"\images\" +eventMaster.Id + ".png";//update entry into the db
+                    }
+                    await _context.SaveChangesAsync();//save the changes 
+                
+                }  catch (DbUpdateConcurrencyException) {
                     if (!EventMasterExists(eventMaster.Id))
                     {
                         return NotFound();
@@ -412,6 +446,16 @@ namespace ExperienceIT.Web.Controllers
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
             var eventMaster = await _context.EventMaster.FindAsync(id);
+            string webRootPath = _webHostEnvironment.WebRootPath;
+            if (eventMaster.ImageUrl != null)
+            {
+                var imagePath = Path.Combine(webRootPath, eventMaster.ImageUrl.TrimStart('\\'));
+
+                if (System.IO.File.Exists(imagePath))
+                {
+                    System.IO.File.Delete(imagePath);
+                }
+            }
             _context.EventMaster.Remove(eventMaster);
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
