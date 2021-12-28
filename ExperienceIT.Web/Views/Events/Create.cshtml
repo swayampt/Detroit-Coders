@@ -16,6 +16,15 @@
                 <div class="col-md-6"><span style="color:#ff0000">* </span><i>is required field</i></div>
                 <div class="col-md-6 offset-md-1"></div>
                 <br />
+                <div class="form-group row">
+                    <div class="col-2">
+                        @*to add label*@
+                        <label asp-for="Event.ImageUrl" class="col-form-label"></label>
+                    </div>
+                    <div class="col-5">
+                        <input type="file" name="files" multiple class="form-control" />
+                    </div>
+                </div>
                 <div class="row">
                     <div class="col-sm-1"></div>
                     <div class="col-md-5">
@@ -48,7 +57,7 @@
                     <div class="col-md-5">
                         <div class="form-group">
                             <label asp-for="Event.Description" class="control-label">Event Discription <span style="color:#ff0000">*</span></label>
-                            @Html.TextAreaFor(model => model.Event.Description, new { @class = "form-control" } )
+                            @Html.TextAreaFor(model => model.Event.Description, new { @class = "form-control" })
                             <span asp-validation-for="Event.Description" class="text-danger"></span>
                         </div>
                     </div>
@@ -60,14 +69,14 @@
                     <div class="col-md-5">
                         <div class="form-group">
                             <label asp-for="Event.StartingDate" class="control-label">Start Date <span style="color:#ff0000">*</span></label>
-                            <input asp-for="Event.StartingDate" class="form-control" value = "@System.DateTime.Today" />
+                            <input asp-for="Event.StartingDate" class="form-control" value="@System.DateTime.Today" />
                             <span asp-validation-for="Event.StartingDate" class="text-danger"></span>
                         </div>
                     </div>
                     <div class="col-md-5">
                         <div class="form-group">
                             <label asp-for="Event.EndingDate" class="control-label">End Date <span style="color:#ff0000">*</span></label>
-                            <input asp-for="Event.EndingDate" class="form-control" value = "@System.DateTime.Today" />
+                            <input asp-for="Event.EndingDate" class="form-control" value="@System.DateTime.Today" />
                             <span asp-validation-for="Event.EndingDate" class="text-danger"></span>
                         </div>
                     </div>

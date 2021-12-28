@@ -14,45 +14,56 @@
                 </div>
                 <div asp-validation-summary="ModelOnly" class="text-danger"></div>
                 <input type="hidden" asp-for="Id" />
-                <div class="form-group">
-                    <label asp-for="Name" class="control-label"></label>
-                    <input asp-for="Name" class="form-control" />
-                    <span asp-validation-for="Name" class="text-danger"></span>
+                <div class="form-group row">
+                    <div class="col-4">
+                        @*to add label*@
+                        <label asp-for="ImageUrl" class="col-form-label"></label>
+                    </div>
+                    <div class="col-8">
+                        <input type="file" name="files" multiple class="form-control" />
+                    </div>
                 </div>
-                <div class="form-group">
-                    <label asp-for="Description" class="control-label"></label>
-                    <input asp-for="Description" class="form-control" />
-                    <span asp-validation-for="Description" class="text-danger"></span>
-                </div>
-                <div class="form-group">
-                    <label asp-for="StartingDate" class="control-label"></label>
-                    <input asp-for="StartingDate" class="form-control" />
-                    <span asp-validation-for="StartingDate" class="text-danger"></span>
-                </div>
-                <div class="form-group">
-                    <label asp-for="EndingDate" class="control-label"></label>
-                    <input asp-for="EndingDate" class="form-control" />
-                    <span asp-validation-for="EndingDate" class="text-danger"></span>
-                </div>
-                @*<div class="form-group">
-                        <label asp-for="EnrollmentDate" class="control-label"></label>
-                        <input asp-for="EnrollmentDate" class="form-control" />
-                        <span asp-validation-for="EnrollmentDate" class="text-danger"></span>
-                    </div>*@
-                <div class="form-group">
-                    <label asp-for="Venue" class="control-label"></label>
-                    <input asp-for="Venue" class="form-control" />
-                    <span asp-validation-for="Venue" class="text-danger"></span>
-                </div>
-                <div class="form-group">
-                    <label asp-for="Duration" class="control-label"></label>
-                    <input asp-for="Duration" class="form-control" />
-                    <span asp-validation-for="Duration" class="text-danger"></span>
-                </div>
-                <div class="form-group">
-                    <input type="submit" value="Save" class="btn btn-primary" />
-                </div>
-            </form>
+                @*<div class="form-group">*@
+                    <div class="form-group">
+                        <label asp-for="Name" class="control-label"></label>
+                        <input asp-for="Name" class="form-control" />
+                        <span asp-validation-for="Name" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="Description" class="control-label"></label>
+                        <input asp-for="Description" class="form-control" />
+                        <span asp-validation-for="Description" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="StartingDate" class="control-label"></label>
+                        <input asp-for="StartingDate" class="form-control" />
+                        <span asp-validation-for="StartingDate" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="EndingDate" class="control-label"></label>
+                        <input asp-for="EndingDate" class="form-control" />
+                        <span asp-validation-for="EndingDate" class="text-danger"></span>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label asp-for="Venue" class="control-label"></label>
+                        <input asp-for="Venue" class="form-control" />
+                        <span asp-validation-for="Venue" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="Duration" class="control-label"></label>
+                        <input asp-for="Duration" class="form-control" />
+                        <span asp-validation-for="Duration" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="ImageUrl" class="control-label"></label>
+                        <img src="@Model.ImageUrl" width="75" height="75" />
+                        <input hidden asp-for="ImageUrl" class="form-control" />
+                    </div>
+                    <div class="form-group">
+                        <input type="submit" value="Save" class="btn btn-primary" />
+                    </div>
+</form>
         </div>
     </div>
 </div>
