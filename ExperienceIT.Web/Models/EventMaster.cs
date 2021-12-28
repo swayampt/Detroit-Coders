@@ -24,6 +24,7 @@ namespace ExperienceIT.Web.Models
 
 
         //saving image in server
+        [Display(Name="Image")]
         public string ImageUrl { get; set; }
         
         [Required]
