@@ -60,9 +60,10 @@
                     <input asp-for="Duration" class="form-control" />
                     <span asp-validation-for="Duration" class="text-danger"></span>
                 </div>
-                <div class="col-3 offset-1">
-                    <input hidden asp-for="ImageUrl" class="form-control"/>
-                    <img src="@Model.ImageUrl" width="75px" height="75px" style="border-radius:5px;border: 1px solid #bbb9b9;" />
+                <div class="form-group">
+                    <label asp-for="ImageUrl" class="control-label"></label>
+                    <img src="@Model.ImageUrl" width="75px" height="75px"  />
+                    <input hidden asp-for="ImageUrl" class="form-control" />
                 </div>
                 <div class="form-group">
                     <input type="submit" value="Save" class="btn btn-primary" />
