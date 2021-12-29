@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>@ViewData["Title"] - Code N Social </title>
+    <title>@ViewData["Title"] - Detroit Coders </title>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.css" />
     <link rel="stylesheet" href="~/css/site.css" />
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css" integrity="sha384-DyZ88mC6Up2uqS4h/KRgHuoeGwBcD4Ng9SiP4dIRy0EXTlnuz47vAwmeGwVChigm" crossorigin="anonymous">
@@ -25,13 +25,14 @@
 </head>
 <body class="search-background">
 
-    <header>
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-dark bg-dark border-bottom box-shadow mb-3">
+       <header>
+        <nav class=" navbar navbar-expand-sm navbar-toggleable-sm navbar-dark bg-dark border-bottom box-shadow mb-4">
             @*<nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light border-bottom box-shadow mb-3" style="background-color:antiquewhite; color:white;">*@
             <div class="container">
                 @*<a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">
                         <img src="~/images/techflightNew.png" />
                     </a>*@
+
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
                         aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
@@ -41,8 +42,8 @@
 
 
                     <div class="navbar-header pull-left">
-                        <a class="nav-link active font-weight-bold" asp-area="" asp-controller="Home" asp-action="Index">
-                            <img src="~/Images/logo.png" alt="Code N Social" height="70" width="70" />
+                        <a class=" nav-link active font-weight-bold" asp-area="" asp-controller="Home" asp-action="Index">
+                            <img src="~/Images/dtwcoders.png" alt="Detroit Coders" class="rounded-circle" height="60" width="60" />
                         </a>
                     </div>
                     @*<a class="nav-link " asp-area="" asp-controller="Home" asp-action="Index">iTechVolunteers</a>*@
@@ -57,17 +58,17 @@
 
                         }
                         <li class="nav-item navigation-item font-weight-bold">
-                            <a class="nav-link navigation-link" asp-controller="Programs" asp-action="Index"><h4>Programs</h4></a>
+                            <a class=" nav-link navigation-link" asp-controller="Programs" asp-action="Index"><h4>Programs</h4></a>
                         </li>
                         <li class="nav-item navigation-item font-weight-bold">
-                            <a class="nav-link navigation-link " asp-controller="Events" asp-action="Index"><h4>Events</h4></a>
+                            <a class=" nav-link navigation-link " asp-controller="Events" asp-action="Index"><h4>Events</h4></a>
                         </li>
                         <li class="nav-item navigation-item font-weight-bold">
-                            <a class="nav-link navigation-link" asp-controller="Organizers" asp-action="Index"><h4>Sponsors</h4></a>
+                            <a class=" nav-link navigation-link" asp-controller="Organizers" asp-action="Index"><h4>Sponsors</h4></a>
                         </li>
 
                     </ul>
-                    <partial name="_LoginPartial" />
+                    <partial name="_LoginPartial"/>
                 </div>
             </div>
         </nav>
@@ -95,13 +96,6 @@
                 slidesToScroll: 3
             });
         });
-
-
-
-
-
-
-
-    </script>
+            </script>
 </body>
 </html>

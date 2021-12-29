@@ -5,7 +5,9 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 <div class="card w-75" style="margin-left:160px">
+
     <form asp-action="Create" method="post">
+
         <div class="row">
             <div class="col-md-6 form-group offset-md-5 align-content-md-center text-info"><h2>Edit Sponsors</h2></div>
         </div>
@@ -13,6 +15,7 @@
         <div class="col-md-4 ml-4"><span style="color:#ff0000">* </span><i>is required field</i></div>
 
         <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
         <div class="form-group row">
             <div class="col-md-4 col-xs-6">
                 <label asp-for="Name" class="col-form-label ml-5">Sponsoring Company<span style="color:#ff0000">*</span></label>
@@ -72,6 +75,7 @@
             </div>
             <span asp-validation-for="Country" class="text-danger"></span>
         </div>
+
         <div class="col-6 offset-3">
             <partial name="_EditAndBackToListButton" model="Model.Id" />
         </div>
