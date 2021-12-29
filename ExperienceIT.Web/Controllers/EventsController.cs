@@ -183,7 +183,7 @@ namespace ExperienceIT.Web.Controllers
                 };
 
                 await _context.ProgramEventVolunteerMapper.AddAsync(volunteerEventProgramMapper);
-                message = "You were successfully registered for this event.Email confirmation has sent to you";
+                message = "You were successfully registered for this event.Email confirmation has sent to you.";
             }
             else //UnRegister
             {
@@ -192,7 +192,7 @@ namespace ExperienceIT.Web.Controllers
                     .FirstOrDefaultAsync();
 
                 _context.ProgramEventVolunteerMapper.Remove(mapper);
-                message = "You were successfully un-registered from this event.Email confirmation has sent to you";
+                message = "You were successfully un-registered from this event.Email confirmation has sent to you.";
             }
 
             await _context.SaveChangesAsync();
