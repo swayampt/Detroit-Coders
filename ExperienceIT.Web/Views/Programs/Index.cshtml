@@ -5,27 +5,25 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<div class="row">
-    <div class="col-md-12 ">
-        <div class="card">
+
+        <div class="container p-3 bg-white">
             <br />
-            <div class="row">
+            
                 <div class="col-md-6 form-group offset-md-5 align-content-md-center text-info"><h2>Our Programs</h2></div>
 
 
                 @if (User.IsInRole("ApplicationAdmin"))
                 {
-                    <div class="col-md-11 offset-1 px-md-5 text-right">
+                    <div class="text-right">
                         <a><partial name="_CreateButtonPartial" /></a>
                     </div>
                 }
-            </div>
+          
 
                 <table class="table table-striped border">
                     <tr class="table-secondary">
 
 
-                        @*<table class="table">*@
                         <th>
                             <label>Name</label>
                         </th>
@@ -41,7 +39,10 @@
                                 <label>Action</label>
                             </th>
                         }
+                        else
+                        {
                         <th colspan="2"></th>
+                        }
                     </tr>
 
 
@@ -88,6 +89,6 @@
 
 
             </table>
-        </div>
-    </div>
-</div>
+         </div>
+           
+    

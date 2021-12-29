@@ -184,8 +184,12 @@ h1 {
 textarea {    
     width: 345px;
     height: 100px;
+    border: none;
+    outline:none;
 }
 
 .card {
     border-radius: 10px;
 }
+
+
