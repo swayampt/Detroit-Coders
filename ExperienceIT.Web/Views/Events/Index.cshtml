@@ -14,30 +14,32 @@
         }
     }
 }
-<div class="border backgroundwhite">
-    @*adding border,background and image*@
+
+
+
+
+<div class="card">   
+    <h3 class="text-center section-title col-md-12">Our Events</h3>
     <div class="row">
-        @* the "row" class is used mainly to hold columns in it.*@
-        <div class="col-6">
-            @*element take half of the horizontal screen space devices.*@
-
-
-        </div>
-        <div class="col-6 text-right">
-            @* move the columns to the right*@
+        
+        <div class="col-md-12 text-right">
 
             @if (User.IsInRole("ApplicationAdmin"))
             {
-                <a><partial name="_CreateButtonPartial" /></a>
+            <a><partial name="_CreateButtonPartial" /></a>
             }
             else if (!User.Identity.IsAuthenticated)
             {
-                <h3 class="text-right text-info">To Register to an Event, Please <a href="/Identity/Account/Register">Sign Up!</a></h3>
+            <h3 class="text-right text-info">To Register to an Event, Please <a href="/Identity/Account/Register">Sign Up!</a></h3>
             }
         </div>
     </div>
+    @if(!User.IsInRole("ApplicationAdmin"))
+    {
     <a><partial name="_EventUserView" /></a>
-
+    }
+    else 
+    {
     <div class="row">
         <div class="col-md-12">
             <table class="table table-striped border">
@@ -57,15 +59,7 @@
                         @Html.DisplayNameFor(model => model.Event.StartingDate)-
                         @Html.DisplayNameFor(model => model.Event.EndingDate)
                     </th>
-                    <!--<div class="form-group row">
-                    <div class="col-2">-->
-                    @*to add label*@
-                    <!--<label asp-for="MenuItem.Image" class="col-form-label"></label>
-                        </div>
-                        <div class="col-5">
-                            <input type="file" name="files" multiple class="form-control" />
-                        </div>
-                    </div>-->
+                    
                     <th>
                         @Html.DisplayNameFor(model => model.ProgramName)
                     </th>
@@ -77,12 +71,12 @@
                     </th>
                     @if (User.IsInRole("ApplicationAdmin"))
                     {
-                        <th>Action</th>
+                    <th>Action</th>
                     }
                     else if (User.Identity.IsAuthenticated)
                     {
 
-                        <th>Action</th>
+                    <th>Action</th>
                     }
 
 
@@ -91,60 +85,58 @@
 
                 @foreach (var item in Model)
                 {
-                    <tr>
-                        <td>
-                            <img src=@Html.DisplayFor(modelItem => item.Event.ImageUrl) width="75px" height="75px" />
-                        </td>
-                        <td>
-                            <b>
-                                @Html.DisplayFor(modelItem => item.Event.Name)
-                            </b>
-                            -<br />
-                            @Html.DisplayFor(modelItem => item.Event.Description)
-                        </td>
-                        @*<td>
-                                @Html.DisplayFor(modelItem => item.Event.Description)
-                            </td>*@
-                        <td>
-                            @Html.DisplayFor(modelItem => item.Event.StartingDate)-
-                            @Html.DisplayFor(modelItem => item.Event.EndingDate)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.ProgramName)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.Event.Venue)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.Event.Duration)
-                        </td>
-                        @if (User.Identity.IsAuthenticated)
+                <tr>
+                    <td>
+                        <img src=@Html.DisplayFor(modelItem => item.Event.ImageUrl) width="75px" height="75px" />
+                    </td>
+                    <td>
+                        <b>
+                            @Html.DisplayFor(modelItem => item.Event.Name)
+                        </b>
+                        -<br />
+                        @Html.DisplayFor(modelItem => item.Event.Description)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Event.StartingDate)-
+                        @Html.DisplayFor(modelItem => item.Event.EndingDate)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.ProgramName)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Event.Venue)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Event.Duration)
+                    </td>
+                    @*@if (User.Identity.IsAuthenticated)
                         {
                             if (User.IsInRole("ApplicationAdmin"))
-                            {
-                                <partial name="_TableButtonPartial" model="item.Event.Id" />
-                            }
+                            {*@
+                    <partial name="_TableButtonPartial" model="item.Event.Id" />
+                            @*}
                             else
                             {
                                 if (vems.Any(x => x.EventId == item.Event.Id))
                                 {
-                                    <td>
-                                        <button class="btn btn-danger" id="Register" onclick="RegisterVolunteer(@item.Event.Id, @item.ProgramId,0)">UnRegister</button>
-                                    </td>
+                    <td>
+                        <button class="btn btn-danger" id="Register" onclick="RegisterVolunteer(@item.Event.Id, @item.ProgramId,0)">UnRegister</button>
+                    </td>
                                 }
                                 else
                                 {
-                                    <td>
-                                        <button class="btn btn-primary px-md-4" id="Register" onclick="RegisterVolunteer(@item.Event.Id, @item.ProgramId,1)">Register</button>
-                                    </td>
+                    <td>
+                        <button class="btn btn-primary px-md-4" id="Register" onclick="RegisterVolunteer(@item.Event.Id, @item.ProgramId,1)">Register</button>
+                    </td>
                                 }
                             }
-                        }
-                    </tr>
+                        }*@
+                </tr>
                 }
             </table>
         </div>
     </div>
+    }
 </div>
 
 
