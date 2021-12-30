@@ -6,8 +6,10 @@
 }
 
 <div class="card w-75" style="margin-left:160px">
+    <br />
     <form asp-action="Create" method="post">
         <div class="row">
+
             <div class="col-md-6 form-group offset-md-5 align-content-md-center text-info"><h2>Our Programs</h2></div>
         </div>
         <div class="col-md-4 ml-4"><span style="color:#ff0000">* </span><i>is required field</i></div>
@@ -19,7 +21,7 @@
                 <label asp-for="Program.Name" class="col-form-label ml-5"></label>
             </div>
             <div class="col-xs-12 col-sm-6 col-md-8">
-                <input asp-for="Program.Name" class="form-control" style="width:342px"/>
+                <input asp-for="Program.Name" class="form-control" style="width:342px" />
             </div>
             <span asp-validation-for="Program.Name" class="text-danger"></span>
         </div>
@@ -43,7 +45,7 @@
                 <label asp-for="Program.ProgramUrl" class="col-form-label ml-5"></label>
             </div>
             <div class="col-xs-12 col-sm-6 col-md-8">
-                <input asp-for="Program.ProgramUrl" class="form-control" style="width:342px"/>
+                <input asp-for="Program.ProgramUrl" class="form-control" style="width:342px" />
             </div>
             <span asp-validation-for="Program.ProgramUrl" class="text-danger"></span>
         </div>
@@ -55,7 +57,7 @@
             </div>
             <div class="col-xs-12 col-sm-6 col-md-6">
                 @Html.DropDownListFor(s => s.OrganizationId,
-new SelectList(Model.Organizations, "Id", "Name"), "--Select Sponsor--", new { @class = "form-control",style = "width:342px" })
+new SelectList(Model.Organizations, "Id", "Name"), "--Select Sponsor--", new { @class = "form-control", style = "width:342px" })
             </div>
             <span asp-validation-for="OrganizationId" class="text-danger"></span>
             <div class="col-2">
@@ -68,15 +70,17 @@ new SelectList(Model.Organizations, "Id", "Name"), "--Select Sponsor--", new { @
 
 
 
-<ul id="organizers"></ul>
-<br />
-<br />
-<input type="hidden" id="orgIds" name="orgIds" />
-<div class="d-flex justify-content-center align-items-center">
-    <input type="submit" value="Create" class="btn btn-primary mx-2 px-4" />
-    <a asp-action="Index" class="btn btn-info mx-3">Back to List </a>
-</div>
-</form>
+        <ul id="organizers"></ul>
+        <br />
+        <br />
+        <input type="hidden" id="orgIds" name="orgIds" />
+        <div class="d-flex justify-content-center align-items-center">
+            <input type="submit" value="Create" class="btn btn-primary mx-2 px-4" />
+            <a asp-action="Index" class="btn btn-info mx-3">Back to List </a>
+
+        </div>
+        <br />
+    </form>
 </div>
 
 @section Scripts {
