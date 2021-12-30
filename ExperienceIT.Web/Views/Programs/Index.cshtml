@@ -27,7 +27,7 @@
                         <th>
                             <label>Name</label>
                         </th>
-                        <th>
+                        <th class="col1">
                             <label>Description</label>
                         </th>
                         <th>
@@ -53,7 +53,7 @@
                             <a href="@item.ProgramUrl" style="text-decoration:underline" target="_blank">@item.Name</a>
                         </td>
                         <td>
-                            @Html.TextAreaFor(modelItem => item.Description)
+                            @Html.DisplayTextFor(modelItem => item.Description)
                         </td>
                         <td>
                             @{

@@ -184,8 +184,10 @@ h1 {
 textarea {    
     width: 345px;
     height: 100px;
-    border: none;
-    outline:none;
+    
+}
+.col1 {
+    width: 50%;
 }
 
 .card {
