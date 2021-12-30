@@ -10,21 +10,13 @@
             <form enctype="multipart/form-data" asp-action="Create">
                 <br />
                 <div class="row">
-                    <div class="col-md-6 form-group offset-md-5 align-content-md-center text-info"><h2>Create New</h2></div>
+                    <div class="col-md-6 form-group offset-md-5 align-content-md-center text-info"><h2>Create Event</h2></div>
                 </div>
                 <div asp-validation-summary="ModelOnly" class="text-danger"></div>
                 <div class="col-md-6"><span style="color:#ff0000">* </span><i>is required field</i></div>
                 <div class="col-md-6 offset-md-1"></div>
                 <br />
-                <div class="form-group row">
-                    <div class="col-2">
-                        @*to add label*@
-                        <label asp-for="Event.ImageUrl" class="col-form-label"></label>
-                    </div>
-                    <div class="col-5">
-                        <input type="file" name="files" multiple class="form-control" />
-                    </div>
-                </div>
+                
                 <div class="row">
                     <div class="col-sm-1"></div>
                     <div class="col-md-5">
@@ -85,11 +77,17 @@
 
                 <div class="row">
                     <div class="col-sm-1"></div>
-                    <div class="col-md-10">
+                    <div class="col-md-5">
                         <div class="form-group">
                             <label asp-for="Event.Duration" class="control-label">Timings <span style="color:#ff0000">*</span></label>
                             <input asp-for="Event.Duration" class="form-control" />
                             <span asp-validation-for="Event.Duration" class="text-danger"></span>
+                        </div>
+                    </div>
+                    <div class="col-md-5">
+                        <div class="form-group">                            
+                            <label asp-for="Event.ImageUrl" class="control-label">Upload Image <span style="color:#ff0000">*</span></label>
+                            <input type="file" name="files" multiple class="form-control" />                            
                         </div>
                     </div>
 
@@ -125,3 +123,4 @@
     await Html.RenderPartialAsync("_ValidationScriptsPartial");
 }
 }
+
