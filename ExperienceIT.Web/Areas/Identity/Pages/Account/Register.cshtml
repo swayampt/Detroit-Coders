@@ -126,13 +126,16 @@
         <div class="col-md-3">
             <div class="form-group">
                 <label class="col-form-label">
-                    <input type="radio" onclick="ShowVolunteer()" name="rdUserRole" value="@SD.VolunteerUser" /> @SD.VolunteerUser
+                    <input type="radio" checked  name="rdUserRole" value="@SD.VolunteerUser" /> @SD.VolunteerUser
                 </label>
             </div>
         </div>
         <div class="col-md-3">
             <div class="form-group">
                 <label class="col-form-label">
+                    @*When student role is introduced, the disabled attribute will be removed from the below radio button and the
+        below volunteer div tag has to be hidden using  style="display:none;". In each role radio button the ShowStudent Script has to be called and
+        the corresponding data elements div has to be toggled to show / hide*@
                     <input type="radio" disabled onclick="ShowStudent()" name="rdUserRole" value="@SD.StudentUser" /> @SD.StudentUser
                 </label>
             </div>
@@ -141,7 +144,7 @@
 
     <br />
 
-    <div class="volunteer" style="display:none;">
+    <div class="volunteer" >
         <div class="row">
             <div class="col-sm-1"></div>
             <div class="col-md-5">

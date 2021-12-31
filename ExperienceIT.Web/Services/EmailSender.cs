@@ -27,8 +27,8 @@ namespace ExperienceIT.Web.Services
             
             //var apiKey = Environment.GetEnvironmentVariable("NAME_OF_THE_ENVIRONMENT_VARIABLE_FOR_YOUR_SENDGRID_KEY");
             var client = new SendGridClient(sendGridKey);
-            var from = new EmailAddress(fromEmail, "TechFlight Admin");
-            var to = new EmailAddress(email, "Example User");
+            var from = new EmailAddress(fromEmail, "Detroit Coders");
+            var to = new EmailAddress(email, "Volunteer User");
             var plainTextContent = message;
             var htmlContent = message;
             var msg = MailHelper.CreateSingleEmail(from, to, subject, plainTextContent, htmlContent);
