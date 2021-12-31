@@ -36,7 +36,7 @@ namespace ExperienceIT.Web.Controllers
 
 
         // GET: EventMasters
-        public async Task<IActionResult> Index(int? programId)//passing program id to redirect into respective page.
+        public async Task<IActionResult> Index(int? programId, string area)//passing program id to redirect into respective page.
         {
             var events = await _context.EventMaster.ToListAsync();
             var programEventMapper= new List<ProgramEventMapper>();
@@ -54,7 +54,7 @@ namespace ExperienceIT.Web.Controllers
                .Include(x => x.EventMaster).ToListAsync();
             }
             
-
+            
             if (User.Identity.IsAuthenticated)
             {
                 if (!User.IsInRole("ApplicationAdmin"))
@@ -66,6 +66,29 @@ namespace ExperienceIT.Web.Controllers
                     var volMapper = await _context.ProgramEventVolunteerMapper
                                     .Where(x => x.VolunteerId == volunteer.Id).ToListAsync();
                     ViewBag.VEM = volMapper;
+
+                    if (area!=null && area.Equals("Views") && volMapper.Count>0) { 
+                    var modelFilter = volMapper.Select(x => new ProgramEventViewModel()
+                    {
+                        Event = new EventMaster()
+                        {
+                            Id = x.EventMaster.Id,
+                            Name = x.EventMaster.Name,
+                            Description = x.EventMaster.Description,
+                            StartingDate = x.EventMaster.StartingDate,
+                            EndingDate = x.EventMaster.EndingDate,
+                            EnrollmentDate = x.EventMaster.EnrollmentDate,
+                            Venue = x.EventMaster.Venue,
+                            Duration = x.EventMaster.Duration,
+                            ImageUrl = x.EventMaster.ImageUrl
+                        },
+                        ProgramName = x.ProgramMaster.Name,
+                        ProgramId = x.ProgramMaster.Id
+                    }).OrderBy(x => x.ProgramName).ToList();
+                    
+                    return View(modelFilter);
+                    }
+
                 }
             }
 
@@ -183,7 +206,7 @@ namespace ExperienceIT.Web.Controllers
                 };
 
                 await _context.ProgramEventVolunteerMapper.AddAsync(volunteerEventProgramMapper);
-                message = "You were successfully registered for this event.Email confirmation has sent to you.";
+                message = "You were successfully registered for this event.This is the Email confirmation !";
             }
             else //UnRegister
             {
@@ -192,7 +215,7 @@ namespace ExperienceIT.Web.Controllers
                     .FirstOrDefaultAsync();
 
                 _context.ProgramEventVolunteerMapper.Remove(mapper);
-                message = "You were successfully un-registered from this event.Email confirmation has sent to you.";
+                message = "You were successfully un-registered from this event.This is the Email confirmation !";
             }
 
             await _context.SaveChangesAsync();
@@ -200,7 +223,7 @@ namespace ExperienceIT.Web.Controllers
 
             //Send Email
 
-            //await _emailSender.SendEmailAsync(User.Identity.Name, "Volunteer Registration", "You are registered");
+            await _emailSender.SendEmailAsync(User.Identity.Name, "Volunteer Registration", message);
 
 
 
