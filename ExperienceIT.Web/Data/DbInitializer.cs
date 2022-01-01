@@ -37,7 +37,7 @@ namespace ExperienceIT.Web.Data
             }
             catch (Exception ex)
             {
-
+                Console.WriteLine(ex.Message);
             }
 
             if (_db.Roles.Any(r => r.Name == Utility.SD.ManagerUser)) return;
@@ -49,7 +49,7 @@ namespace ExperienceIT.Web.Data
             _roleManager.CreateAsync(new IdentityRole(SD.GuestUser)).GetAwaiter().GetResult();
 
             // Data seeding for Admin User
-            _userManager.CreateAsync(new ApplicationUser
+           IdentityResult result = _userManager.CreateAsync(new ApplicationUser
             {
                 UserName = "ExpITGroup2@gmail.com",
                 Email = "ExpITGroup2@gmail.com",
@@ -61,11 +61,18 @@ namespace ExperienceIT.Web.Data
                 City = "Detroit",
                 State = "MI",
                 Zipcode = "48266"
+                
             }, "!23First").GetAwaiter().GetResult();
 
-            IdentityUser user = await _db.Users.FirstOrDefaultAsync(u => u.Email == "ExpITGroup2@gmail.com");
+            if (result.Succeeded) {
 
-            await _userManager.AddToRoleAsync(user, SD.ManagerUser);
+                IdentityUser user = await _db.Users.FirstOrDefaultAsync(u => u.Email == "ExpITGroup2@gmail.com");
+                if (user != null) { 
+                    IdentityResult roleResult=await _userManager.AddToRoleAsync(user, SD.ManagerUser);
+                    Console.WriteLine(roleResult.Succeeded);
+                    Console.WriteLine(roleResult.Errors.ToString());
+                }
+            }
 
         }
     }
