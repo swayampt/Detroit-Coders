@@ -19,6 +19,10 @@ namespace ExperienceIT.Web.Controllers
         {
             _context = context;
         }
+        protected override void Dispose(bool disposing)
+        {
+            _context.Dispose();
+        }
 
         //GET: Organizers
         public async Task<IActionResult> Index()

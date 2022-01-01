@@ -33,7 +33,10 @@ namespace ExperienceIT.Web.Controllers
             _userManager = userManager;
             _webHostEnvironment = webHostEnvironment;
         }
-
+        protected override void Dispose(bool disposing)
+        {
+            _context.Dispose();            
+        }
 
         // GET: EventMasters
         public async Task<IActionResult> Index(int? programId, string area)//passing program id to redirect into respective page.

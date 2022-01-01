@@ -22,6 +22,11 @@ namespace ExperienceIT.Web.Controllers
             _context = context;
         }
 
+        protected override void Dispose(bool disposing)
+        {
+            _context.Dispose();
+        }
+
         public IActionResult GetProgramPage(int programId)
         {
             return View(programId);
@@ -153,7 +158,7 @@ namespace ExperienceIT.Web.Controllers
 
             var programMaster = await _context.ProgramMaster.FirstOrDefaultAsync(m => m.Id == id);
             var orgMaster = await _context.OrganizerMaster.ToListAsync();
-            var eventMaster = await _context.EventMaster.ToListAsync();
+            //var eventMaster = await _context.EventMaster.ToListAsync();
 
             if (programMaster == null)
             {
@@ -164,20 +169,20 @@ namespace ExperienceIT.Web.Controllers
                 .Where(x => x.ProgramId == programMaster.Id)
                 .Select(x => x.OrganizerId).ToArrayAsync();
 
-            var eventMapper = await _context.ProgramEventMapper
-                .Where(x => x.ProgramId == programMaster.Id)
-                .Select(x => x.EventId).ToArrayAsync();
+            //var eventMapper = await _context.ProgramEventMapper
+            //    .Where(x => x.ProgramId == programMaster.Id)
+            //    .Select(x => x.EventId).ToArrayAsync();
 
             model.Program = programMaster;
             model.Organizations = orgMaster.ToList();
-            model.Events = eventMaster.ToList();
+            //model.Events = eventMaster.ToList();
             model.ProgramOrganizations = orgMaster
                                   .Where(x => prgOrgMapper.Contains(x.Id))
                                   .ToList();
 
-            model.ProgramEvents = eventMaster
-                            .Where(x => eventMapper.Contains(x.Id))
-                            .ToList();
+            //model.ProgramEvents = eventMaster
+            //                .Where(x => eventMapper.Contains(x.Id))
+            //                .ToList();
 
             return View(model);
         }
@@ -190,7 +195,7 @@ namespace ExperienceIT.Web.Controllers
         public async Task<IActionResult> Edit(ProgramOrganizerViewModel model)
         {
             var orgIds = Request.Form["orgIds"].ToString().Split(',');
-            var eventIds = Request.Form["eventIds"].ToString().Split(',');
+            //var eventIds = Request.Form["eventIds"].ToString().Split(',');
 
             var program = model.Program;
             _context.Update(program);
