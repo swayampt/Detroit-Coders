@@ -9,12 +9,6 @@ using ExperienceIT.Web.Data;
 using ExperienceIT.Web.Models;
 using ExperienceIT.Web.ViewModels;
 
-/// <summary>
-/// Author: ExperienceIT group2
-/// Description: This controller is  used for retrieving the list of available volunteers and also get 
-/// information about the particular Volunteer.
-/// </summary>
-
 namespace ExperienceIT.Web.Controllers
 {
     public class VolunteersController : Controller
@@ -24,6 +18,11 @@ namespace ExperienceIT.Web.Controllers
         public VolunteersController(ApplicationDbContext context)
         {
             _context = context;
+        }
+
+        protected override void Dispose(bool disposing)
+        {
+            _context.Dispose();
         }
 
         // GET: VolunteerMasters
