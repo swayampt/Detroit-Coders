@@ -4,55 +4,91 @@
     ViewData["Title"] = "Index";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
+@*<div class="card">
+        <br />
+        <div class="row">
+            <div class="col-md-6 form-group offset-md-5 align-content-md-center text-info"><h2>Our Programs</h2></div>
+        </div>
+    </div>*@
+@if (!User.IsInRole("ApplicationAdmin"))
+{
+    <div class="card">
+        <br />
+        <div class="row">
+            <div class="col-md-6 form-group offset-md-5 align-content-md-center text-info"><h2>Our Programs</h2></div>
+        </div>
+    </div>
+    @foreach (var item in Model.ProgramList)
+    {
+        <div class="card d-md-inline-flex m-md-3 p-md-4 text-center" style="width: 22rem; height:35rem;">
 
-
-        <div class="container p-3 bg-white">
-            <br />
-            
-                <div class="col-md-6 form-group offset-md-5 align-content-md-center text-info"><h2>Our Programs</h2></div>
-
-
-                @if (User.IsInRole("ApplicationAdmin"))
-                {
-                    <div class="text-right">
-                        <a><partial name="_CreateButtonPartial" /></a>
-                    </div>
+            <a class="card-header text-white bg-primary" href="@item.ProgramUrl" style="text-decoration:underline;" target="_blank">@item.Name</a>
+            <div class="card-body">
+                <p class="card-title font-weight-bold">Description</p>
+                <p class="card-text">@item.Description</p>
+                <p class="font-weight-bold">Sponsors</p>
+                @{
+                    var orgIds = Model.ProgramOrganizerMappers.Where(x => x.ProgramId == item.Id)
+                        .Select(x => x.OrganizerId).ToArray();
+                    var orgs = Model.Organizations.Where(x => orgIds.Contains(x.Id)).ToList();
                 }
-          
+                @*<ul style="list-style-type:none;">*@
+                @foreach (var org in orgs)
+                {
+                    <p> @org.Name,</p>
+                }
+                @*</ul>*@
 
-                <table class="table table-striped border">
-                    <tr class="table-secondary">
+            </div>
+            <p>
+                <div class="card-footer bg-primary text-white">
 
-
-                        <th>
-                            <label>Name</label>
-                        </th>
-                        <th class="col1">
-                            <label>Description</label>
-                        </th>
-                        <th>
-                            <label>&emsp;&nbsp;Sponsors</label>
-                        </th>
-                        @if (User.IsInRole("ApplicationAdmin"))
-                        {
-                            <th>
-                                <label>Action</label>
-                            </th>
-                        }
-                        else
-                        {
-                        <th colspan="2"></th>
-                        }
-                    </tr>
+                    @Html.ActionLink("View Events", "Index", "Events", new { programId = item.Id }, new { @class = "btn btn-primary" })
 
 
+                </div>
+
+        </div>
+    }
+}
+
+
+@if (User.IsInRole("ApplicationAdmin"))
+{
+    <div class="container">
+    <div class="card">
+        <br />
+        <div class="row">
+            <div class="col-md-6 form-group offset-md-5 align-content-md-center text-info"><h2>Our Programs</h2></div>
+
+           
+            <div class="col-12 text-right">
+                <a><partial name="_CreateButtonPartial" /></a>
+            </div>
+            <table class="table table-striped border" style="width:95%; margin-left:27px">
+                <tr class="table-secondary">
+                    
+                    <th>
+                        <label>Name</label>
+                    </th>
+                    <th>
+                        <label>Description</label>
+                    </th>
+                    <th>
+                        <label>&emsp;&nbsp;&emsp;&nbsp;Organizers</label>
+                    </th>
+                    <th>
+                        <label>Action</label>
+                    </th>
+                    <th colspan="2"></th>
+                </tr>
                 @foreach (var item in Model.ProgramList)
                 {
                     <tr>
                         <td>
                             <a href="@item.ProgramUrl" style="text-decoration:underline" target="_blank">@item.Name</a>
                         </td>
-                        <td>
+                        <td style="width:300px;height:50px;">
                             @Html.DisplayTextFor(modelItem => item.Description)
                         </td>
                         <td>
@@ -61,34 +97,34 @@
                                     .Select(x => x.OrganizerId).ToArray();
                                 var orgs = Model.Organizations.Where(x => orgIds.Contains(x.Id)).ToList();
                             }
-                            <ul>
+                            <ul style="list-style-type:none">
                                 @foreach (var org in orgs)
                                 {
-                                    <li style="list-style-type:none">@org.Name,</li>
+                                    <li>@org.Name,</li>
                                 }
                             </ul>
                         </td>
-
-                        <td>
-
-                            @if (User.IsInRole("ApplicationAdmin"))
-                            {
-
-                                <a asp-action="Edit" class="btn btn-primary px-md-5" asp-route-id="@item.Id">Edit</a>
-                            }
+                        <td colspan="2">
+                            <a asp-action="Edit" class="btn btn-primary px-md-5" asp-route-id="@item.Id">Edit</a>
 
                         </td>
-                        @if (!User.IsInRole("ApplicationAdmin"))
-                        {
-                            <td>
-                                @Html.ActionLink("View Events", "Index", "Events", new { programId = item.Id }, new { @class = "btn btn-primary btn-large" })
-                            </td>
-                        }
+
                     </tr>
                 }
-
-
             </table>
-         </div>
-           
-    
+
+        </div>
+    </div>
+
+
+    </div>
+                
+
+}
+
+
+
+
+
+
+
