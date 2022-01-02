@@ -4,21 +4,17 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-
-
 <div class="border backgroundwhite">
-    @*adding border,background and image*@
-    <div class="row">
-        @*the "row" class is used mainly to hold columns in it.*@
-        <div class="col-6">
-            @*element take half of the horizontal screen space devices.*@
-
+   
+    <div class="row">       
+        <div class="col-6">           
             <h2 class="section-title col-md-12 offset-md-6">
-
                 Our Sponsors
             </h2>
         </div>
         <br />
+
+        @*users point of view*@
 
         @if (User.IsInRole("ApplicationAdmin"))
         {
@@ -29,8 +25,8 @@
             </div>
         }
     </div>
-    @*Below code is e the implementaion for slick view*@
 
+    @*Below code is e the implementaion for slick view*@
     @if (!User.IsInRole("ApplicationAdmin"))
     {
         <div class="items">
@@ -40,11 +36,10 @@
                     <img src="~/images/OneMagnify_logo.jpg" />
                 </a>
             </div>
+
             <div>
                 <a href="https://www.dynatrace.com/" target="_blank" style="outline: none;">
                     <img src="~/images/dynatrace.png" />
-
-
                 </a>
             </div>
 
@@ -54,30 +49,34 @@
                     <img src="~/images/bcbs.png" />
                 </a>
             </div>
+
             <div>
                 <a class="x-image e46-28 m1a-s m1a-u m1a-v" href="https://galaxe.com/"
                    target="_blank" style="outline: none;">
                     <img src="~/images/galaxe.png" />
                 </a>
             </div>
+
             <div>
                 <a class="x-image e46-32 m1a-s m1a-u"
                    href="https://www.amrock.com/" target="_blank" style="outline: none;">
                     <img src="~/images/amrock.png" />
                 </a>
             </div>
+
             <div>
                 <a class="x-image e46-34 m1a-s m1a-u" href="https://www.rockethomes.com/"
                    target="_blank" style="outline: none;">
                     <img src="~/images/rockhome.png" />
                 </a>
             </div>
+
             <div>
                 <a class="x-image e46-36 m1a-s m1a-u m1a-v m1a-w" href="https://www.rockcentraldetroit.com/" target="_blank" style="outline: none;">
                     <img src="~/images/rockcentral.png" />
                 </a>
-
             </div>
+
             <div>
                 <a class="x-image e46-38 m1a-s m1a-u" href="https://www.rocketmortgage.com/"
                    target="_blank" style="outline: none;">
@@ -85,19 +84,17 @@
                 </a>
             </div>
 
-
         </div>
         <h3 class="section-subtitle text-info text-center">THANK YOU TO ALL OUR CURRENT Sponsors</h3>
-
     }
 
-
+    @*admin point of view*@
 
     @if (User.IsInRole("ApplicationAdmin"))
     {
         <table class="table table-striped border">
             <tr class="table-secondary">
-                @*<tr>*@
+               
             <tr>
                 <th>
                     @Html.DisplayNameFor(model => model.Name)
@@ -159,9 +156,6 @@
                     {
                         <partial name="_TableButtonPartial" model="item.Id" />                       
 
-                        <a asp-action="Edit" asp-route-id="@item.Id"></a>
-                        <a asp-action="Details" asp-route-id="@item.Id"></a>
-                        <a asp-action="Delete" asp-route-id="@item.Id"></a>
                     }
                 </tr>
             }
