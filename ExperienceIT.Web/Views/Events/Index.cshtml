@@ -47,7 +47,7 @@
         </div>
         @if (!User.IsInRole("ApplicationAdmin"))
         {
-            <a><partial name="_EventUserView" /></a>
+            <partial name="_EventUserView" />
         }
         else
         {

@@ -22,7 +22,6 @@ namespace ExperienceIT.Web.Models
         [Display(Name = "Event Description")]
         public string Description { get; set; }
 
-
         //saving image in server
         [Display(Name="Image")]
         public string ImageUrl { get; set; }
