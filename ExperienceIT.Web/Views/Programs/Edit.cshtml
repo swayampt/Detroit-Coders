@@ -6,7 +6,7 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 <div class="card w-75" style="margin-left:160px">
-    <form asp-action="Create" method="post">
+    <form asp-action="Edit" method="post">
         <div class="row">
             <div class="col-md-6 form-group offset-md-5 align-content-md-center text-info"><h2>Program-Edit</h2></div>
         </div>
@@ -20,6 +20,7 @@
             </div>
             <div class="col-xs-12 col-sm-6 col-md-8">
                 <input asp-for="Program.Name" class="form-control" style="width:342px" />
+                <input type="hidden" asp-for="Program.Id" class="form-control" />
             </div>
             <span asp-validation-for="Program.Name" class="text-danger"></span>
         </div>

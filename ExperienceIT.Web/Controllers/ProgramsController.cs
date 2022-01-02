@@ -200,7 +200,7 @@ namespace ExperienceIT.Web.Controllers
             var program = model.Program;
             _context.Update(program);
             await _context.SaveChangesAsync();
-
+            
             var programId = program.Id;
 
             foreach (var orgId in orgIds)
@@ -213,7 +213,7 @@ namespace ExperienceIT.Web.Controllers
                         OrganizerId = organizationId,
                         ProgramId = programId
                     };
-                    _context.Add(organizationMapper);
+                    _context.Update(organizationMapper);
                     await _context.SaveChangesAsync();
                 }
 
