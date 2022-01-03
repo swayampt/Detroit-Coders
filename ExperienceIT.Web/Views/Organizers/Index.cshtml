@@ -5,160 +5,158 @@
 }
 
 <div class="border backgroundwhite">
-   
-    <div class="row">       
-        <div class="col-6">           
-            <h2 class="section-title col-md-12 offset-md-6">
-                Our Sponsors
-            </h2>
-        </div>
-        <br />
+    <div class="backgroundwhite">
 
-        @*users point of view*@
+        <div class="row">
+            <div class="col-6">
+                <h2 class="section-title col-md-12 offset-md-6">
+                    Our Sponsors
+                </h2>
+            </div>
+            <br />
+
+            @*users point of view*@
+
+            @if (User.IsInRole("ApplicationAdmin"))
+            {
+                <div class="col-6 text-right">
+                    <br />
+                    @*move the columns to the right*@
+                    <a><partial name="_CreateButtonPartial" /></a>
+                </div>
+            }
+        </div>
+
+        @*Below code is e the implementaion for slick view*@
+        @if (!User.IsInRole("ApplicationAdmin"))
+        {
+            <div class="items">
+                <div>
+                    <a class="x-image e46-26 m1a-s m1a-u" href="https://onemagnify.com/"
+                       target="_blank" style="outline: none;">
+                        <img src="~/images/OneMagnify_logo.jpg" />
+                    </a>
+                </div>
+
+                <div>
+                    <a href="https://www.dynatrace.com/" target="_blank" style="outline: none;">
+                        <img src="~/images/dynatrace.png" />
+                    </a>
+                </div>
+
+                <div>
+                    <a class="x-image e46-30 m1a-s m1a-u"
+                       href="https://www.bcbs.com/" target="_blank" style="outline: none;">
+                        <img src="~/images/bcbs.png" />
+                    </a>
+                </div>
+
+                <div>
+                    <a class="x-image e46-28 m1a-s m1a-u m1a-v" href="https://galaxe.com/"
+                       target="_blank" style="outline: none;">
+                        <img src="~/images/galaxe.png" />
+                    </a>
+                </div>
+
+                <div>
+                    <a class="x-image e46-32 m1a-s m1a-u"
+                       href="https://www.amrock.com/" target="_blank" style="outline: none;">
+                        <img src="~/images/amrock.png" />
+                    </a>
+                </div>
+
+                <div>
+                    <a class="x-image e46-34 m1a-s m1a-u" href="https://www.rockethomes.com/"
+                       target="_blank" style="outline: none;">
+                        <img src="~/images/rockhome.png" />
+                    </a>
+                </div>
+
+                <div>
+                    <a class="x-image e46-36 m1a-s m1a-u m1a-v m1a-w" href="https://www.rockcentraldetroit.com/" target="_blank" style="outline: none;">
+                        <img src="~/images/rockcentral.png" />
+                    </a>
+                </div>
+
+                <div>
+                    <a class="x-image e46-38 m1a-s m1a-u" href="https://www.rocketmortgage.com/"
+                       target="_blank" style="outline: none;">
+                        <img src="~/images/rocket mortgage.png" />
+                    </a>
+                </div>
+
+            </div>
+            <h3 class="section-subtitle text-info text-center">THANK YOU TO ALL OUR CURRENT Sponsors</h3>
+        }
+
+        @*admin point of view*@
 
         @if (User.IsInRole("ApplicationAdmin"))
         {
-            <div class="col-6 text-right">
-                <br />
-                @*move the columns to the right*@
-                <a><partial name="_CreateButtonPartial" /></a>
-            </div>
-        }
-    </div>
-
-    @*Below code is e the implementaion for slick view*@
-    @if (!User.IsInRole("ApplicationAdmin"))
-    {
-        <div class="items">
-            <div>
-                <a class="x-image e46-26 m1a-s m1a-u" href="https://onemagnify.com/"
-                   target="_blank" style="outline: none;">
-                    <img src="~/images/OneMagnify_logo.jpg" />
-                </a>
-            </div>
-
-            <div>
-                <a href="https://www.dynatrace.com/" target="_blank" style="outline: none;">
-                    <img src="~/images/dynatrace.png" />
-                </a>
-            </div>
-
-            <div>
-                <a class="x-image e46-30 m1a-s m1a-u"
-                   href="https://www.bcbs.com/" target="_blank" style="outline: none;">
-                    <img src="~/images/bcbs.png" />
-                </a>
-            </div>
-
-            <div>
-                <a class="x-image e46-28 m1a-s m1a-u m1a-v" href="https://galaxe.com/"
-                   target="_blank" style="outline: none;">
-                    <img src="~/images/galaxe.png" />
-                </a>
-            </div>
-
-            <div>
-                <a class="x-image e46-32 m1a-s m1a-u"
-                   href="https://www.amrock.com/" target="_blank" style="outline: none;">
-                    <img src="~/images/amrock.png" />
-                </a>
-            </div>
-
-            <div>
-                <a class="x-image e46-34 m1a-s m1a-u" href="https://www.rockethomes.com/"
-                   target="_blank" style="outline: none;">
-                    <img src="~/images/rockhome.png" />
-                </a>
-            </div>
-
-            <div>
-                <a class="x-image e46-36 m1a-s m1a-u m1a-v m1a-w" href="https://www.rockcentraldetroit.com/" target="_blank" style="outline: none;">
-                    <img src="~/images/rockcentral.png" />
-                </a>
-            </div>
-
-            <div>
-                <a class="x-image e46-38 m1a-s m1a-u" href="https://www.rocketmortgage.com/"
-                   target="_blank" style="outline: none;">
-                    <img src="~/images/rocket mortgage.png" />
-                </a>
-            </div>
-
-        </div>
-        <h3 class="section-subtitle text-info text-center">THANK YOU TO ALL OUR CURRENT Sponsors</h3>
-    }
-
-    @*admin point of view*@
-
-    @if (User.IsInRole("ApplicationAdmin"))
-    {
-        <table class="table table-striped border">
-            <tr class="table-secondary">
-               
-            <tr>
-                <th>
-                    @Html.DisplayNameFor(model => model.Name)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.Address)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.City)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.State)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.Zipcode)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.Country)
-                </th>
-                @if (User.IsInRole("ApplicationAdmin"))
-                {
-                    <th>Action</th>
-                }
-                @*else if (User.Identity.IsAuthenticated)
+            <table class="table table-striped border">
+                <tr class="table-secondary">                
+                    <th>
+                        @Html.DisplayNameFor(model => model.Name)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Address)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.City)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.State)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Zipcode)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Country)
+                    </th>
+                    @if (User.IsInRole("ApplicationAdmin"))
+                    {
+                        <th colspan="2">Action</th>
+                    }
+                    @*else if (User.Identity.IsAuthenticated)
                     {
 
                         <th>Action</th>
-                    }*@
-
-                <th></th>
-
-            </tr>
+                    }*@                              
 
 
-            @foreach (var item in Model)
-            {
-                <tr>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Name)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Address)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.City)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.State)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Zipcode)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Country)
-                    </td>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Name)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Address)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.City)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.State)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Zipcode)
+                        </td>
+                        <td colspan="2">
+                            @Html.DisplayFor(modelItem => item.Country)
+                        </td>
 
 
-                    @if (User.IsInRole("ApplicationAdmin"))
-                    {
-                        <partial name="_TableButtonPartial" model="item.Id" />                       
+                        @if (User.IsInRole("ApplicationAdmin"))
+                        {
+                            <partial name="_TableButtonPartial" model="item.Id" />
 
-                    }
-                </tr>
-            }
-        </table>
-    }
+
+
+                        }
+                    </tr>
+                }
+            </table>
+        }
+    </div>
 </div>

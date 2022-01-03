@@ -1,14 +1,13 @@
-﻿@*@model ExperienceIT.Web.Models.ProgramMaster*@
-@model ProgramOrganizerViewModel
+﻿@model ProgramOrganizerViewModel
 
 @{
     ViewData["Title"] = "Edit";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-<div class="card w-75" style="margin-left:160px">
+<div class="card w-100" style="margin-left:50px">
     <form asp-action="Edit" method="post">
         <div class="row">
-            <div class="col-md-6 form-group offset-md-5 align-content-md-center text-info"><h2>Program-Edit</h2></div>
+            <div class="col-md-6 form-group offset-md-5 align-content-md-center text-info"><h3>Program-Edit</h3></div>
         </div>
         <div class="col-md-4 ml-4"><span style="color:#ff0000">* </span><i>is required field</i></div>
 
@@ -49,42 +48,56 @@
         <div class="form-group row">
             <div class="col-md-4 col-xs-6">
                 <h2 class="col-form-label ml-5 font-weight-normal">Sponsors<span style="color:#ff0000">*</span></h2>
-
             </div>
-            <div class="col-xs-12 col-sm-6 col-md-6">
-                @Html.DropDownListFor(s => s.OrganizationId,
-new SelectList(Model.Organizations, "Id", "Name"), "--Select Sponsor--", new { @class = "form-control", style = "width:342px" })
+            <div class="col-xs-12 col-sm-6 col-md-8">
+
+                @{
+                    var orgIdlist = Model.ProgramOrganizations.Select(x => x.Id).ToArray();
+                    <div class="row">
+                        @foreach (var orgItem in Model.Organizations)
+                        {
+
+                            <div class="col-sm-2">
+                                @if (orgIdlist.Contains(orgItem.Id))
+                                {
+                                    <input type="checkbox" name="orgIds" id="orgIds" checked value="@orgItem.Id" class="form-control" />@orgItem.Name
+                                }
+                                else
+                                {
+                                    <input type="checkbox" name="orgIds" id="orgIds" value="@orgItem.Id" class="form-control" />@orgItem.Name
+                                }
+                            </div>
+
+                        }
+                    </div>
+                }
             </div>
             <span asp-validation-for="OrganizationId" class="text-danger"></span>
-            <div class="col-2">
-                <input type="button" class="btn btn-primary px-md-4" id="addOrganizer" value="Add" />
 
-            </div>
         </div>
-        <ul id="organizers"></ul>
+        <div class="col-6 offset-3">
+            <partial name="_EditAndBackToListButton" model="Model.ProgramId" />
+        </div>
         <br />
-        <br />
-        <input type="hidden" id="orgIds" name="orgIds" />
-        <div class="d-flex justify-content-center align-items-center">
-            <input type="submit" value="Edit" class="btn btn-primary mx-2 px-4" />
+
+        @*<div class="d-flex justify-content-center align-items-center">
+            <input type="submit" value="Edit" id="submit" name="submit" class="btn btn-primary mx-2 px-4" />
             <a asp-action="Index" class="btn btn-info mx-3">Back to List </a>
-        </div>
+        </div>*@
     </form>
 </div>
-
 @section Scripts {
     <script type="text/javascript">
         var orgIds = '';
-        $("#addOrganizer").click(function () {
-            var orgtext = $("#OrganizationId").find('option:selected').text();
-            var org = $("#OrganizationId").val();
-            if (org > 0) {
-                var li = '<li>' + orgtext + '</li>'
-                $("#organizers").append(li);
-                orgIds = orgIds + org + ',';
-                $("#orgIds").val(orgIds);
+        $("#submit").click(function () {
+            for (i = 0; i < 5; i++) {
+                if (document.getElementsByName('orgIds')[i].checked) {
+                    return true;
+                }
             }
+            alert('Please Select a Sponsor!');
+            return false;
         });
-                                   
     </script>
 }
+

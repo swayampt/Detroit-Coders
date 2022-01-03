@@ -149,16 +149,17 @@ namespace ExperienceIT.Web.Controllers
                 return NotFound();
             }
 
-            var prgOrgMapper = await _context.ProgramOrganizerMapper
-                .Where(x => x.ProgramId == programMaster.Id)
-                .Select(x => x.OrganizerId).ToArrayAsync();
+            var prgOrgMapper = await _context.ProgramOrganizerMapper.ToListAsync();
+            var matchedOrg = prgOrgMapper.Where(x => x.ProgramId == programMaster.Id)
+                .Select(x => x.OrganizerId);
 
             
             model.Program = programMaster;
             model.Organizations = orgMaster.ToList();
             model.ProgramOrganizations = orgMaster
-                                  .Where(x => prgOrgMapper.Contains(x.Id))
+                                  .Where(x => matchedOrg.Contains(x.Id))
                                   .ToList();
+            model.ProgramOrganizerMappers = prgOrgMapper;
 
 
             return View(model);
@@ -171,12 +172,16 @@ namespace ExperienceIT.Web.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(ProgramOrganizerViewModel model)
         {
-            var orgIds = Request.Form["orgIds"].ToString().Split(',');
+            var orgIds = Request.Form["orgIds"];
             var program = model.Program;
             _context.Update(program);
             await _context.SaveChangesAsync();
             
             var programId = program.Id;
+            var prgOrgMapper = await _context.ProgramOrganizerMapper
+            .Where(x => x.ProgramId == programId).ToListAsync();
+            _context.RemoveRange(prgOrgMapper);
+            _context.SaveChanges();
 
             foreach (var orgId in orgIds)
             {

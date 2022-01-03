@@ -21,9 +21,10 @@
                 <label asp-for="Program.Name" class="col-form-label ml-5"></label>
             </div>
             <div class="col-xs-12 col-sm-6 col-md-8">
+                <span asp-validation-for="Program.Name" class="text-danger"></span>
+
                 <input asp-for="Program.Name" class="form-control" style="width:342px" />
             </div>
-            <span asp-validation-for="Program.Name" class="text-danger"></span>
         </div>
 
 
@@ -36,7 +37,7 @@
                     @Html.TextAreaFor(model => model.Program.Description)
                 </div>
             </div>
-            @Html.ValidationMessageFor(model => model.Program.Description, "", new { @class = "text-danger" })
+            @*@Html.ValidationMessageFor(model => model.Program.Description, "", new { @class = "text-danger" })*@
         </div>
 
 
@@ -55,11 +56,13 @@
                 <h2 class="col-form-label ml-5 font-weight-normal">Sponsors<span style="color:#ff0000">*</span></h2>
 
             </div>
-            <div class="col-xs-12 col-sm-6 col-md-6">
+
+            <div class="col-xs-12 col-sm-6">
+                <span asp-validation-for="OrganizationId" class="text-danger"></span>
+
                 @Html.DropDownListFor(s => s.OrganizationId,
 new SelectList(Model.Organizations, "Id", "Name"), "--Select Sponsor--", new { @class = "form-control", style = "width:342px" })
             </div>
-            <span asp-validation-for="OrganizationId" class="text-danger"></span>
             <div class="col-2">
                 <input type="button" class="btn btn-primary px-md-4" id="addOrganizer" value="Add" />
 
