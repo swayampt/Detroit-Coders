@@ -33,12 +33,7 @@
 
        <header>
         <nav class=" navbar navbar-expand-sm navbar-toggleable-sm navbar-dark bg-dark border-bottom box-shadow mb-4">
-            @*<nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light border-bottom box-shadow mb-3" style="background-color:antiquewhite; color:white;">*@
             <div class="container">
-                @*<a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">
-                        <img src="~/images/techflightNew.png" />
-                    </a>*@
-
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
                         aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
@@ -50,17 +45,10 @@
                             <img src="~/Images/dtwcoders.png" alt="Detroit Coders" class="rounded-circle" height="60" width="60" />
                         </a>
                     </div>
-                    @*<a class="nav-link " asp-area="" asp-controller="Home" asp-action="Index">iTechVolunteers</a>*@
 
 
                     <ul class="navbar-nav flex-md-grow-1">
-                        @if (User.IsInRole("ApplicationAdmin"))
-                        {
-                            <li class="nav-item navigation-item font-weight-bold">
-                                <a class="nav-link  navigation-link" asp-controller="Volunteers" asp-action="Index"><h4>Volunteers</h4></a>
-                            </li>
 
-                        }
                         <li class="nav-item navigation-item font-weight-bold">
                             <a class=" nav-link navigation-link" asp-controller="Programs" asp-action="Index"><h4>Programs</h4></a>
                         </li>
@@ -70,6 +58,13 @@
                         <li class="nav-item navigation-item font-weight-bold">
                             <a class=" nav-link navigation-link" asp-controller="Organizers" asp-action="Index"><h4>Sponsors</h4></a>
                         </li>
+                        @if (User.IsInRole("ApplicationAdmin"))
+                        {
+                            <li class="nav-item navigation-item font-weight-bold">
+                                <a class="nav-link  navigation-link" asp-controller="Volunteers" asp-action="Index"><h4>Volunteers</h4></a>
+                            </li>
+
+                        }
 
                     </ul>
                     <partial name="_LoginPartial"/>
@@ -83,11 +78,11 @@
         </main>
     </div>
 
-    @*<footer class="border-top footer text-muted">
+    <footer class="border-top footer text-muted">
             <div class="container">
-                &copy; 2021 - ExperienceIT.Web - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+                &copy; 2021 - Detroit Coders - <a asp-area="" asp-controller="Home" asp-action="Privacy">Code is like humor. You have to explain it.</a>
             </div>
-        </footer>*@
+        </footer>
 
     @RenderSection("Scripts", required: false)
     <script>
@@ -100,6 +95,6 @@
                 slidesToScroll: 3
             });
         });
-            </script>
+     </script>
 </body>
 </html>

@@ -74,11 +74,27 @@ new SelectList(Model.Organizations, "Id", "Name"), "--Select Sponsor--", new { @
         <br />
         <br />
         <input type="hidden" id="orgIds" name="orgIds" />
-        <div class="d-flex justify-content-center align-items-center">
-            <input type="submit" value="Create" class="btn btn-primary mx-2 px-4" />
-            <a asp-action="Index" class="btn btn-info mx-3">Back to List </a>
+        <div class="row">
+            <div class="col-sm-1"></div>
+            <div class="col-md-5">
+                <div class="form-group">
+                    <button type="submit" class="btn btn-primary form-control"><b>Save</b></button>
+                </div>
+            </div>
 
+            <div class="col-md-5">
+                <div>
+                    <a asp-action="Index" class="btn btn-info form-control"><b>Back to List</b></a>
+                </div>
+                <div class="col-sm-1"></div>
+            </div>
         </div>
+
+        @*<div class="d-flex justify-content-center align-items-center">
+            <input type="submit" value="Create" class="btn btn-primary mx-5 px-5" />
+            <a asp-action="Index" class="btn btn-info px-4">Back to List </a>
+
+        </div>*@
         <br />
     </form>
 </div>
