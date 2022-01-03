@@ -44,9 +44,7 @@ namespace ExperienceIT.Web.Controllers
             var model = new ProgramOrganizerViewModel()
             {
                 ProgramList = programMaster,
-                Organizations = organizations,
-                Events = events,
-                EventMappers = eventMapper,
+                Organizations = organizations,                
                 ProgramOrganizerMappers = orgMapper
             };
 
@@ -71,25 +69,14 @@ namespace ExperienceIT.Web.Controllers
             //for that program and storing it in an integer array
             var orgArray = await _context.ProgramOrganizerMapper
                 .Where(x => x.ProgramId == programMaster.Id)
-                .Select(x => x.OrganizerId).ToArrayAsync();
-
-            //Going to the EventMaster and getting all the Events (id)
-            //for that program and storing it in an integer array
-            var eventArray = await _context.ProgramEventMapper
-                .Where(x => x.ProgramId == programMaster.Id)
-                .Select(x => x.EventId).ToArrayAsync();
+                .Select(x => x.OrganizerId).ToArrayAsync();            
 
             model.Program = programMaster;
 
             //Look for the organization from the integer array and only
             //select those organizations
             model.Organizations = await _context.OrganizerMaster
-                .Where(x => orgArray.Contains(x.Id)).ToListAsync();
-
-            //Look for the events from the integer array and only
-            //select those events
-            model.Events = await _context.EventMaster
-                .Where(x => eventArray.Contains(x.Id)).ToListAsync();
+                .Where(x => orgArray.Contains(x.Id)).ToListAsync();            
 
             if (programMaster == null)
             {
@@ -105,9 +92,7 @@ namespace ExperienceIT.Web.Controllers
             var model = new ProgramOrganizerViewModel()
             {
                 Organizer = new OrganizerMaster(),
-                Organizations = await _context.OrganizerMaster.ToListAsync(),
-                Event=new EventMaster(),
-                Events=await _context.EventMaster.ToListAsync()
+                Organizations = await _context.OrganizerMaster.ToListAsync()                
             };
 
             return View(model);
@@ -158,8 +143,7 @@ namespace ExperienceIT.Web.Controllers
 
             var programMaster = await _context.ProgramMaster.FirstOrDefaultAsync(m => m.Id == id);
             var orgMaster = await _context.OrganizerMaster.ToListAsync();
-            //var eventMaster = await _context.EventMaster.ToListAsync();
-
+            
             if (programMaster == null)
             {
                 return NotFound();
@@ -169,20 +153,13 @@ namespace ExperienceIT.Web.Controllers
                 .Where(x => x.ProgramId == programMaster.Id)
                 .Select(x => x.OrganizerId).ToArrayAsync();
 
-            //var eventMapper = await _context.ProgramEventMapper
-            //    .Where(x => x.ProgramId == programMaster.Id)
-            //    .Select(x => x.EventId).ToArrayAsync();
-
+            
             model.Program = programMaster;
             model.Organizations = orgMaster.ToList();
-            //model.Events = eventMaster.ToList();
             model.ProgramOrganizations = orgMaster
                                   .Where(x => prgOrgMapper.Contains(x.Id))
                                   .ToList();
 
-            //model.ProgramEvents = eventMaster
-            //                .Where(x => eventMapper.Contains(x.Id))
-            //                .ToList();
 
             return View(model);
         }
@@ -195,8 +172,6 @@ namespace ExperienceIT.Web.Controllers
         public async Task<IActionResult> Edit(ProgramOrganizerViewModel model)
         {
             var orgIds = Request.Form["orgIds"].ToString().Split(',');
-            //var eventIds = Request.Form["eventIds"].ToString().Split(',');
-
             var program = model.Program;
             _context.Update(program);
             await _context.SaveChangesAsync();
@@ -224,6 +199,13 @@ namespace ExperienceIT.Web.Controllers
         // GET: Programs/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
+            
+
+
+
+
+            
+
             if (id == null)
             {
                 return NotFound();
@@ -244,6 +226,7 @@ namespace ExperienceIT.Web.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
+
             var programMaster = await _context.ProgramMaster.FindAsync(id);
             _context.ProgramMaster.Remove(programMaster);
             await _context.SaveChangesAsync();

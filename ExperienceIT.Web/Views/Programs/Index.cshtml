@@ -4,12 +4,6 @@
     ViewData["Title"] = "Index";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-@*<div class="card">
-        <br />
-        <div class="row">
-            <div class="col-md-6 form-group offset-md-5 align-content-md-center text-info"><h2>Our Programs</h2></div>
-        </div>
-    </div>*@
 @if (!User.IsInRole("ApplicationAdmin"))
 {
     <div class="card">
@@ -20,7 +14,7 @@
     </div>
     @foreach (var item in Model.ProgramList)
     {
-        <div class="card d-md-inline-flex m-md-3 p-md-4 text-center" style="width: 22rem; height:35rem;">
+        <div class="card d-md-inline-flex m-md-3 p-md-4 text-center" style="width: 22rem; height:30rem;">
 
             <a class="card-header text-white bg-primary" href="@item.ProgramUrl" style="text-decoration:underline;" target="_blank">@item.Name</a>
             <div class="card-body">
@@ -35,7 +29,7 @@
                 @*<ul style="list-style-type:none;">*@
                 @foreach (var org in orgs)
                 {
-                    <p> @org.Name,</p>
+                    <p> @org.Name</p>
                 }
                 @*</ul>*@
 
@@ -100,13 +94,13 @@
                             <ul style="list-style-type:none">
                                 @foreach (var org in orgs)
                                 {
-                                    <li>@org.Name,</li>
+                                    <li>@org.Name</li>
                                 }
                             </ul>
                         </td>
                         <td colspan="2">
                             <a asp-action="Edit" class="btn btn-primary px-md-5" asp-route-id="@item.Id">Edit</a>
-
+                            <a asp-action="Delete" class="btn btn-primary px-md-5" asp-route-id="@item.Id">Delete</a>
                         </td>
 
                     </tr>
