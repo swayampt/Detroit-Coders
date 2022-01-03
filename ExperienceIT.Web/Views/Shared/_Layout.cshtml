@@ -22,11 +22,11 @@
     @*Bootbox javascript file added under lib folder for register confirm message*@
     <script src="~/lib/bootbox.all.min.js"></script>
 
- </head>
-<body class="search-background">
+</head>
+<body class="search-background d-block w-100">
 
-       <header>
-        <nav class=" navbar navbar-expand-sm navbar-toggleable-sm navbar-dark bg-dark border-bottom box-shadow mb-4">
+    <header>
+        <nav class="navbar-expand-sm navbar-toggleable-sm navbar-dark bg-transparent box-shadow mb-4">
             <div class="container">
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
                         aria-expanded="false" aria-label="Toggle navigation">
@@ -61,7 +61,7 @@
                         }
 
                     </ul>
-                    <partial name="_LoginPartial"/>
+                    <partial name="_LoginPartial" />
                 </div>
             </div>
         </nav>
@@ -72,23 +72,26 @@
         </main>
     </div>
 
-    <footer class="border-top footer text-muted">
-            <div class="container">
-                &copy; 2021 - Detroit Coders - <a asp-area="" asp-controller="Home" asp-action="Privacy">Code is like humor. You have to explain it.</a>
-            </div>
-        </footer>
 
     @RenderSection("Scripts", required: false)
-    <script>
-        $(document).ready(function () {
-            $('li.active').removeClass('active');
-            $('a[href="' + location.pathname + '"]').closest('li').addClass('active');
-            $('.items').slick({
-                infinite: true,
-                slidesToShow: 3,
-                slidesToScroll: 3
-            });
-        });
-     </script>
+
+    <footer class="footer text-white" style="margin-bottom:-50px;">
+        <div class="container">
+            &copy; 2021 - Detroit Coders-"Code is like humor. You have to explain it".
+        </div>
+    </footer>
 </body>
 </html>
+<script>
+    $(document).ready(function () {
+        $('li.active').removeClass('active');
+        $('a[href="' + location.pathname + '"]').closest('li').addClass('active');
+        $('.items').slick({
+            infinite: true,
+            slidesToShow: 3,
+            slidesToScroll: 3
+        });
+    });
+</script>
+
+

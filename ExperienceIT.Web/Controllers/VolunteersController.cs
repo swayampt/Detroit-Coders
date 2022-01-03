@@ -8,7 +8,10 @@ using Microsoft.EntityFrameworkCore;
 using ExperienceIT.Web.Data;
 using ExperienceIT.Web.Models;
 using ExperienceIT.Web.ViewModels;
-
+/// <summary>
+/// Author: ExperienceIT group2    
+///Description:All the CRUD operations of Events are done here. But we used only Index and detail actions.
+/// </summary>
 namespace ExperienceIT.Web.Controllers
 {
     public class VolunteersController : Controller

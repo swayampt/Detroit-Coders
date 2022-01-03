@@ -8,7 +8,10 @@ using Microsoft.EntityFrameworkCore;
 using ExperienceIT.Web.Data;
 using ExperienceIT.Web.Models;
 using ExperienceIT.Web.ViewModels;
-
+/// <summary>
+/// Author: ExperienceIT group2    
+///Description:All the CRUD operations of Programs are done.
+/// </summary>
 namespace ExperienceIT.Web.Controllers
 {
     public class ProgramsController : Controller
@@ -203,13 +206,7 @@ namespace ExperienceIT.Web.Controllers
 
         // GET: Programs/Delete/5
         public async Task<IActionResult> Delete(int? id)
-        {
-            
-
-
-
-
-            
+        {     
 
             if (id == null)
             {

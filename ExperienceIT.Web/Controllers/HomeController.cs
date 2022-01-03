@@ -6,7 +6,9 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
-
+/// <summary>
+/// This is the Home page controller
+/// </summary>
 namespace ExperienceIT.Web.Controllers
 {
     public class HomeController : Controller
@@ -21,12 +23,7 @@ namespace ExperienceIT.Web.Controllers
         public IActionResult Index()
         {
             return View();
-        }
-
-        public IActionResult IndexHome()
-        {
-            return View();
-        }
+        }        
 
         public IActionResult Privacy()
         {

@@ -13,6 +13,11 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Hosting;
 using System.IO;
 using ExperienceIT.Web.Utility;
+/// <summary>
+///Author: ExperienceIT group2    
+///Description:All the CRUD operations of Events, view the particular event has chosen by Event Id, 
+///register and ungister the particular event and send grid email confirmation functionalities are done
+///</summary>
 
 namespace ExperienceIT.Web.Controllers
 {
@@ -95,32 +100,7 @@ namespace ExperienceIT.Web.Controllers
                 }
             }
 
-            //For every record in the programeventmapper you will have to create an
-            //instance of the programeventviewmodel and provide the values for all the
-            //properties - Event, ProgramId, ProgramName and ProgramList.
-
-            //List<ProgramEventViewModel> result = new List<ProgramEventViewModel>();
-
-            //foreach(var x in programEventMapper)
-            //{
-            //    var viewModel = new ProgramEventViewModel()
-            //    {
-            //        Event = new EventMaster()
-            //        {
-            //            Id = x.EventMaster.Id,
-            //            Name = x.EventMaster.Name,
-            //            Description = x.EventMaster.Description,
-            //            StartingDate = x.EventMaster.StartingDate,
-            //            EndingDate = x.EventMaster.EndingDate,
-            //            EnrollmentDate = x.EventMaster.EnrollmentDate,
-            //            Venue = x.EventMaster.Venue,
-            //            Duration = x.EventMaster.Duration
-            //        },
-            //        ProgramName = x.ProgramMaster.Name,
-            //        ProgramId = x.ProgramMaster.Id
-            //    };
-            //    result.Add(viewModel);
-            //}
+            
 
             var model = programEventMapper.Select(x => new ProgramEventViewModel()
             {
@@ -234,50 +214,7 @@ namespace ExperienceIT.Web.Controllers
             
         }
 
-        //public async Task<string> EmailConfirmation(int eventId, int progId, int flag)
-        //{
-        //    //Get logged in volunteer details
-
-        //    var user = await _userManager.GetUserAsync(User);
-        //    var userId = user.Id;
-        //    var message = string.Empty;
-
-        //    var volunteer = await _context.VolunteerMaster
-        //        .Where(x => x.UserId == userId).FirstOrDefaultAsync();
-
-        //    var volunteerId = volunteer.Id;
-
-        //    if (flag == 1) //Register
-        //    {
-        //        var volunteerEventProgramMapper = new ProgramEventVolunteerMapper()
-        //        {
-        //            ProgramId = progId,
-        //            EventId = eventId,
-        //            VolunteerId = volunteerId
-        //        };
-
-        //        await _context.ProgramEventVolunteerMapper.AddAsync(volunteerEventProgramMapper);
-        //        message = "You were successfully registered for this event.";
-        //    }
-        //    else //UnRegister
-        //    {
-        //        var mapper = await _context.ProgramEventVolunteerMapper.
-        //            Where(x => x.VolunteerId == volunteerId && x.EventId == eventId && x.ProgramId == progId)
-        //            .FirstOrDefaultAsync();
-
-        //        _context.ProgramEventVolunteerMapper.Remove(mapper);
-        //        message = "You were successfully un-registered from this event.";
-        //    }
-
-            
-            //Send Email
-
-        //    await _emailSender.SendEmailAsync(User.Identity.Name, "Volunteer Registration", "You are registered");
-
-        //    return message;
-
-        //}
-
+       
         // GET: EventMasters/Details/5
         public async Task<IActionResult> Details(int? id)
         {
@@ -318,9 +255,7 @@ namespace ExperienceIT.Web.Controllers
             if (ModelState.IsValid)
             {
                 _context.Add(model.Event);
-                await _context.SaveChangesAsync();
-
-                // Update the ProgramEventMapper
+                await _context.SaveChangesAsync();                
 
                 //Work on the image saving section
 
@@ -492,21 +427,7 @@ namespace ExperienceIT.Web.Controllers
             return _context.EventMaster.Any(e => e.Id == id);
         }
 
-        //public async Task<IActionResult> Register()
-        //{
-        //    string userName = User.Identity.Name;
-           
-        //    if(User.IsInRole("Volunteer"))
-        //    {
-        //        //Put entry into ProgramEventVolunteerMapper
-        //    }
-        //    else if (User.IsInRole("Student"))
-        //    {
-        //        //Put entry into ProgramEventStudentMapper
-        //    }
-
-        //    return RedirectToAction(nameof(Index));
-        //}
+       
 
     }
 }
