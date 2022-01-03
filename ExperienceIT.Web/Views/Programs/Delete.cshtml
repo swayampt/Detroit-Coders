@@ -1,19 +1,28 @@
-﻿@model ExperienceIT.Web.Models.ProgramMaster
+﻿@*Author: ExperienceIT group2
+    Description: Programs-Delete.cshtml used to delete the specific program .*@
+
+@model ExperienceIT.Web.Models.ProgramMaster
 
 @{
     ViewData["Title"] = "Delete";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
+
 <div class="row">
     <div class="col-md-10 offset-md-1">
         <div class="card">
             <form enctype="multipart/form-data" asp-action="Delete">
+
                 <br />
+
                 <div class="row">
                     <div class="col-md-6 form-group offset-md-5 align-content-md-center text-info"><h2>Delete Program</h2></div>
                 </div>
+
                 <br />
-                <input type="hidden" asp-for="Id" />
+
+                <input type="hidden" asp-for="Id" />@*to submit data elements from browser to server*@
+
                 <h3 class="offset-1">Are you sure you want to delete this?</h3>
 
                 <div class="row">
@@ -45,7 +54,7 @@
                     </div>
                     <div class="col-sm-1"></div>
                 </div>
-               
+
                 <div class="col-5 offset-4">
                     <partial name="_DeleteAndBackToListButton" model="Model.Id" />
                 </div>
@@ -54,4 +63,4 @@
             </form>
         </div>
     </div>
-    </div>
+</div>

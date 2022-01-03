@@ -1,4 +1,7 @@
-﻿@model ProgramEventViewModel
+﻿@*Author: ExperienceIT group2
+    Description: Events-Create.cshtml used to create new event .*@
+
+@model ProgramEventViewModel
 @{
     ViewData["Title"] = "Create";
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -16,7 +19,7 @@
                 <div class="col-md-6"><span style="color:#ff0000">* </span><i>is required field</i></div>
                 <div class="col-md-6 offset-md-1"></div>
                 <br />
-                
+
                 <div class="row">
                     <div class="col-sm-1"></div>
                     <div class="col-md-5">
@@ -85,9 +88,9 @@
                         </div>
                     </div>
                     <div class="col-md-5">
-                        <div class="form-group">                            
+                        <div class="form-group">
                             <label asp-for="Event.ImageUrl" class="control-label">Upload Image <span style="color:#ff0000">*</span></label>
-                            <input type="file" name="files" multiple class="form-control" />                            
+                            <input type="file" name="files" multiple class="form-control" />
                         </div>
                     </div>
 
@@ -120,7 +123,7 @@
 
 @section Scripts {
     @{
-    await Html.RenderPartialAsync("_ValidationScriptsPartial");
-}
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
 }
 

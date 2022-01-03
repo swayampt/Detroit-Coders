@@ -1,4 +1,7 @@
-﻿@model ExperienceIT.Web.Models.EventMaster
+﻿@*Author: ExperienceIT group2
+    Description:Events-Details.cshtml used to view the Details of the events and also it route to edit if needed .*@
+
+@model ExperienceIT.Web.Models.EventMaster
 
 @{
     ViewData["Title"] = "Details";
@@ -12,9 +15,9 @@
                 <br />
                 <div class="row">
                     <div class="col-md-6 form-group offset-md-5 align-content-md-center text-info"><h2>Event Details</h2></div>
-                </div>                
-                <input type="hidden" asp-for="Id" />            
-                <br/>
+                </div>
+                <input type="hidden" asp-for="Id" />
+                <br />
 
                 <div class="row">
                     <div class="col-sm-1"></div>
@@ -115,7 +118,7 @@
                     </div>
                     <div class="col-md-5">
                         <div class="form-group">
-                            <img src="@Model.ImageUrl" width="75" height="75"/>
+                            <img src="@Model.ImageUrl" width="75" height="75" />
                         </div>
                     </div>
                     <div class="col-sm-1"></div>
@@ -126,7 +129,7 @@
                 <div class="row">
                     <div class="col-sm-1"></div>
                     <div class="col-md-5">
-                        <div class="form-group">                            
+                        <div class="form-group">
                             <a asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-primary form-control">Edit</a>
                         </div>
                     </div>
@@ -145,23 +148,3 @@
     </div>
 </div>
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    
-   

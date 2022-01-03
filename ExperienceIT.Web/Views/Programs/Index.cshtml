@@ -1,134 +1,140 @@
-﻿@model ProgramOrganizerViewModel
+﻿@*Author: ExperienceIT group2
+    Description: Programs-Index.cshtml used to view the list of  programs .*@
+
+@model ProgramOrganizerViewModel
 
 @{
     ViewData["Title"] = "Index";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
+
+@*below code is for user point of view*@
 @if (!User.IsInRole("ApplicationAdmin"))
 {
     <div class="card">
         <br />
+
         <div class="row">
             <div class="col-md-6 form-group offset-md-5 align-content-md-center text-info"><h3>Our Programs</h3></div>
         </div>
     </div>
+
     @foreach (var item in Model.ProgramList)
     {
         <div class="card d-md-inline-flex m-md-3 p-md-4 text-center" style="width: 22rem; height:30rem;">
-
             <a class="card-header text-white bg-primary" href="@item.ProgramUrl" style="text-decoration:underline;" target="_blank">@item.Name</a>
+
             <div class="card-body">
                 <p class="card-title font-weight-bold">Description</p>
                 <p class="card-text">@item.Description</p>
                 <p class="font-weight-bold">Sponsors</p>
+
+                @*getting corresponding organizer id for the particular program*@
                 @{
                     var orgIds = Model.ProgramOrganizerMappers.Where(x => x.ProgramId == item.Id)
                         .Select(x => x.OrganizerId).ToArray();
                     var orgs = Model.Organizations.Where(x => orgIds.Contains(x.Id)).ToList();
                 }
-                @*<ul style="list-style-type:none;">*@
+
                 @foreach (var org in orgs)
                 {
                     <p> @org.Name</p>
                 }
-                @*</ul>*@
 
             </div>
+
             <p>
                 <div class="card-footer bg-primary text-white">
-
                     @Html.ActionLink("View Events", "Index", "Events", new { programId = item.Id }, new { @class = "btn btn-primary" })
-
-
                 </div>
+            </p>
 
         </div>
     }
 }
 
-
+@*below code is for admin point of view*@
 @if (User.IsInRole("ApplicationAdmin"))
 {
     <div class="container">
-    <div class="card">
-        <br />
-        <div class="row">
-            <div class="col-md-6 form-group offset-md-3 align-content-md-center text-info"><h1>Our Programs</h1></div>
+        <div class="card">
+            <br />
+            <div class="row">
 
-           
-            <div class="col-11 ml-4 text-right">
-                <a><partial name="_CreateButtonPartial" /></a>
-            </div>
-            <table class="table table-striped border" style="width:95%; margin-left:27px">
-                <tr class="table-secondary">
-                    
-                    <th>
-                        <label>&emsp;&nbsp;&emsp;&nbsp;&emsp;Name</label>
-                    </th>
-                    <th>
-                        
-                        <label>Description</label>
-                    </th>
-                    <th>
-                        <label>&emsp;&nbsp;&emsp;&nbsp;Organizers</label>
-                    </th>
-                    <th></th>
-                    <th>
-                        <label>Action</label>
-                    </th>
-                    
-                </tr>
-                @foreach (var item in Model.ProgramList)
-                {
-            <tr>
-                <td class="zoom">
-                    <a href="@item.ProgramUrl" style="text-decoration:underline;margin-left:50px" target="_blank">@item.Name</a>
-                </td>
-                <td style="width:300px;height:50px;">
-                    @Html.DisplayTextFor(modelItem => item.Description)
-                </td>
-                <td colspan="2">
-                    @{
-                        var orgIds = Model.ProgramOrganizerMappers.Where(x => x.ProgramId == item.Id)
-                            .Select(x => x.OrganizerId).ToArray();
-                        var orgs = Model.Organizations.Where(x => orgIds.Contains(x.Id)).ToList();
+                <div class="col-md-6 form-group offset-md-3 align-content-md-center text-info">
+                    <h1>Our Programs</h1>
+                </div>
+
+                <div class="col-11 ml-4 text-right">
+                    <a><partial name="_CreateButtonPartial" /></a>
+                </div>
+
+                <table class="table table-striped border" style="width:95%; margin-left:27px">
+                    <tr class="table-secondary">
+
+                        <th>
+                            <label>&emsp;&nbsp;&emsp;&nbsp;&emsp;Name</label>
+                        </th>
+
+                        <th>
+                            <label>Description</label>
+                        </th>
+
+                        <th>
+                            <label>&emsp;&nbsp;&emsp;&nbsp;Organizers</label>
+                        </th>
+
+                        <th></th>
+
+                        <th>
+                            <label>Action</label>
+                        </th>
+
+                    </tr>
+
+                    @foreach (var item in Model.ProgramList)
+                    {
+                        <tr>                           
+                            <td class="zoom">
+                                <br />
+                                <a href="@item.ProgramUrl" style="text-decoration:underline;margin-left:50px" target="_blank">@item.Name</a>
+                            </td>
+
+                            <td style="width:300px;height:50px;">
+                                @Html.DisplayTextFor(modelItem => item.Description)
+                            </td>
+
+                            <td colspan="2">
+                                @{
+                                    var orgIds = Model.ProgramOrganizerMappers.Where(x => x.ProgramId == item.Id)
+                                        .Select(x => x.OrganizerId).ToArray();
+                                    var orgs = Model.Organizations.Where(x => orgIds.Contains(x.Id)).ToList();
+                                }
+                                <ul style="list-style-type:none">
+                                    @foreach (var org in orgs)
+                                    {
+                                        <li>@org.Name</li>
+                                    }
+                                </ul>
+                            </td>
+
+                            <td style="width: 150px">
+                                <div class="btn-group" role="group">
+                                    <a class="btn btn-primary text-white" asp-action="Edit" asp-route-Id="@item.Id">
+                                        <i class="fas fa-edit"></i>
+                                    </a>
+                                    @*change color to danger*@
+                                    <a class="btn btn-danger text-white" asp-action="Delete" asp-route-Id="@item.Id">
+                                        <i class="fas fa-trash-alt"></i>
+                                    </a>
+                                </div>
+                            </td>
+
+                        </tr>
                     }
-                    <ul style="list-style-type:none">
-                        @foreach (var org in orgs)
-                        {
-                            <li>@org.Name</li>
-                        }
-                    </ul>
-                </td>
-
-                @*<td colspan="2">
-                    <a asp-action="Edit" class="btn btn-primary px-md-5" asp-route-id="@item.Id">Edit</a>
-                    <a asp-action="Delete" class="btn btn-primary px-md-5" asp-route-id="@item.Id">Delete</a>
-                </td>*@
-
-                <td style="width: 150px">
-                    <div class="btn-group" role="group">
-                        <a class="btn btn-primary text-white" asp-action="Edit" asp-route-Id="@item.Id">
-                            <i class="fas fa-edit"></i>
-                        </a>
-                         @*change color to danger*@
-                        <a class="btn btn-danger text-white" asp-action="Delete" asp-route-Id="@item.Id">
-                            <i class="fas fa-trash-alt"></i>
-                        </a>
-                    </div>
-                </td>
-
-            </tr>
-                }
-            </table>
+                </table>
+            </div>
         </div>
     </div>
-    </div>               
 
 }
-
-
-
-
-
-

@@ -1,4 +1,8 @@
-﻿@model ExperienceIT.Web.ViewModels.VolunteerOrganizationViewModel
+﻿@*Author: ExperienceIT group2
+    Description: Volunteer-Index.cshtml used to view the list of  Volunteers.
+    volunteer e-mail will redirect to his/her specific details.*@
+
+@model ExperienceIT.Web.ViewModels.VolunteerOrganizationViewModel
 @{
     ViewData["Title"] = "Index";
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -40,11 +44,12 @@
                         </td>
 
                         <td></td>
-
+                        @*to show volunteer e-mail*@
                         <td class="zoom">
                             @Html.ActionLink(item.User.Email, "Details", "Volunteers", new { id = item.Id, Style = "color: Red" }, null)
                         </td>
 
+                        @*to show volunteer workplace*@
                         <td>
                             @{
                                 var org = Model.organizationList.FirstOrDefault(o => o.Id.ToString() == item.CurrentOrganization);

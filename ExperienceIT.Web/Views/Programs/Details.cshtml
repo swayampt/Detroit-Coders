@@ -1,4 +1,7 @@
-﻿@model ProgramOrganizerViewModel
+﻿@*Author: ExperienceIT group2
+    Description: Programs-Details.cshtml used to show the program Details.*@
+
+@model ProgramOrganizerViewModel
 
 @{
     ViewData["Title"] = "Details";
@@ -6,7 +9,6 @@
 }
 
 <h1>Details</h1>
-
 <div>
     <h4>Program</h4>
     <hr />
@@ -25,6 +27,7 @@
         </dd>
     </dl>
     <hr />
+
     <h4>List of Organizers</h4>
     <ul>
         @foreach (var org in Model.Organizations)
@@ -33,14 +36,9 @@
         }
     </ul>
     <hr />
-    
 
 </div>
 <br />
 <div>
-    @*<a asp-action="Edit" class="btn btn-primary" asp-route-id="@Model.Program.Id">Edit</a>*@
-    @*<a asp-action="Edit" class="btn btn-primary" asp-route-id="@Model.Program.Id">Edit</a>*@
-
-
-    <a asp-action="Index" class="btn btn-primary">Back to List</a>
+       <a asp-action="Index" class="btn btn-primary">Back to List</a>
 </div>

@@ -1,4 +1,8 @@
-﻿@model IEnumerable<ExperienceIT.Web.Models.OrganizerMaster>
+﻿@*Author: ExperienceIT group2
+    Description: Sponsor-Index.cshtml used to view the list of Sponsors.
+    company logos redirect to corresponding comapany pages.*@
+
+@model IEnumerable<ExperienceIT.Web.Models.OrganizerMaster>
 @{
     ViewData["Title"] = "Index";
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -27,7 +31,7 @@
             }
         </div>
 
-        @*Below code is e the implementaion for slick view*@
+        @*Below code is for the implementaion for slick view*@
         @if (!User.IsInRole("ApplicationAdmin"))
         {
             <div class="items">
@@ -94,7 +98,7 @@
         @if (User.IsInRole("ApplicationAdmin"))
         {
             <table class="table table-striped border">
-                <tr class="table-secondary">                
+                <tr class="table-secondary">
                     <th>
                         @Html.DisplayNameFor(model => model.Name)
                     </th>
@@ -113,16 +117,12 @@
                     <th>
                         @Html.DisplayNameFor(model => model.Country)
                     </th>
+
                     @if (User.IsInRole("ApplicationAdmin"))
                     {
                         <th colspan="2">Action</th>
                     }
-                    @*else if (User.Identity.IsAuthenticated)
-                    {
-
-                        <th>Action</th>
-                    }*@                              
-
+                </tr>
 
                 @foreach (var item in Model)
                 {
@@ -150,8 +150,6 @@
                         @if (User.IsInRole("ApplicationAdmin"))
                         {
                             <partial name="_TableButtonPartial" model="item.Id" />
-
-
 
                         }
                     </tr>
