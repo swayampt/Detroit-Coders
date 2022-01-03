@@ -1,4 +1,9 @@
-﻿@using Microsoft.AspNetCore.Http
+﻿@*Author: ExperienceIT group2
+    Description: Events-Index.cshtml used to view the list of  Events with image. 
+    to register for event will redirect to corresponding pages,
+    for every register/unregister,will get confirmation emails.*@
+
+@using Microsoft.AspNetCore.Http
 @model IEnumerable<ProgramEventViewModel>
 @{
     ViewData["Title"] = "Index";
@@ -62,7 +67,7 @@
                             <th>
                                 Events
                             </th>
-                           
+
                             <th>
                                 @Html.DisplayNameFor(model => model.Event.StartingDate)-
                                 @Html.DisplayNameFor(model => model.Event.EndingDate)
@@ -90,9 +95,7 @@
                                 <th>Action</th>
                             }
 
-
                         </tr>
-
 
                         @foreach (var item in Model)
                         {
@@ -120,28 +123,9 @@
                                 <td>
                                     @Html.DisplayFor(modelItem => item.Event.Duration)
                                 </td>
-                                @*@if (User.Identity.IsAuthenticated)
-                                    {
-                                        if (User.IsInRole("ApplicationAdmin"))
-                                        {*@
+
                                 <partial name="_TableButtonPartial" model="item.Event.Id" />
-                                @*}
-                                            else
-                                            {
-                                                if (vems.Any(x => x.EventId == item.Event.Id))
-                                                {
-                                    <td>
-                                        <button class="btn btn-danger" id="Register" onclick="RegisterVolunteer(@item.Event.Id, @item.ProgramId,0)">UnRegister</button>
-                                    </td>
-                                                }
-                                                else
-                                                {
-                                    <td>
-                                        <button class="btn btn-primary px-md-4" id="Register" onclick="RegisterVolunteer(@item.Event.Id, @item.ProgramId,1)">Register</button>
-                                    </td>
-                                                }
-                                            }
-                                        }*@
+
                             </tr>
                         }
                     </table>
@@ -152,10 +136,7 @@
 </div>
 
 
-
-
-
-
+@*for Register/email confirmation.*@
 @section Scripts {
 
     <script type="text/javascript">
@@ -194,9 +175,5 @@
                 }
             });
         }
-
-
-
-
     </script>
 }

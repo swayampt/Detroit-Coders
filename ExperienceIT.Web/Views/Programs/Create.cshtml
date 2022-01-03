@@ -1,4 +1,7 @@
-﻿@model ProgramOrganizerViewModel
+﻿@*Author: ExperienceIT group2
+    Description: Programs-Create.cshtml used to Create new programs .*@
+
+@model ProgramOrganizerViewModel
 
 @{
     ViewData["Title"] = "Create";
@@ -9,20 +12,19 @@
     <br />
     <form asp-action="Create" method="post">
         <div class="row">
-
             <div class="col-md-6 form-group offset-md-5 align-content-md-center text-info"><h2>Our Programs</h2></div>
         </div>
+
         <div class="col-md-4 ml-4"><span style="color:#ff0000">* </span><i>is required field</i></div>
 
-
         <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+        
         <div class="form-group row">
             <div class="col-md-4 col-xs-6">
                 <label asp-for="Program.Name" class="col-form-label ml-5"></label>
             </div>
             <div class="col-xs-12 col-sm-6 col-md-8">
                 <span asp-validation-for="Program.Name" class="text-danger"></span>
-
                 <input asp-for="Program.Name" class="form-control" style="width:342px" />
             </div>
         </div>
@@ -37,9 +39,7 @@
                     @Html.TextAreaFor(model => model.Program.Description)
                 </div>
             </div>
-            @*@Html.ValidationMessageFor(model => model.Program.Description, "", new { @class = "text-danger" })*@
-        </div>
-
+               </div>
 
         <div class="form-group row">
             <div class="col-md-4 col-xs-6">
@@ -54,24 +54,15 @@
         <div class="form-group row">
             <div class="col-md-4 col-xs-6">
                 <h2 class="col-form-label ml-5 font-weight-normal">Sponsors<span style="color:#ff0000">*</span></h2>
-
             </div>
-
             <div class="col-xs-12 col-sm-6">
                 <span asp-validation-for="OrganizationId" class="text-danger"></span>
-
-                @Html.DropDownListFor(s => s.OrganizationId,
-new SelectList(Model.Organizations, "Id", "Name"), "--Select Sponsor--", new { @class = "form-control", style = "width:342px" })
+                @Html.DropDownListFor(s => s.OrganizationId,new SelectList(Model.Organizations, "Id", "Name"), "--Select Sponsor--", new { @class = "form-control", style = "width:342px" })
             </div>
             <div class="col-2">
                 <input type="button" class="btn btn-primary px-md-4" id="addOrganizer" value="Add" />
-
             </div>
         </div>
-
-
-
-
 
         <ul id="organizers"></ul>
         <br />
@@ -92,12 +83,6 @@ new SelectList(Model.Organizations, "Id", "Name"), "--Select Sponsor--", new { @
                 <div class="col-sm-1"></div>
             </div>
         </div>
-
-        @*<div class="d-flex justify-content-center align-items-center">
-            <input type="submit" value="Create" class="btn btn-primary mx-5 px-5" />
-            <a asp-action="Index" class="btn btn-info px-4">Back to List </a>
-
-        </div>*@
         <br />
     </form>
 </div>
@@ -105,7 +90,7 @@ new SelectList(Model.Organizations, "Id", "Name"), "--Select Sponsor--", new { @
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");
     }
-
+@*multiple sponsor selection to add during creating program *@
     <script type="text/javascript">
         var orgIds = '';
         $("#addOrganizer").click(function () {

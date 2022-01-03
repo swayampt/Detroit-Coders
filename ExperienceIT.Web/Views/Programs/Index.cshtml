@@ -1,4 +1,6 @@
-﻿
+﻿@*Author: ExperienceIT group2
+    Description: Programs-Index.cshtml used to view the list of  programs .*@
+
 @model ProgramOrganizerViewModel
 
 @{
@@ -6,6 +8,7 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
+@*below code is for user point of view*@
 @if (!User.IsInRole("ApplicationAdmin"))
 {
     <div class="card">
@@ -25,6 +28,8 @@
                 <p class="card-title font-weight-bold">Description</p>
                 <p class="card-text">@item.Description</p>
                 <p class="font-weight-bold">Sponsors</p>
+
+                @*getting corresponding organizer id for the particular program*@
                 @{
                     var orgIds = Model.ProgramOrganizerMappers.Where(x => x.ProgramId == item.Id)
                         .Select(x => x.OrganizerId).ToArray();
@@ -48,6 +53,7 @@
     }
 }
 
+@*below code is for admin point of view*@
 @if (User.IsInRole("ApplicationAdmin"))
 {
     <div class="container">
@@ -88,8 +94,9 @@
 
                     @foreach (var item in Model.ProgramList)
                     {
-                        <tr>
+                        <tr>                           
                             <td class="zoom">
+                                <br />
                                 <a href="@item.ProgramUrl" style="text-decoration:underline;margin-left:50px" target="_blank">@item.Name</a>
                             </td>
 

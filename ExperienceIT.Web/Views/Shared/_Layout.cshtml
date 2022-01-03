@@ -1,4 +1,5 @@
-﻿<!DOCTYPE html>
+﻿
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8" />
@@ -19,13 +20,13 @@
     <script src="~/js/site.js" asp-append-version="true"></script>
     @*this script content is downloaded from internet and copied into a local js file under lib folder*@
     <script src="~/lib/slick.min.js"></script>
-    @*Bootbox javascript file added under lib folder for register confirm message*@
+    @*Bootbox javascript file added under lib folder for event-register confirm message*@
     <script src="~/lib/bootbox.all.min.js"></script>
 
- </head>
+</head>
 <body class="search-background">
 
-       <header>
+    <header>
         <nav class=" navbar navbar-expand-sm navbar-toggleable-sm navbar-dark bg-dark border-bottom box-shadow mb-4">
             <div class="container">
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
@@ -61,7 +62,7 @@
                         }
 
                     </ul>
-                    <partial name="_LoginPartial"/>
+                    <partial name="_LoginPartial" />
                 </div>
             </div>
         </nav>
@@ -73,12 +74,13 @@
     </div>
 
     <footer class="border-top footer text-muted">
-            <div class="container">
-                &copy; 2021 - Detroit Coders - <a asp-area="" asp-controller="Home" asp-action="Privacy">Code is like humor. You have to explain it.</a>
-            </div>
-        </footer>
+        <div class="container">
+            &copy; 2021 - Detroit Coders - <a asp-area="" asp-controller="Home" asp-action="Privacy">Code is like humor. You have to explain it.</a>
+        </div>
+    </footer>
 
     @RenderSection("Scripts", required: false)
+   
     <script>
         $(document).ready(function () {
             $('li.active').removeClass('active');
@@ -89,6 +91,6 @@
                 slidesToScroll: 3
             });
         });
-     </script>
+    </script>
 </body>
 </html>

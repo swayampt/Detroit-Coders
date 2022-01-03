@@ -1,4 +1,7 @@
-﻿@model ExperienceIT.Web.Models.EventMaster
+﻿@*Author: ExperienceIT group2
+    Description:Events-Edit.cshtml used to Edit the Event fields.*@
+
+@model ExperienceIT.Web.Models.EventMaster
 @{
     ViewData["Title"] = "Edit";
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -7,7 +10,7 @@
 <div class="row">
     <div class="col-md-10 offset-md-1">
         <div class="card">
-            <form  enctype="multipart/form-data" asp-action="Edit" >
+            <form enctype="multipart/form-data" asp-action="Edit">
                 <br />
                 <div class="row">
                     <div class="col-md-6 form-group offset-md-5 align-content-md-center text-info"><h2>Edit Event</h2></div>
@@ -24,10 +27,11 @@
                             <span asp-validation-for="Name" class="text-danger"></span>
                         </div>
                     </div>
+
                     <div class="col-md-5">
                         <div class="form-group">
                             <label asp-for="Description" class="control-label">Event Discription <span style="color:#ff0000">*</span></label>
-                            @Html.TextAreaFor(model => model.Description, new { @class = "form-control" } )
+                            @Html.TextAreaFor(model => model.Description, new { @class = "form-control" })
                             <span asp-validation-for="Description" class="text-danger"></span>
                         </div>
                     </div>
@@ -43,6 +47,7 @@
                             <span asp-validation-for="StartingDate" class="text-danger"></span>
                         </div>
                     </div>
+
                     <div class="col-md-5">
                         <div class="form-group">
                             <label asp-for="EndingDate" class="control-label">End Date <span style="color:#ff0000">*</span></label>
@@ -62,6 +67,7 @@
                             <span asp-validation-for="Venue" class="text-danger"></span>
                         </div>
                     </div>
+
                     <div class="col-md-5">
                         <div class="form-group">
                             <label asp-for="Duration" class="control-label">Timing <span style="color:#ff0000">*</span></label>
@@ -81,6 +87,7 @@
                             <span asp-validation-for="Venue" class="text-danger"></span>
                         </div>
                     </div>
+
                     <div class="col-md-5">
                         <div class="form-group">
                             <label asp-for="ImageUrl" class="control-label"></label>
@@ -97,7 +104,7 @@
                     <div class="col-sm-1"></div>
                     <div class="col-md-5">
                         <div class="form-group">
-                            <button type="submit" class="btn btn-primary form-control" ><b>Update</b></button>
+                            <button type="submit" class="btn btn-primary form-control"><b>Update</b></button>
                         </div>
                     </div>
 
@@ -115,32 +122,6 @@
 
 @section Scripts {
     @{
-    await Html.RenderPartialAsync("_ValidationScriptsPartial");
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
 }
-}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
