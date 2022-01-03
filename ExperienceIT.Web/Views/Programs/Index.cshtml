@@ -9,7 +9,7 @@
     <div class="card">
         <br />
         <div class="row">
-            <div class="col-md-6 form-group offset-md-5 align-content-md-center text-info"><h2>Our Programs</h2></div>
+            <div class="col-md-6 form-group offset-md-5 align-content-md-center text-info"><h3>Our Programs</h3></div>
         </div>
     </div>
     @foreach (var item in Model.ProgramList)
@@ -78,41 +78,50 @@
                 </tr>
                 @foreach (var item in Model.ProgramList)
                 {
-                    <tr>
-                        <td>
-                            <a href="@item.ProgramUrl" style="text-decoration:underline" target="_blank">@item.Name</a>
-                        </td>
-                        <td style="width:300px;height:50px;">
-                            @Html.DisplayTextFor(modelItem => item.Description)
-                        </td>
-                        <td>
-                            @{
-                                var orgIds = Model.ProgramOrganizerMappers.Where(x => x.ProgramId == item.Id)
-                                    .Select(x => x.OrganizerId).ToArray();
-                                var orgs = Model.Organizations.Where(x => orgIds.Contains(x.Id)).ToList();
-                            }
-                            <ul style="list-style-type:none">
-                                @foreach (var org in orgs)
-                                {
-                                    <li>@org.Name</li>
-                                }
-                            </ul>
-                        </td>
-                        <td colspan="2">
-                            <a asp-action="Edit" class="btn btn-primary px-md-5" asp-route-id="@item.Id">Edit</a>
-                            <a asp-action="Delete" class="btn btn-primary px-md-5" asp-route-id="@item.Id">Delete</a>
-                        </td>
+            <tr>
+                <td>
+                    <a href="@item.ProgramUrl" style="text-decoration:underline" target="_blank">@item.Name</a>
+                </td>
+                <td style="width:300px;height:50px;">
+                    @Html.DisplayTextFor(modelItem => item.Description)
+                </td>
+                <td>
+                    @{
+                        var orgIds = Model.ProgramOrganizerMappers.Where(x => x.ProgramId == item.Id)
+                            .Select(x => x.OrganizerId).ToArray();
+                        var orgs = Model.Organizations.Where(x => orgIds.Contains(x.Id)).ToList();
+                    }
+                    <ul style="list-style-type:none">
+                        @foreach (var org in orgs)
+                        {
+                            <li>@org.Name</li>
+                        }
+                    </ul>
+                </td>
 
-                    </tr>
+                @*<td colspan="2">
+                    <a asp-action="Edit" class="btn btn-primary px-md-5" asp-route-id="@item.Id">Edit</a>
+                    <a asp-action="Delete" class="btn btn-primary px-md-5" asp-route-id="@item.Id">Delete</a>
+                </td>*@
+
+                <td style="width: 150px">
+                    <div class="btn-group" role="group">
+                        <a class="btn btn-primary text-white" asp-action="Edit" asp-route-Id="@item.Id">
+                            <i class="fas fa-edit"></i>
+                        </a>
+                         @*change color to danger*@
+                        <a class="btn btn-danger text-white" asp-action="Delete" asp-route-Id="@item.Id">
+                            <i class="fas fa-trash-alt"></i>
+                        </a>
+                    </div>
+                </td>
+
+            </tr>
                 }
             </table>
-
         </div>
     </div>
-
-
-    </div>
-                
+    </div>               
 
 }
 
