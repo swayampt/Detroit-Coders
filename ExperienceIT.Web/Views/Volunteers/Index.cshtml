@@ -4,61 +4,63 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<div class="border backgroundwhite ">    
-    <div class="backgroundwhite">        
-            <h3 class="text-center section-title col-md-12">Our Volunteers</h3>
+<div class="border backgroundwhite ">
+    <div class="backgroundwhite">
+        <h3 class="text-center section-title col-md-12">Our Volunteers</h3>
         <br />
-           
-                @if (Model.volunteers.Count() > 0)
-                {
-                    <table class="table table-striped border">
-                        <tr class="table-secondary">
-                            <th>
-                                First Name
-                            </th>
-                            <th>
-                                Last Name
-                            </th>
-                            <th></th>
-                            <th>
-                                Email
-                            </th>
-                            <th>
-                                Sponsoring Company
-                            </th>
-                        </tr>
 
-                        @foreach (var item in Model.volunteers)
-                        {
-                            <tr>
-                                <td>
-                                    @Html.DisplayFor(m => item.FirstName)
-                                </td>
-                                <td>
-                                    @Html.DisplayFor(m => item.LastName)
-                                </td>
+        @if (Model.volunteers.Count() > 0)
+        {
+            <table class="table table-striped border">
+                <tr class="table-secondary">
+                    <th>
+                        First Name
+                    </th>
+                    <th>
+                        Last Name
+                    </th>
+                    <th></th>
+                    <th>
+                        Email
+                    </th>
+                    <th>
+                        Sponsoring Company
+                    </th>
+                </tr>
 
-                                <td>
-                                    @*<a href="/Volunteers/details/">@Html.DisplayFor(m => item.User.Email)</a>*@
-                                <td>
-                                    @Html.ActionLink(item.User.Email, "Details", "Volunteers", new { id = item.Id, Style = "color: Red" }, null)
-                            </td>
-                            <td>
-                                @{
-                                    var org = Model.organizationList.FirstOrDefault(o => o.Id.ToString() == item.CurrentOrganization);
-                                    var orgName = org == null ? "" : org.Name;
-                                }
-                                @orgName
-                            </td>
-                        </tr>
-                    }
-                    </table>
-                }
-                else
+                @foreach (var item in Model.volunteers)
                 {
-                    <p>No Volunteer Exists...</p>
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(m => item.FirstName)
+                        </td>
+
+                        <td>
+                            @Html.DisplayFor(m => item.LastName)
+                        </td>
+
+                        <td></td>
+
+                        <td class="zoom">
+                            @Html.ActionLink(item.User.Email, "Details", "Volunteers", new { id = item.Id, Style = "color: Red" }, null)
+                        </td>
+
+                        <td>
+                            @{
+                                var org = Model.organizationList.FirstOrDefault(o => o.Id.ToString() == item.CurrentOrganization);
+                                var orgName = org == null ? "" : org.Name;
+                            }
+                            @orgName
+                        </td>
+                    </tr>
                 }
-            </div>
-        </div>
+            </table>
+        }
+        else
+        {
+            <p>No Volunteer Exists...</p>
+        }
+    </div>
+</div>
 
 

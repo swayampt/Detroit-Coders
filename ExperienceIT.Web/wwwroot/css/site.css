@@ -29,9 +29,9 @@ a {
 .navigation-item.active:after {
     background-color: #3a9cac;
     content: " ";
-    display: block;
+    display:block;
     height: 5px;
-    width: 100%;
+    width: 80%;
 }
 /*slickCarousel*/
 .items {
@@ -51,12 +51,9 @@ a {
 
 .section-title, .text-block h2 {
     color: #3a9cac;
-    /*font-family: AbrilFatface,cursive;*/
+    
     font-size: 40px;
-   /* font-style: italic;
-    font-weight: 400;
-    line-height: 1;
-    margin-bottom: 0.85em;*/
+  
     text-align: center;
 }
 
@@ -74,6 +71,13 @@ a {
     text-align: center;
     text-transform: uppercase;
 }
+
+.zoom:hover {
+    -ms-transform: scale(1.5);
+    
+    transform: scale(1.5);
+}
+
 /* Sticky footer styles
 -------------------------------------------------- */
 html {

@@ -53,39 +53,41 @@
     <div class="card">
         <br />
         <div class="row">
-            <div class="col-md-6 form-group offset-md-5 align-content-md-center text-info"><h2>Our Programs</h2></div>
+            <div class="col-md-6 form-group offset-md-3 align-content-md-center text-info"><h1>Our Programs</h1></div>
 
            
-            <div class="col-12 text-right">
+            <div class="col-11 ml-4 text-right">
                 <a><partial name="_CreateButtonPartial" /></a>
             </div>
             <table class="table table-striped border" style="width:95%; margin-left:27px">
                 <tr class="table-secondary">
                     
                     <th>
-                        <label>Name</label>
+                        <label>&emsp;&nbsp;&emsp;&nbsp;&emsp;Name</label>
                     </th>
                     <th>
+                        
                         <label>Description</label>
                     </th>
                     <th>
                         <label>&emsp;&nbsp;&emsp;&nbsp;Organizers</label>
                     </th>
+                    <th></th>
                     <th>
                         <label>Action</label>
                     </th>
-                    <th colspan="2"></th>
+                    
                 </tr>
                 @foreach (var item in Model.ProgramList)
                 {
             <tr>
-                <td>
-                    <a href="@item.ProgramUrl" style="text-decoration:underline" target="_blank">@item.Name</a>
+                <td class="zoom">
+                    <a href="@item.ProgramUrl" style="text-decoration:underline;margin-left:50px" target="_blank">@item.Name</a>
                 </td>
                 <td style="width:300px;height:50px;">
                     @Html.DisplayTextFor(modelItem => item.Description)
                 </td>
-                <td>
+                <td colspan="2">
                     @{
                         var orgIds = Model.ProgramOrganizerMappers.Where(x => x.ProgramId == item.Id)
                             .Select(x => x.OrganizerId).ToArray();
@@ -124,7 +126,6 @@
     </div>               
 
 }
-
 
 
 

@@ -22,13 +22,7 @@
     @*Bootbox javascript file added under lib folder for register confirm message*@
     <script src="~/lib/bootbox.all.min.js"></script>
 
-    <style>
-        a:hover {
-            background-color:flavor;
-        }
-    </style>
-
-</head>
+ </head>
 <body class="search-background">
 
        <header>
@@ -41,7 +35,7 @@
                 <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row">
 
                     <div class="navbar-header pull-left">
-                        <a class=" nav-link active font-weight-bold" asp-area="" asp-controller="Home" asp-action="Index">
+                        <a class=" zoom nav-link active font-weight-bold mr-2" asp-area="" asp-controller="Home" asp-action="Index">
                             <img src="~/Images/dtwcoders.png" alt="Detroit Coders" class="rounded-circle" height="60" width="60" />
                         </a>
                     </div>
@@ -50,18 +44,18 @@
                     <ul class="navbar-nav flex-md-grow-1">
 
                         <li class="nav-item navigation-item font-weight-bold">
-                            <a class=" nav-link navigation-link" asp-controller="Programs" asp-action="Index"><h4>Programs</h4></a>
+                            <a class=" zoom nav-link navigation-link mr-4" asp-controller="Programs" asp-action="Index"><h4 style="color:white">Programs</h4></a>
                         </li>
                         <li class="nav-item navigation-item font-weight-bold">
-                            <a class=" nav-link navigation-link " asp-controller="Events" asp-action="Index"><h4>Events</h4></a>
+                            <a class="zoom nav-link navigation-link mr-4 " asp-controller="Events" asp-action="Index"><h4 style="color:white">Events</h4></a>
                         </li>
                         <li class="nav-item navigation-item font-weight-bold">
-                            <a class=" nav-link navigation-link" asp-controller="Organizers" asp-action="Index"><h4>Sponsors</h4></a>
+                            <a class=" zoom nav-link navigation-link mr-4" asp-controller="Organizers" asp-action="Index"><h4 style="color:white">Sponsors</h4></a>
                         </li>
                         @if (User.IsInRole("ApplicationAdmin"))
                         {
                             <li class="nav-item navigation-item font-weight-bold">
-                                <a class="nav-link  navigation-link" asp-controller="Volunteers" asp-action="Index"><h4>Volunteers</h4></a>
+                                <a class="zoom nav-link  navigation-link mr-4" asp-controller="Volunteers" asp-action="Index"><h4 style="color:white">Volunteers</h4></a>
                             </li>
 
                         }
