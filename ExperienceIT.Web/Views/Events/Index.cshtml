@@ -9,132 +9,132 @@
     ViewData["Title"] = "Index";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-
-@{
-    var vems = new List<ProgramEventVolunteerMapper>();
-    if (User.Identity.IsAuthenticated)
-    {
-        if (!User.IsInRole("ApplicationAdmin"))
+<div class="container">
+    @{
+        var vems = new List<ProgramEventVolunteerMapper>();
+        if (User.Identity.IsAuthenticated)
         {
-            vems = (List<ProgramEventVolunteerMapper>)ViewBag.VEM;
+            if (!User.IsInRole("ApplicationAdmin"))
+            {
+                vems = (List<ProgramEventVolunteerMapper>)ViewBag.VEM;
+            }
         }
     }
-}
 
 
-<div class="card">
-    <div class="backgroundwhite">
-        <h3 class="text-center section-title col-md-12">Our Events</h3>
-        <div class="row">
-
-            <div class="col-md-12 text-right">
-
-                @if (User.IsInRole("ApplicationAdmin"))
-                {
-                    <a><partial name="_CreateButtonPartial" /></a>
-                }
-                else if (User.IsInRole("Volunteer") && vems.Count == 0)
-                {
-                    <h3 class="text-right text-info">You have not signed up for any Events yet!!</h3>
-                }
-                else if (User.IsInRole("Volunteer") && vems.Count > 0)
-                {
-                    if (ViewContext.ModelState["area"] != null && ViewContext.ModelState["area"].AttemptedValue == "Views")
-                    {
-                        <h3 class="text-right text-info">Thanks for Volunteering !! <a href='/Events'>Click Here</a> to View All Events!</h3>
-                    }
-                }
-                else if (!User.Identity.IsAuthenticated)
-                {
-                    <h3 class="text-right text-info">To Register to an Event, Please <a href="/Identity/Account/Register">Sign Up!</a></h3>
-                }
-            </div>
-        </div>
-        @if (!User.IsInRole("ApplicationAdmin"))
-        {
-            <partial name="_EventUserView" />
-        }
-        else
-        {
+    <div class="card">
+        <div class="backgroundwhite">
+            <h3 class="text-center section-title col-md-12">Our Events</h3>
             <div class="row">
-                <div class="col-md-12">
-                    <table class="table table-striped border">
-                        <tr class="table-secondary">
-                            <th>
-                                @Html.DisplayNameFor(model => model.Event.ImageUrl)
-                            </th>
 
-                            <th>
-                                Events
-                            </th>
+                <div class="col-md-12 text-right">
 
-                            <th>
-                                @Html.DisplayNameFor(model => model.Event.StartingDate)-
-                                @Html.DisplayNameFor(model => model.Event.EndingDate)
-                            </th>
-
-                            <th>
-                                @Html.DisplayNameFor(model => model.ProgramName)
-                            </th>
-
-                            <th>
-                                @Html.DisplayNameFor(model => model.Event.Venue)
-                            </th>
-
-                            <th>
-                                @Html.DisplayNameFor(model => model.Event.Duration)
-                            </th>
-
-                            @if (User.IsInRole("ApplicationAdmin"))
-                            {
-                                <th>Action</th>
-                            }
-                            else if (User.Identity.IsAuthenticated)
-                            {
-
-                                <th>Action</th>
-                            }
-
-                        </tr>
-
-                        @foreach (var item in Model)
+                    @if (User.IsInRole("ApplicationAdmin"))
+                    {
+                        <a><partial name="_CreateButtonPartial" /></a>
+                    }
+                    else if (User.IsInRole("Volunteer") && vems.Count == 0)
+                    {
+                        <h3 class="text-right text-info">You have not signed up for any Events yet!!</h3>
+                    }
+                    else if (User.IsInRole("Volunteer") && vems.Count > 0)
+                    {
+                        if (ViewContext.ModelState["area"] != null && ViewContext.ModelState["area"].AttemptedValue == "Views")
                         {
-                            <tr>
-                                <td>
-                                    <img src=@Html.DisplayFor(modelItem => item.Event.ImageUrl) width="75" height="75" />
-                                </td>
-                                <td>
-                                    <b>
-                                        @Html.DisplayFor(modelItem => item.Event.Name)
-                                    </b>
-                                    -<br />
-                                    @Html.DisplayFor(modelItem => item.Event.Description)
-                                </td>
-                                <td>
-                                    @Html.DisplayFor(modelItem => item.Event.StartingDate)-
-                                    @Html.DisplayFor(modelItem => item.Event.EndingDate)
-                                </td>
-                                <td>
-                                    @Html.DisplayFor(modelItem => item.ProgramName)
-                                </td>
-                                <td>
-                                    @Html.DisplayFor(modelItem => item.Event.Venue)
-                                </td>
-                                <td>
-                                    @Html.DisplayFor(modelItem => item.Event.Duration)
-                                </td>
-
-                                <partial name="_TableButtonPartial" model="item.Event.Id" />
-
-                            </tr>
+                            <h3 class="text-right text-info">Thanks for Volunteering !! <a href='/Events'>Click Here</a> to View All Events!</h3>
                         }
-                    </table>
+                    }
+                    else if (!User.Identity.IsAuthenticated)
+                    {
+                        <h3 class="text-right text-info">To Register to an Event, Please <a href="/Identity/Account/Register">Sign Up!</a></h3>
+                    }
                 </div>
             </div>
-        }
+            @if (!User.IsInRole("ApplicationAdmin"))
+            {
+                <partial name="_EventUserView" />
+            }
+            else
+            {
+                <div class="row">
+                    <div class="col-md-12">
+                        <table class="table table-striped border">
+                            <tr class="table-secondary">
+                                <th>
+                                    @Html.DisplayNameFor(model => model.Event.ImageUrl)
+                                </th>
+
+                                <th>
+                                    Events
+                                </th>
+
+                                <th>
+                                    @Html.DisplayNameFor(model => model.Event.StartingDate)-
+                                    @Html.DisplayNameFor(model => model.Event.EndingDate)
+                                </th>
+
+                                <th>
+                                    @Html.DisplayNameFor(model => model.ProgramName)
+                                </th>
+
+                                <th>
+                                    @Html.DisplayNameFor(model => model.Event.Venue)
+                                </th>
+
+                                <th>
+                                    @Html.DisplayNameFor(model => model.Event.Duration)
+                                </th>
+
+                                @if (User.IsInRole("ApplicationAdmin"))
+                                {
+                                    <th>Action</th>
+                                }
+                                else if (User.Identity.IsAuthenticated)
+                                {
+
+                                    <th>Action</th>
+                                }
+
+                            </tr>
+
+                            @foreach (var item in Model)
+                            {
+                                <tr>
+                                    <td>
+                                        <img src=@Html.DisplayFor(modelItem => item.Event.ImageUrl) width="75" height="75" />
+                                    </td>
+                                    <td>
+                                        <b>
+                                            @Html.DisplayFor(modelItem => item.Event.Name)
+                                        </b>
+                                        -<br />
+                                        @Html.DisplayFor(modelItem => item.Event.Description)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.Event.StartingDate)-
+                                        @Html.DisplayFor(modelItem => item.Event.EndingDate)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.ProgramName)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.Event.Venue)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.Event.Duration)
+                                    </td>
+
+                                    <partial name="_TableButtonPartial" model="item.Event.Id" />
+
+                                </tr>
+                            }
+                        </table>
+                    </div>
+                </div>
+            }
+        </div>
     </div>
 </div>
-
 
 @*for Register/email confirmation.*@
 @section Scripts {
