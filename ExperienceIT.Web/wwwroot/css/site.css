@@ -73,12 +73,14 @@ a {
     -ms-transform: scale(1.2);
     transform: scale(1.2);
 }
+
 /*ourmission */
 section.fullwidth .content {
-    width:72.9%;    
-    float: right;
+  /*  width:72.9%;    
+    float: right;*/
     color: #FFF;
     background:black;
+  
     /*padding: 2% 5%;*/
 }
     section.fullwidth .content p {
@@ -143,15 +145,14 @@ body {
     background-position: center;
     background-size: cover;
     background-repeat: no-repeat;
-    /* background-attachment: inherit;*/
+     background-attachment: inherit;
     height: 100%;
     min-height: 100%;
 }
 
 .search-background {
-    background: url('/images/bg.jpg'); /*this will set background form this image*/
-    background-size:cover;
-    background-repeat: no-repeat;
+    background: url('/images/bg.jpg'); /*this will set background form this image*/   
+    
 }
 
 .backgroundwhite {

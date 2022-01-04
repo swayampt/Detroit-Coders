@@ -9,50 +9,51 @@
 }
 
 @*below code is for user point of view*@
-@if (!User.IsInRole("ApplicationAdmin"))
-{
-    <div class="card" style="width:98%">
-        <br />
-
-        <div class="row">
-            <div class="col-md-6 form-group offset-md-5 align-content-md-center text-info"><h3>Our Programs</h3></div>
-        </div>
-    </div>
-
-    @foreach (var item in Model.ProgramList)
+<div class="container">
+    @if (!User.IsInRole("ApplicationAdmin"))
     {
-        <div class="card d-md-inline-flex m-md-3 p-md-4 text-center" style="width: 22rem; height:28rem;">
-            <a class="text-white bg-primary py-2" href="@item.ProgramUrl" style="text-decoration:underline;" target="_blank">@item.Name</a>
+        <div class="card" style="width:98%">
+            <br />
 
-            <div class="card-body" style="height:100px; overflow:scroll;">
-                <p class="card-title font-weight-bold">Description</p>
-                <p class="card-text">@item.Description</p>
-                <p class="font-weight-bold">Sponsors</p>
+            <div class="row">
+                <div class="col-md-6 form-group offset-md-5 align-content-md-center text-info"><h3>Our Programs</h3></div>
+            </div>
+        </div>
 
-                @*getting corresponding organizer id for the particular program*@
-                @{
-                    var orgIds = Model.ProgramOrganizerMappers.Where(x => x.ProgramId == item.Id)
-                        .Select(x => x.OrganizerId).ToArray();
-                    var orgs = Model.Organizations.Where(x => orgIds.Contains(x.Id)).ToList();
-                }
+        @foreach (var item in Model.ProgramList)
+        {
+            <div class="card d-md-inline-flex m-md-3 p-md-4 text-center" style="width: 22rem; height:28rem;">
+                <a class="text-white bg-primary py-2" href="@item.ProgramUrl" style="text-decoration:underline;" target="_blank">@item.Name</a>
 
-                @foreach (var org in orgs)
-                {
-                    <p> @org.Name</p>
-                }
+                <div class="card-body" style="height:100px; overflow:scroll;">
+                    <p class="card-title font-weight-bold">Description</p>
+                    <p class="card-text">@item.Description</p>
+                    <p class="font-weight-bold">Sponsors</p>
+
+                    @*getting corresponding organizer id for the particular program*@
+                    @{
+                        var orgIds = Model.ProgramOrganizerMappers.Where(x => x.ProgramId == item.Id)
+                            .Select(x => x.OrganizerId).ToArray();
+                        var orgs = Model.Organizations.Where(x => orgIds.Contains(x.Id)).ToList();
+                    }
+
+                    @foreach (var org in orgs)
+                    {
+                        <p> @org.Name</p>
+                    }
+
+                </div>
+
+                <p>
+                    <div class="bg-primary text-white">
+                        @Html.ActionLink("View Events", "Index", "Events", new { programId = item.Id }, new { @class = "btn btn-primary" })
+                    </div>
+                </p>
 
             </div>
-
-            <p>
-                <div class="bg-primary text-white">
-                    @Html.ActionLink("View Events", "Index", "Events", new { programId = item.Id }, new { @class = "btn btn-primary" })
-                </div>
-            </p>
-
-        </div>
+        }
     }
-}
-
+</div>
 @*below code is for admin point of view*@
 @if (User.IsInRole("ApplicationAdmin"))
 {
