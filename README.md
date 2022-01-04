@@ -109,9 +109,9 @@ The `Code-First migration approach` is used to create database tables in `SQL Se
   | Name | Description |
   | ------------- | ------------- |
   | `Frontend Languages` | Html, JavaScript, CSS |
-  | `Frontend Libraries / Frameworks`  | Bootstrap, jQuery, Font Awsome, Bootbox, Cloudflare Ajax, W3Schools CSS, Slick JS  |
+  | `Frontend Libraries / Frameworks`  | Bootstrap, jQuery, Font Awsome, Bootbox, Cloudflare Ajax, Slick JS  |
   | `Backend Languages` | C# |
-  | `Backend Frameworks` | ASP.Net Core 3.1, EntityFrameworkCore |
+  | `Backend Frameworks` | ASP.Net Core Web App (MVC) 3.1, EntityFrameworkCore |
   | `External API` | SendGrid for email confirmation |
   | `Database Technologies` | SQL Server Developer Edition 2019, SQL Server Management Studio (SSMS) |
   | `Web server` | IIS Express provided by Visual Studio |
@@ -127,6 +127,6 @@ The application is developed and built using `Visual Studio` IDE, and is deploye
 
 ## References
 
-- For project reference: https://www.udemy.com/course/master-aspnet-core-mvc/ (Udemy Spice project by Bhrugen Patel)
-- For troubleshooting: https://www.geeksforgeeks.org/, https://stackoverflow.com/, https://www.w3schools.com/
+- For project reference: https://www.udemy.com/course/master-aspnet-core-mvc/ (Udemy Spice project by Bhrugen Patel), https://www.w3schools.com/
+- For troubleshooting: https://www.geeksforgeeks.org/, https://stackoverflow.com/
 - For additional learning: https://docs.microsoft.com/en-us/
