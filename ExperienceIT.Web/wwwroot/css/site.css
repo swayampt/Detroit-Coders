@@ -13,9 +13,9 @@ a {
 }
 
 .btn-primary {
-  color: #fff;
-  background-color: #1b6ec2;
-  border-color: #1861ac;
+    color: #fff;
+    background-color: #1b6ec2;
+    border-color: #1861ac;
 }
 
 .nav-pills .nav-link.active, .nav-pills .show > .nav-link {
@@ -29,7 +29,7 @@ a {
 .navigation-item.active:after {
     background-color: #3a9cac;
     content: " ";
-    display:block;
+    display: block;
     height: 5px;
     width: 80%;
 }
@@ -37,23 +37,20 @@ a {
 .items {
     width: 100%;
     margin: 5px auto;
-    
 }
 
 .slick-slide {
     margin: 10px
 }
 
-.slick-slide img {
+    .slick-slide img {
         width: 100%;
         border: 2px solid #fff
-}
+    }
 
 .section-title, .text-block h2 {
     color: #3a9cac;
-    
     font-size: 40px;
-  
     text-align: center;
 }
 
@@ -74,9 +71,24 @@ a {
 
 .zoom:hover {
     -ms-transform: scale(1.2);
-    
     transform: scale(1.2);
 }
+/*ourmission */
+section.fullwidth .content {
+    width:72.9%;    
+    float: right;
+    color: #FFF;
+    background:black;
+    /*padding: 2% 5%;*/
+}
+    section.fullwidth .content p {
+        font-size: 1.5em;
+    }
+.home {
+    line-height: 2.1;
+    font-size: 5.2rem;
+}
+
 
 /* Sticky footer styles
 -------------------------------------------------- */
@@ -131,14 +143,14 @@ body {
     background-position: center;
     background-size: cover;
     background-repeat: no-repeat;
-   /* background-attachment: inherit;*/
+    /* background-attachment: inherit;*/
     height: 100%;
-    min-height: 100%;    
+    min-height: 100%;
 }
 
 .search-background {
     background: url('/images/bg.jpg'); /*this will set background form this image*/
-    background-size: cover;
+    background-size:cover;
     background-repeat: no-repeat;
 }
 
@@ -169,9 +181,9 @@ body {
     font-size:20px;
     color:black;
 }*/
-.navBackground{
-    background-color:darkseagreen;
-    color:white;
+.navBackground {
+    background-color: darkseagreen;
+    color: white;
 }
 
 section.hero h1 {
@@ -180,18 +192,19 @@ section.hero h1 {
 }
 
 h1 {
-    
     font-size: 100px;
     text-align: center;
 }
-.card{
-    border-radius:10px;
+
+.card {
+    border-radius: 10px;
 }
-textarea {    
+
+textarea {
     width: 345px;
     height: 100px;
-    
 }
+
 .col1 {
     width: 50%;
 }
@@ -199,6 +212,3 @@ textarea {
 .card {
     border-radius: 10px;
 }
-
-
-
