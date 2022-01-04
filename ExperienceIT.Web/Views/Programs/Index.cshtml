@@ -11,7 +11,7 @@
 @*below code is for user point of view*@
 @if (!User.IsInRole("ApplicationAdmin"))
 {
-    <div class="card">
+    <div class="card" style="width:98%">
         <br />
 
         <div class="row">
@@ -21,10 +21,10 @@
 
     @foreach (var item in Model.ProgramList)
     {
-        <div class="card d-md-inline-flex m-md-3 p-md-4 text-center" style="width: 22rem; height:30rem;">
-            <a class="card-header text-white bg-primary" href="@item.ProgramUrl" style="text-decoration:underline;" target="_blank">@item.Name</a>
+        <div class="card d-md-inline-flex m-md-3 p-md-4 text-center" style="width: 22rem; height:28rem;">
+            <a class="text-white bg-primary py-2" href="@item.ProgramUrl" style="text-decoration:underline;" target="_blank">@item.Name</a>
 
-            <div class="card-body">
+            <div class="card-body" style="height:100px; overflow:scroll;">
                 <p class="card-title font-weight-bold">Description</p>
                 <p class="card-text">@item.Description</p>
                 <p class="font-weight-bold">Sponsors</p>
@@ -44,7 +44,7 @@
             </div>
 
             <p>
-                <div class="card-footer bg-primary text-white">
+                <div class="bg-primary text-white">
                     @Html.ActionLink("View Events", "Index", "Events", new { programId = item.Id }, new { @class = "btn btn-primary" })
                 </div>
             </p>
