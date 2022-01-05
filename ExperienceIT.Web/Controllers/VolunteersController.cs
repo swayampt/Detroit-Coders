@@ -10,7 +10,7 @@ using ExperienceIT.Web.Models;
 using ExperienceIT.Web.ViewModels;
 /// <summary>
 /// Author: ExperienceIT group2    
-///Description:All the CRUD operations of Events are done here. But we used only Index and detail actions.
+///Description:All the CRUD operations of Events are done here. But we used Index and detail actions.
 /// </summary>
 namespace ExperienceIT.Web.Controllers
 {
