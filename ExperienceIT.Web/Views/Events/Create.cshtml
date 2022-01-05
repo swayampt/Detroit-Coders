@@ -24,7 +24,7 @@
                     <div class="col-sm-1"></div>
                     <div class="col-md-5">
                         <div class="form-group">
-                            <label asp-for="ProgramName" class="control-label"></label>
+                            <label asp-for="ProgramName" class="control-label">Program Name</label>
                             @Html.DropDownListFor(s => s.ProgramId,
                             new SelectList(Model.ProgramList, "Id", "Name"), "--Select Program--", new { @class = "form-control" })
                             <span asp-validation-for="ProgramName" class="text-danger"></span>
