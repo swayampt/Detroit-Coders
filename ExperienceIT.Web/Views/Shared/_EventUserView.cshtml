@@ -22,10 +22,10 @@
             <div class="col-7 p-3">
                 <h5 class="card-title"><span class="font-weight-bold">Name</span><span class="mr-1">:</span>@item.Event.Name</h5>
                 <p class="card-text"><span class="font-weight-bold">Description</span><span class="mr-1">:</span>@item.Event.Description</p>
-                <p class="card-text"><span class="font-weight-bold">StartingDate</span><span class="mr-1">:</span>@item.Event.StartingDate</p>
-                <p class="card-text"><span class="font-weight-bold">EndingDate</span><span class="mr-1">:</span>@item.Event.EndingDate</p>
+                <p class="card-text"><span class="font-weight-bold">Starting Date</span><span class="mr-1">:</span>@item.Event.StartingDate.ToShortDateString()</p>
+                <p class="card-text"><span class="font-weight-bold">Ending Date</span><span class="mr-1">:</span>@item.Event.EndingDate.ToShortDateString()</p>
                 <p class="card-text"><span class="font-weight-bold">Venue</span><span class="mr-1">:</span>@item.Event.Venue</p>
-                <p class="card-text"><span class="font-weight-bold">ProgramName</span><span class="mr-1">:</span>@item.ProgramName</p>
+                <p class="card-text"><span class="font-weight-bold">Program Name</span><span class="mr-1">:</span>@item.ProgramName</p>
                 @if (User.Identity.IsAuthenticated)
                 {
 

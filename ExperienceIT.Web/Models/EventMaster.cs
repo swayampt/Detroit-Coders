@@ -29,11 +29,13 @@ namespace ExperienceIT.Web.Models
         [Required]
         [Display(Name = "Start Date")]
         [DataType(DataType.Date)]
+        [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}")]
         public DateTime StartingDate { get; set; }
 
         [Required]
         [Display(Name = "End Date")]
         [DataType(DataType.Date)]
+        [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}")]
         public DateTime EndingDate { get; set; }
 
         [Required]
