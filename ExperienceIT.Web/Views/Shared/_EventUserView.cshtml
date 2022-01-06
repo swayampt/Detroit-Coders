@@ -25,7 +25,9 @@
                 <p class="card-text"><span class="font-weight-bold">Starting Date</span><span class="mr-1">:</span>@item.Event.StartingDate.ToShortDateString()</p>
                 <p class="card-text"><span class="font-weight-bold">Ending Date</span><span class="mr-1">:</span>@item.Event.EndingDate.ToShortDateString()</p>
                 <p class="card-text"><span class="font-weight-bold">Venue</span><span class="mr-1">:</span>@item.Event.Venue</p>
+                <p class="card-text"><span class="font-weight-bold">Timings</span><span class="mr-1">:</span>@item.Event.Duration</p>
                 <p class="card-text"><span class="font-weight-bold">Program Name</span><span class="mr-1">:</span>@item.ProgramName</p>
+
                 @if (User.Identity.IsAuthenticated)
                 {
 
