@@ -80,6 +80,9 @@ namespace ExperienceIT.Web.Areas.Identity.Pages.Account
             [Required]
             public string LastName { get; set; }
             public string StreetAddress { get; set; }
+
+            [RegularExpression(@"^\(?([0-9]{3})\)?[-. ]?([0-9]{3})[-. ]?([0-9]{4})$",
+                   ErrorMessage = "Entered phone format is not valid.")]
             public string PhoneNumber { get; set; }
             public string City { get; set; }
             public string State { get; set; }
