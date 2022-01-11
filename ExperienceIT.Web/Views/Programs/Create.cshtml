@@ -18,7 +18,7 @@
         <div class="col-md-4 ml-4"><span style="color:#ff0000">* </span><i>is required field</i></div>
 
         <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-        
+
         <div class="form-group row">
             <div class="col-md-4 col-xs-6">
                 <label asp-for="Program.Name" class="col-form-label ml-5"></label>
@@ -34,12 +34,12 @@
             <div class="col-md-4 col-xs-6">
                 <label asp-for="Program.Description" class="col-form-label ml-5"></label>
             </div>
-            <div class="col-xs-12 col-sm-6 col-md-8">
+            <div class="col-xs-12 col-sm-6">
                 <div>
                     @Html.TextAreaFor(model => model.Program.Description)
                 </div>
             </div>
-               </div>
+        </div>
 
         <div class="form-group row">
             <div class="col-md-4 col-xs-6">
@@ -57,7 +57,7 @@
             </div>
             <div class="col-xs-12 col-sm-6">
                 <span asp-validation-for="OrganizationId" class="text-danger"></span>
-                @Html.DropDownListFor(s => s.OrganizationId,new SelectList(Model.Organizations, "Id", "Name"), "--Select Sponsor--", new { @class = "form-control", style = "width:342px" })
+                @Html.DropDownListFor(s => s.OrganizationId, new SelectList(Model.Organizations, "Id", "Name"), "--Select Sponsor--", new { @class = "form-control", style = "width:342px" })
             </div>
             <div class="col-2">
                 <input type="button" class="btn btn-primary px-md-4" id="addOrganizer" value="Add" />
@@ -90,7 +90,7 @@
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");
     }
-@*multiple sponsor selection to add during creating program *@
+    @*multiple sponsor selection to add during creating program *@
     <script type="text/javascript">
         var orgIds = '';
         $("#addOrganizer").click(function () {
@@ -103,7 +103,14 @@
                 $("#orgIds").val(orgIds);
             }
         });
-
+        //For Rich Text Box
+        tinymce.init({
+            selector: 'textarea',
+            plugins: "lists",
+            menubar: 'file edit format'
+        });
     </script>
+         
+    
 
 }
