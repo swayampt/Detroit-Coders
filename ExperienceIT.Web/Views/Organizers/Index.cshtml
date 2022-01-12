@@ -7,6 +7,7 @@
     ViewData["Title"] = "Index";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
+<br />
 <div class="container">
     <div class="border backgroundwhite">
         <div class="backgroundwhite">
@@ -16,6 +17,7 @@
                     <h2 class="section-title col-md-12 offset-md-6">
                         Our Sponsors
                     </h2>
+                    <br />
                 </div>
                 <br />
 
@@ -31,65 +33,177 @@
                 }
             </div>
 
-            @*Below code is for the implementaion for slick view*@
+            
             @if (!User.IsInRole("ApplicationAdmin"))
             {
-                <div class="items">
-                    <div>
-                        <a class="x-image e46-26 m1a-s m1a-u" href="https://onemagnify.com/"
-                           target="_blank" style="outline: none;">
-                            <img src="~/images/OneMagnify_logo.jpg" />
-                        </a>
-                    </div>
+                <div class="container">
+                    <div class="card-group">
 
-                    <div>
-                        <a href="https://www.dynatrace.com/" target="_blank" style="outline: none;">
-                            <img src="~/images/dynatrace.png" />
-                        </a>
-                    </div>
+                        <!--bootstrap card with 3 horizontal images-->
+                    <div class="row">
+                            <div class="card col-md-4">
+                                <br />
+                                <a class="x-image e46-26 m1a-s m1a-u" href="https://onemagnify.com/">
+                                    <img class="card-img-top" src="~/images/OneMagnify_logo.jpg">
+                                </a>
+                                <br />
+                                <div class="card-body">
+                                    <p class="card-text">
+                                        OneMagnify has a compelling 50-year history, but what we’ve accomplished thus far only hints at what we’re capable of today.
+                                        OneMagnify is a unique entity – a one-of-a-kind combination of creative and technology-driven marketing services that cut across
+                                        multiple disciplines to deliver a whole that is truly greater than the sum of its parts. Today’s complex business and marketing environments
+                                        require a fresh and vigilant approach to human communications – and we get it.
+                                    </p>
+                                </div>
+                            </div>
 
-                    <div>
-                        <a class="x-image e46-30 m1a-s m1a-u"
-                           href="https://www.bcbs.com/" target="_blank" style="outline: none;">
-                            <img src="~/images/bcbs.png" />
-                        </a>
-                    </div>
+                            <div class="card col-md-4">
+                                <br />
+                                <a class="x-image e46-30 m1a-s m1a-u"
+                               href="https://www.bcbs.com/" target="_blank" style="outline: none;">
+                                    <img src="~/images/bcbs.png" />
+                                </a>
+                                <div class="card-body">
+                                    <p class="card-text">
+                                        When people think of health benefits, they will first think of Blue Cross Blue Shield of Michigan.
+                                        Our vision starts with our members. This is our commitment to you: We aspire to be clear and simple, to help you make the right choices,
+                                        to offer valuable coverage, and help you get quality health care for you and those you love.
+                                    </p>
+                                </div>
+                            </div>
 
-                    <div>
-                        <a class="x-image e46-28 m1a-s m1a-u m1a-v" href="https://galaxe.com/"
-                           target="_blank" style="outline: none;">
-                            <img src="~/images/galaxe.png" />
-                        </a>
-                    </div>
+                            <div class="card col-md-4">
+                                <br />
+                                <a class="x-image e46-38 m1a-s m1a-u" href="https://www.rocketmortgage.com/"
+                               target="_blank" style="outline: none;">
+                                    <img src="~/images/rocket mortgage.png" />
+                                </a>
+                                <br />
+                                <div class="card-body">
+                                    <p class="card-text">
+                                        Rocket Mortgage is one of the largest full-service residential mortgage lenders in the United States.
+                                        We’re America’s #1 Online Mortgage Lender. We close loans in all 50 states and have more than 20 years of experience in the industry.
+                                        It all started in June of 1985 with a simple concept that, even today, large mortgage companies just don’t get.
+                                        Guess what? Buying a house can be one of the most stressful, frightening, exhilarating, and exciting times in a person’s life.
+                                        Dan Gilbert, our Founder and Chairman, thought to himself, WE CAN DO IT BETTER THAN EVERYONE ELSE. So we  did.
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                        <br />
 
-                    <div>
-                        <a class="x-image e46-32 m1a-s m1a-u"
-                           href="https://www.amrock.com/" target="_blank" style="outline: none;">
-                            <img src="~/images/amrock.png" />
-                        </a>
-                    </div>
+                        <div class="row">
+                            <div class="card col-md-4">
+                                <br />
+                                <a class="x-image e46-34 m1a-s m1a-u" href="https://www.rockethomes.com/"
+                               target="_blank" style="outline: none;">
+                                    <img src="~/images/rockhome.png" />
+                                </a>
+                                <br />
+                                <div class="card-body">
+                                    <p class="card-text">
+                                        Rocket Homes manages a Partner Network of more than 25,000 premier real estate agents and has assisted nearly 500,000 consumers
+                                        with their home buying and selling needs. All of our Partner Agents are prescreened and demonstrate exceptional client service,
+                                        knowledge and experience in their local communities. In September 2018, Rocket Homes launched a new website that allows consumers to search for homes,
+                                        connect with a real estate advisor and obtain a mortgage through Rocket Mortgage, creating a seamless, fully-integrated home buying and selling experience.
+                                    </p>
+                                </div>
+                            </div>
 
-                    <div>
-                        <a class="x-image e46-34 m1a-s m1a-u" href="https://www.rockethomes.com/"
-                           target="_blank" style="outline: none;">
-                            <img src="~/images/rockhome.png" />
-                        </a>
-                    </div>
+                            <div class="card col-md-4">
+                                <br />
+                                <a class="x-image e46-36 m1a-s m1a-u m1a-v m1a-w" href="https://www.rockcentraldetroit.com/" target="_blank" style="outline: none;">
+                                    <img src="~/images/rockcentral.png" />
+                                </a>
+                                <br />
+                                <div class="card-body">
+                                    <p class="card-text">
+                                        At our core, we operate with the spirit of a startup and years of experience. We were formed to support the growth within our
+                                        Rock Family of Companies and we provide the services that our clients need to evolve while allowing them to focus on their business.
+                                        Our expertise encompasses human resources, accounting, technology, legal services and more. From helping companies who are just getting
+                                        started to working with experienced industry veterans, our teams will partner with you to help you go further.
+                                    </p>
+                                </div>
+                            </div>
 
-                    <div>
-                        <a class="x-image e46-36 m1a-s m1a-u m1a-v m1a-w" href="https://www.rockcentraldetroit.com/" target="_blank" style="outline: none;">
-                            <img src="~/images/rockcentral.png" />
-                        </a>
+                            <div class="card col-md-4">
+                                <br />
+                                <a class="x-image e46-32 m1a-s m1a-u"
+                               href="https://www.amrock.com/" target="_blank" style="outline: none;">
+                                    <img src="~/images/amrock.png" />
+                                </a>
+                                <br />
+                                <div class="card-body">
+                                    <p class="card-text">
+                                        Amrock is one of the largest independent providers of title insurance, property valuations and settlement services in the nation.
+                                        The company is a preferred provider to nine of the top 10 retail mortgage lenders and provides commercial title services to
+                                        real estate professionals, corporations and attorneys nationwide. Amrock is based in Detroit, Michigan, and retains regional
+                                        operating centers in California, Ohio, Pennsylvania and Texas.
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
                     </div>
-
-                    <div>
-                        <a class="x-image e46-38 m1a-s m1a-u" href="https://www.rocketmortgage.com/"
-                           target="_blank" style="outline: none;">
-                            <img src="~/images/rocket mortgage.png" />
-                        </a>
-                    </div>
-
                 </div>
+
+                @*Below code is for the implementaion for slick view*@
+                @*<div class="items">
+                    <div>
+                    <a class="x-image e46-26 m1a-s m1a-u" href="https://onemagnify.com/"
+                    target="_blank" style="outline: none;">
+                    <img src="~/images/OneMagnify_logo.jpg" />
+                    </a>
+                    </div>
+
+                    <div>
+                    <a href="https://www.dynatrace.com/" target="_blank" style="outline: none;">
+                    <img src="~/images/dynatrace.png" />
+                    </a>
+                    </div>
+
+                    <div>
+                    <a class="x-image e46-30 m1a-s m1a-u"
+                    href="https://www.bcbs.com/" target="_blank" style="outline: none;">
+                    <img src="~/images/bcbs.png" />
+                    </a>
+                    </div>
+
+                    <div>
+                    <a class="x-image e46-28 m1a-s m1a-u m1a-v" href="https://galaxe.com/"
+                    target="_blank" style="outline: none;">
+                    <img src="~/images/galaxe.png" />
+                    </a>
+                    </div>
+
+                    <div>
+                    <a class="x-image e46-32 m1a-s m1a-u"
+                    href="https://www.amrock.com/" target="_blank" style="outline: none;">
+                    <img src="~/images/amrock.png" />
+                    </a>
+                    </div>
+
+                    <div>
+                    <a class="x-image e46-34 m1a-s m1a-u" href="https://www.rockethomes.com/"
+                    target="_blank" style="outline: none;">
+                    <img src="~/images/rockhome.png" />
+                    </a>
+                    </div>
+
+                    <div>
+                    <a class="x-image e46-36 m1a-s m1a-u m1a-v m1a-w" href="https://www.rockcentraldetroit.com/" target="_blank" style="outline: none;">
+                    <img src="~/images/rockcentral.png" />
+                    </a>
+                    </div>
+
+                    <div>
+                    <a class="x-image e46-38 m1a-s m1a-u" href="https://www.rocketmortgage.com/"
+                    target="_blank" style="outline: none;">
+                    <img src="~/images/rocket mortgage.png" />
+                    </a>
+                    </div>
+
+                    </div>*@
+                <br />
                 <h3 class="section-subtitle text-info text-center">THANK YOU TO ALL OUR CURRENT Sponsors</h3>
             }
 

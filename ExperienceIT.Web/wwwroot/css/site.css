@@ -78,8 +78,8 @@ a {
 section.fullwidth .content {
   /*  width:72.9%;    
     float: right;*/
-    color: #FFF;
-    background-color:cadetblue;
+    /*color: #FFF;
+    background-color:cadetblue;*/
   
     /*padding: 2% 5%;*/
 }
@@ -151,8 +151,7 @@ body {
 }
 
 .search-background {
-    background: url('/images/bg.jpg'); /*this will set background form this image*/   
-    
+    background: url('/images/Background_grey.jpg'); /*this will set background form this image*/
 }
 
 .backgroundwhite {

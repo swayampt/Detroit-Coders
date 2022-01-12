@@ -7,7 +7,7 @@
     ViewData["Title"] = "Index";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-
+<br/>
 @*below code is for user point of view*@
 <div class="container">
     @if (!User.IsInRole("ApplicationAdmin"))
@@ -16,14 +16,14 @@
             <br />
 
             <div class="row">
-                <div class="col-md-6 form-group offset-md-5 align-content-md-center text-info"><h3>Our Programs</h3></div>
+                <div class="col-md-6 form-group offset-md-5 align-content-md-center text-info"><h2>Our Programs</h2></div>
             </div>
         </div>
 
         @foreach (var item in Model.ProgramList)
         {
             <div class="card d-md-inline-flex m-md-3 p-md-4 text-center" style="width: 22rem; height:28rem;">
-                <a class="text-white bg-primary py-2" href="@item.ProgramUrl" style="text-decoration:underline;" target="_blank">@item.Name</a>
+                <a class="text-white py-2 font-weight-bold"  href="@item.ProgramUrl" style="text-decoration:underline;background-color:dimgrey" target="_blank">@item.Name</a>
 
                 <div class="card-body" style="height:100px; overflow:scroll;">
                     <p class="card-title font-weight-bold">Description</p>
@@ -45,8 +45,8 @@
                 </div>
 
                 <p>
-                    <div class="bg-primary text-white">
-                        @Html.ActionLink("View Events", "Index", "Events", new { programId = item.Id }, new { @class = "btn btn-primary" })
+                    <div class="text-white" style="background-color:dimgrey">
+                        @Html.ActionLink("View Events", "Index", "Events", new { programId = item.Id }, new { @class = "btn btn-info" })
                     </div>
                 </p>
 

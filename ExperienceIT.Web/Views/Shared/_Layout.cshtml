@@ -30,7 +30,7 @@
 <body class="search-background d-block w-100 h-100">
 
     <header>
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-dark bg-transparent box-shadow">
+        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-dark bg-dark box-shadow ">
             <div class="container">
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
                         aria-expanded="false" aria-label="Toggle navigation">
@@ -39,27 +39,28 @@
                 <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row">
 
                     <div class="navbar-header pull-left">
-                        <a class="zoom nav-link active font-weight-bold mr-2" asp-area="" asp-controller="Home" asp-action="Index">
-                            <img src="~/Images/dtwcoders.png" alt="Detroit Coders" class="rounded-circle" height="60" width="60" />
+                        <a class="zoom nav-link active font-weight-bold mr-4" style="color:deeppink" asp-area="" asp-controller="Home" asp-action="Index"> <h4>[Detroit <br />Coders]</h4>
+                            
+                            @*<img src="~/Images/dtwcoders.png" alt="Detroit Coders" class="rounded-circle" height="60" width="60" />*@
                         </a>
                     </div>
 
 
                     <ul class="navbar-nav flex-md-grow-1">
 
-                        <li class="nav-item navigation-item font-weight-bold">
-                            <a class=" zoom nav-link navigation-link mr-4" asp-controller="Programs" asp-action="Index"><h4 style="color:white">Programs</h4></a>
+                        <li>
+                            <a class=" zoom nav-link navigation-link mr-4" asp-controller="Programs" asp-action="Index"><h4 style="color:papayawhip">Programs</h4></a>
                         </li>
-                        <li class="nav-item navigation-item font-weight-bold">
-                            <a class="zoom nav-link navigation-link mr-4 " asp-controller="Events" asp-action="Index"><h4 style="color:white">Events</h4></a>
+                        <li>
+                            <a class="zoom nav-link navigation-link mr-4 " asp-controller="Events" asp-action="Index"><h4 style="color:papayawhip">Events</h4></a>
                         </li>
-                        <li class="nav-item navigation-item font-weight-bold">
-                            <a class=" zoom nav-link navigation-link mr-4" asp-controller="Organizers" asp-action="Index"><h4 style="color:white">Sponsors</h4></a>
+                        <li>
+                            <a class=" zoom nav-link navigation-link mr-4" asp-controller="Organizers" asp-action="Index"><h4 style="color:papayawhip">Sponsors</h4></a>
                         </li>
                         @if (User.IsInRole("ApplicationAdmin"))
                         {
-                            <li class="nav-item navigation-item font-weight-bold">
-                                <a class="zoom nav-link  navigation-link mr-4" asp-controller="Volunteers" asp-action="Index"><h4 style="color:white">Volunteers</h4></a>
+                            <li>
+                                <a class="zoom nav-link  navigation-link mr-4" asp-controller="Volunteers" asp-action="Index"><h4 style="color:papayawhip">Volunteers</h4></a>
                             </li>
 
                         }
@@ -77,11 +78,13 @@
 
     @RenderSection("Scripts", required: false)
 
-    <footer class="footer text-white" style="margin-bottom:-50px;">
+    <div>
+    <footer class="footer text-white navbar-dark bg-dark box-shadow" style="margin-bottom:1px;">
         <div class="container">
-            &copy; 2021 - Detroit Coders-"Code is like humor. You have to explain it".
+            &copy; 2022 - Detroit Coders <span style="color:deeppink"><strong>"Do something that matters"</strong></span> 
         </div>
     </footer>
+    </div>
 </body>
 </html>
 @*for carousel homepage*@

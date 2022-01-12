@@ -9,6 +9,7 @@
     ViewData["Title"] = "Index";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
+<br/>
 <div class="container">
     @{
         var vems = new List<ProgramEventVolunteerMapper>();
@@ -33,18 +34,19 @@
                     }
                     else if (User.IsInRole("Volunteer") && vems.Count == 0)
                     {
-                        <h3 class="text-right text-info">You have not signed up for any Events yet!!</h3>
+                        <h3 class="text-left">You have not signed up for any Events yet!!</h3>
                     }
                     else if (User.IsInRole("Volunteer") && vems.Count > 0)
                     {
                         if (ViewContext.ModelState["area"] != null && ViewContext.ModelState["area"].AttemptedValue == "Views")
                         {
-                            <h3 class="text-right text-info">Thanks for Volunteering !! <a href='/Events'>Click Here</a> to View All Events!</h3>
+                            <h3 class="text-left">Thanks for Volunteering !! <a href='/Events'>Click Here</a> to View All Events!</h3>
                         }
                     }
                     else if (!User.Identity.IsAuthenticated)
                     {
-                        <h3 class="text-right text-info">To Register to an Event, Please <a href="/Identity/Account/Register">Sign Up!</a></h3>
+                        <br/>
+                        <h4 class="text-left">Please <a href="/Identity/Account/Register">Sign Up!</a> to register</h4>
                     }
                 </div>
             </div>
@@ -132,6 +134,7 @@
             }
         </div>
     </div>
+    <br/><br/>
 </div>
 
 @*for Register/email confirmation.*@

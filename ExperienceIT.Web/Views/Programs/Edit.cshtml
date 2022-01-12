@@ -7,11 +7,13 @@
     ViewData["Title"] = "Edit";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-<div class="card w-100" style="margin-left:50px">
+<br/>
+<div class="card w-100" style="margin:auto">
     <form asp-action="Edit" method="post">
+        <br/>
         <div class="row">
             <div class="col-md-6 form-group offset-md-5 align-content-md-center text-info">
-            <h3>Program-Edit</h3>
+            <h2>Program-Edit</h2>
             </div>
         </div>
 
@@ -79,11 +81,11 @@
             </div>
             <span asp-validation-for="OrganizationId" class="text-danger"></span>
         </div>
-
+        <br/>
         <div class="col-6 offset-3">
             <partial name="_EditAndBackToListButton" model="Model.ProgramId" />
         </div>
-        <br />        
+        <br />  <br/>      
     </form>
 </div>
 

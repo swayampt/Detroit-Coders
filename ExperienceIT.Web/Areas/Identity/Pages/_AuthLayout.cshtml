@@ -7,7 +7,7 @@
 @{
     Layout = "/Views/Shared/_Layout.cshtml";
 }
-
+<br/>
 <div class="row">
     <div class="col-md-8 offset-md-2">
         <div class="card">
@@ -21,6 +21,7 @@
                     </li>
                 </ul>
             </div>
+            <br/>
 
             <div class="card-content">
                 <div class="row">
@@ -28,12 +29,12 @@
                         @RenderBody()
                     </div>
                 </div>
-
             </div>
-
+            
         </div>
     </div>
 </div>
+
 
 @section Scripts {
     @RenderSection("Scripts", required: false)

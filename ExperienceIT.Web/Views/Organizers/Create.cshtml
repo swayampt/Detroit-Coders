@@ -7,7 +7,7 @@
     ViewData["Title"] = "Create";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-
+<br/>
 <div class="card w-75" style="margin-left:160px">
     <form asp-action="Create" method="post">
 
@@ -35,7 +35,7 @@
                 <label asp-for="Organizer.Address" class="col-form-label ml-5"></label>
             </div>
             <div class="col-xs-12 col-sm-6 col-md-8">
-                <input asp-for="Organizer.Name" class="form-control" style="width:342px" />
+                <input asp-for="Organizer.Address" class="form-control" style="width:342px" />
             </div>
             @Html.ValidationMessageFor(model => model.Organizer.Address, "", new { @class = "text-danger" })
         </div>
@@ -79,7 +79,7 @@
             </div>
             <span asp-validation-for="Organizer.Country" class="text-danger"></span>
         </div>
-
+        <br/>
         <div class="d-flex justify-content-center align-items-center">
             <input type="submit" value="Create" class="btn btn-primary mx-2 px-4" />
             <a asp-action="Index" class="btn btn-info mx-3">Back to List </a>
